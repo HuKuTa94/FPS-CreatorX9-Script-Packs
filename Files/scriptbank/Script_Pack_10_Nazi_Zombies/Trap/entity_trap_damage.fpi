@@ -1,0 +1,24 @@
+;Описание:
+;Activated=0 - ловушка выключена
+;Activated=1 - ловушка включена
+
+;Начало скрипта
+:state=0:activate=0,hde,floorlogic,coloff,nobullectcol=1,addaiteam=10,aiaddenemy=10 1,aiattackwareness=0,aiautofactionoff=1,aisetviewrange=100,setaiactive=0,state=1
+
+;Ловушка включена
+:state=1,activated=1:alwaysactive=1,setaiactive=1,state=3
+
+;Определение цели	
+:state=3:aicleartarget
+:state=3,aihastarget=0:aisettarget
+;:state=3,aitargetdistwithin=40:aisetmeleedamage=1,aiusemelee=1,airotatetotarget
+
+;Нанесение урона
+:state=3,aitargetdistwithin=40:etimerstart,state=4
+:state=4,aitargetdistfurther=60:state=3
+:state=4,etimergreater=100:aisetmeleedamage=10,aiusemelee=1,state=3
+
+;Отключение ловушки
+;:state=3,activated=0:state=5
+;:state=4,activated=0:state=5
+;:state=5:aicleartarget,alwaysactive=0,setaiactive=0,state=1

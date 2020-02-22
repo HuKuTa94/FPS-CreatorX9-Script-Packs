@@ -1,0 +1,23 @@
+;Описание: кнопка вызова лифта на этаж №  2
+
+;--Начало скрипта--
+:state=0:state=2,activate=0
+
+;--Активация кнопки--
+:state=2,activated=0:state=1,alttexture=1
+:state=1,activated=1:state=2,alttexture=0
+
+;\\\\Взаимодействие с игроком\\\\
+;---Игрок близко---
+:state=1,plrnotfacing=20:hudunshow=LiftCall
+:state=1,plrdistfurther=60:hudunshow=LiftCall
+:state=1,inview=1,plrfacing=20,plrdistwithin=60:hudshow=LiftCall
+;---Игрок нажимает кнопку---
+:state=1,inviev=1,plrfacing=20,plrdistwithin=60,keypressed=33 1:state=11
+:state=11,plrdistfurther=60:state=1
+:state=11,plrnotfacing=20:state=1
+:state=11,plrfacing=20,plrdistwithin=60,keypressed=33 0:settargetname=ZoneLift,activatetarget=12,activate=10,sound=$0,hudunshow=LiftCall,state=3
+
+;---Лифт приехал на этаж---
+:state=3,activated=1:state=2,alttexture=0
+

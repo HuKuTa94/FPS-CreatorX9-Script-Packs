@@ -1,0 +1,23 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Minigun (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $10.000,hudname=nomoneyMinigun,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$10.000 Buy Minigun?,hudname=Minigun,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к оружию===
+:state=10,plrdistwithin=50:hudshow=Minigun,hudfadeout=Minigun
+
+;===Игрок купил оружие===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 10000:subvar=moneysys 10000,playertake,hudfadeout=Minigun,plrsound=audiobank\items\pickupweapon.wav,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 10000:state=15,etimerstart,hudunshow=Minigun
+
+:state=15:hudshow=nomoneyMinigun
+:state=15,etimergreater=1000:hudunshow=Minigun,hudunshow=nomoneyMinigun,state=10
+
+;End of Script

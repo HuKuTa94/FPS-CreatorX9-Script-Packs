@@ -1,0 +1,34 @@
+;-Скрыть все полигoны
+:state=0:hide,setbulletcoloff=1,activate=0,alwaysactive=1,state=1
+
+;-Игрок в зоне
+:state=1,varless=BossWave 0,activated=1,vargreater=ZombieInWave 0:state=2
+
+;-Игрок не в зоне или количество непоявившихся зомби в раунде равно 0
+:stategreater=1,activated=0:state=1
+:state=2,varless=ZombieInWave 0:state=1
+:state=2,varnotequal=Area 0:state=1
+
+;-Игрок мертв-
+:state=1,plrhealthless=1:destroy
+
+;-Проверка условий
+;-Waves
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 1,varless=ZombieInGame 0:sethealth=20,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 2,varless=ZombieInGame 1:sethealth=20,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 3,varless=ZombieInGame 1:sethealth=25,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 4,varless=ZombieInGame 2:sethealth=25,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 5,varless=ZombieInGame 2:sethealth=30,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 6,varless=ZombieInGame 2:sethealth=30,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 7,varless=ZombieInGame 2:sethealth=35,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 8,varless=ZombieInGame 2:sethealth=40,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 9,varless=ZombieInGame 2:sethealth=45,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 10,varless=ZombieInGame 2:sethealth=50,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 11,varless=ZombieInGame 2:sethealth=55,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 12,varless=ZombieInGame 2:sethealth=60,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 13,varless=ZombieInGame 2:sethealth=65,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 14,varless=ZombieInGame 2:sethealth=70,state=21
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=Wave 15,varless=ZombieInGame 2:sethealth=75,state=21
+
+;-Cпавн
+:state=21:addvar=ZombieInGame 1,subvar=ZombieInWave 1,addaiteam=1,show,setbulletcoloff=0,runfpidefault=1

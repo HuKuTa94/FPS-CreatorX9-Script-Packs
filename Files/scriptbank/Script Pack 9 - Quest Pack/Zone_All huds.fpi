@@ -1,0 +1,20 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 29.10.2013
+;Требования: необходим патч 1.18
+;Версия скрипта: 1.0
+;Описание: загружает все картинки
+
+;\\\\Загрузка картинок и надписей\\\\
+;---Квест найти части---
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\PickupDetail.dds,hudname=pickpart,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\PickupItem.dds,hudname=pickitem,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=470,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\NoParts.dds,hudname=noparts,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=500,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\BuildItem.dds,hudname=build,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=70,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\Building1.dds,hudname=building1,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=70,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\Building2.dds,hudname=building2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=70,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\Building3.dds,hudname=building3,hudhide=1,hudmake=display
+;---Квест включить электричество---
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\NeedPower.dds,hudname=needpower,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\PowerOn.dds,hudname=poweron,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=500,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TurnOn.dds,hudname=turnon,hudhide=1,hudmake=display

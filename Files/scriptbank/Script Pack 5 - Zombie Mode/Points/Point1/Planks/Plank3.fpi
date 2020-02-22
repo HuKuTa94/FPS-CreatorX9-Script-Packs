@@ -1,0 +1,9 @@
+desc          = Ву Никита
+
+:state=0:dimvar=point1_plank3,setvar=point1_plank3 1,state=1
+:state=1,varequal=point1_kick 3:state=2,setvar=point1_plank3 0
+
+:state=2:settargetname=point2_decal,activatetarget=1,state=3,destroy
+
+
+;End of Script

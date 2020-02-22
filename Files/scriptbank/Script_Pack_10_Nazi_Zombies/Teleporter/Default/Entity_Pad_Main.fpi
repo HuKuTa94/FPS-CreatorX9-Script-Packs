@@ -1,0 +1,30 @@
+;Описание
+;Activated=0 - Неактивен
+;Activated=1 - Телепорт в PAD1
+;Activated=2 - Телепорт в PAD2
+;Activated=3 - Телепорт в PAD3
+;Activated=4 - Телепорт в PAD4
+;Activated=5 - Телепортация
+
+;Начало скрипта
+:state=0:floorlogic,coloff,activate=0,state=1
+
+;Выбор точки назначения
+:state=1,activated=1:activate=0,state=2
+:state=1,activated=2:activate=0,state=3
+:state=1,activated=3:activate=0,state=4
+:state=1,activated=4:activate=0,state=5
+
+;Телепортация
+;-PAD1
+:state=2,activated=5,plrdistfurther=30:activate=0,state=1
+:state=2,activated=5,plrdistwithin=30:activate=0,plrmoveto=pad1,state=1
+;-PAD2
+:state=3,activated=5,plrdistfurther=30:activate=0,state=1
+:state=3,activated=5,plrdistwithin=30:activate=0,plrmoveto=pad2,state=1
+;-PAD3
+:state=4,activated=5,plrdistfurther=30:activate=0,state=1
+:state=4,activated=5,plrdistwithin=30:activate=0,plrmoveto=pad3,state=1
+;-PAD4
+:state=5,activated=5,plrdistfurther=30:activate=0,state=1
+:state=5,activated=5,plrdistwithin=30:activate=0,plrmoveto=pad4,state=1

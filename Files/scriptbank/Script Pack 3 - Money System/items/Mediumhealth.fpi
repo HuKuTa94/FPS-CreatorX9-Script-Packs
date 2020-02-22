@@ -1,0 +1,23 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Medium Health +100 (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $1.000,hudname=nomoneymediumhealth,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$1.000 Buy MegaHealth?,hudname=mediumhealth,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к предмету===
+:state=10,plrdistwithin=50:hudshow=mediumhealth,hudfadeout=mediumhealth
+
+;===Игрок купил предмет===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 1000:subvar=moneysys 1000,playertake,hudfadeout=mediumhealth,plrsound=audiobank\items\healthup.wav,setplrhealth=100,plrhealthadd=100,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 1000:state=15,etimerstart,hudunshow=mediumhealth
+
+:state=15:hudshow=nomoneymediumhealth
+:state=15,etimergreater=1000:hudunshow=mediumhealth,hudunshow=nomoneymediumhealth,state=10
+
+;End of Script

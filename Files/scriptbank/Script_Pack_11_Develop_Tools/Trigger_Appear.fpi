@@ -1,0 +1,7 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт создает триггер и делает его невидимым для игрока
+
+:state=0:coloff,floorlogic,alttexture=1,runfpidefault=1

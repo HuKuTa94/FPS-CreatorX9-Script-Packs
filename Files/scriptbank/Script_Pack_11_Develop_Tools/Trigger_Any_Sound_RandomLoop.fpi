@@ -1,0 +1,9 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт "триггер-бокса" срабатывает один раз, если кто-угодно близко
+
+:state=0,anywithin=50:activateifused=1,state=1
+:state=1,random=5:loopsound=$0,state=2
+:state=1,random=5:loopsound=$1,state=2

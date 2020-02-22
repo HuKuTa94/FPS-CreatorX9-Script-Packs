@@ -1,0 +1,13 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Money System (By Никита) 
+
+:state=0:dimvar=moneysys,setvar=moneysys 0,state=1
+
+:state=1:hudreset,hudx=24,hudy=2,hudsizex=16,hudsizey=16,hudtext=Money,hudname=money,hudmake=display
+:state=1:hudreset,hudx=24,hudy=8,hudsizex=16,hudsizey=16,hudimage=gamecore\huds\numeric1.dds,hudname=cash,hudtype=6,huduservar=moneysys,hudmake=numeric
+
+;End of Script
+

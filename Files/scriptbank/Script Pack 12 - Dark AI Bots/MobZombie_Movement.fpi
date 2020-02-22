@@ -1,0 +1,14 @@
+:state=0:state=1,setanimatespeed=140,animate=92
+
+:state=1:runfore=5
+:state=1,rateoffire,plrdistfurther=50:strafe=15
+:state=1,rateoffire,plrdistfurther=50:strafe=-15
+:state=1,rateoffire,plrdistfurther=50:rotatetoplr
+:state=1,plrdistwithin=50:state=3
+:state=3:rotatetoplr,runfore=5
+:state=3,plrdistfurther=50:state=1
+:state=3,plrnotfacing=50:state=2
+
+:state=1,plrnotfacing=50:state=2
+:state=2:rotatetoplr,runfore=5
+:state=2,plrfacing=50:state=1

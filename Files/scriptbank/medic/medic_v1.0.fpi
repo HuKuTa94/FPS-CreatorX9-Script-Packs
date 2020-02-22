@@ -1,0 +1,45 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = script medic v1.0 (By Никита)
+
+;Triggers
+
+:state=0:state=1
+
+:state=1,scancodekeypressed=33:state=7
+:state=1:rotatetoplr
+:state=1,plrdistfurther=200:state=5
+:state=1,plrhealthless=60:state=2,rotatetoplr,sound=audiobank\medic\plrhealthless.wav
+
+:state=2:rotatetoplr,runfore=10,animate=5,followplr
+:state=2,plrdistwithin=60:state=3
+:state=3:rotatetoplr,etimerstart,state=4
+
+:state=4,plrdistfurther=95:state=2
+:state=4:rotatetoplr
+:state=4,plrhealthgreater=99:state=0,sound=audiobank\medic\plr100hp.wav
+:state=4,etimergreater=2000:plraddhealth=20,sound=audiobank\items\healthup.wav,state=3
+
+:state=5:runfore=10,animate=5,followplr
+:state=5,plrdistwithin=120:state=6
+
+:state=6,random=10:rotatey=45,state=1
+:state=6,random=10:rotatey=90,state=1
+:state=6,random=10:rotatey=180,state=1
+:state=6,random=10:rotatey=-45,state=1
+:state=6,random=10:rotatey=-90,state=1
+:state=6,random=10:rotatey=-180,state=1
+
+;//////////////////////////////////////////////////////////////////////////////////////////////////
+
+:state=7,scncodekeypressed=33:state=0
+:state=7:settargetname=enemy1,rotatetotarget
+:state=7,plrdistfurther=200:followplr,runfore=5,animate=5
+:state=7,ifweapon=1:useweapon,rundecal=6,settarget
+:state=7,ifweapon=0:setframe=6,incframe=6,state=8
+
+:state=8,frameatend=6:reloadweapon,state=7
+
+;End of Script

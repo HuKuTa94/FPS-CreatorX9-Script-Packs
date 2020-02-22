@@ -1,0 +1,24 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 12.07.2013
+;Требования: необходим патч 1.17 и выше 
+;Версия скрипта: 1.0
+;Описание: реверберация большого помещения
+;_______________________________________________________________Shotgun________________________________________________________________
+;---Дробовик - выстрел--
+:plrwithinzone1,varequal=reverb 1,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_1.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+:plrwithinzone1,varequal=reverb 2,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_2.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+:plrwithinzone1,varequal=reverb 3,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_3.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+:plrwithinzone1,varequal=reverb 4,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_4.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+:plrwithinzone1,varequal=reverb 5,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_5.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+:plrwithinzone1,varequal=reverb 6,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_6.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+:plrwithinzone1,varequal=reverb 7,varequal=ShotgunFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_fire_7.ogg,setvar=reverb 0,setvar=ShotgunFire 0
+;---Дробовик - щелчок---
+:plrwithinzone1,varequal=reverb 1,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_1.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+:plrwithinzone1,varequal=reverb 2,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_2.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+:plrwithinzone1,varequal=reverb 3,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_3.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+:plrwithinzone1,varequal=reverb 4,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_4.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+:plrwithinzone1,varequal=reverb 5,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_5.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+:plrwithinzone1,varequal=reverb 6,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_6.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+:plrwithinzone1,varequal=reverb 7,varequal=ShotgunCock 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\LargeRoom\shotgun_cock_7.ogg,setvar=reverb 0,setvar=ShotgunCock 0
+;____________________________________________________________________________________________________________________________________

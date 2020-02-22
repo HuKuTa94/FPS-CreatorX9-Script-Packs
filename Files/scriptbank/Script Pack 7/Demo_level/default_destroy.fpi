@@ -1,0 +1,5 @@
+;Triggers
+
+:state=0,activated=1:state=1,destroy
+
+;End of Script

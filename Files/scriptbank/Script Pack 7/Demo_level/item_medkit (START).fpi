@@ -1,0 +1,6 @@
+;Скрипт написал: Кошелев Никита
+;Описание: аптечка.
+
+:state=0:state=1,playertake,coloff,addvar=med 1
+
+;End of Script

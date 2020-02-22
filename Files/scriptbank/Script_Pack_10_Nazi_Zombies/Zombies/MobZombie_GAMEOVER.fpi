@@ -1,0 +1,17 @@
+;-Конец игры
+:state=0:floorlogic,aisetspeed=100,airemove,alwaysactive=0,coloff,setbulletcoloff=1,state=1
+;-Анимация бездействия
+:state=1,random=5:state=2
+:state=1,random=5:state=3
+:state=1,random=5:state=4
+:state=1,random=5:state=5
+;-Анимация 1
+:state=2:animate=94
+;-Анимация 2
+:state=3:animate=95
+;-Анимация 3
+:state=4:animate=96
+;-Анимация 4
+:state=5:animate=97
+;-Зомби вне обзора
+:state=1,inview=0:destroy

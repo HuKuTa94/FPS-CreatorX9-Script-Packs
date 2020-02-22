@@ -1,0 +1,12 @@
+;Скрипт написал: Jirby (за что ему большое спасибо).
+;Скрипт дополнил/модифицировал: Кошелев Никита.
+;Худы радара нарисовал: haraidon
+;Описание: после подбора предмета у игрока появляется радар. 
+
+:state=0,plrdistwithin=40:state=1,playertake,coloff,plrsound=audiobank\misc\ping.wav,hudshowenemy,hudshowradar,rundecal=5
+
+:state=1:hudreset,hudx=7,hudy=90,hudimagefine=gamecore\huds\haraidon\enemy.dds,hudname=enemy,hudtype=11,hudmake=status
+:state=1:hudreset,hudx=7,hudy=90,hudsizex=120,hudsizey=120,hudimagefine=gamecore\huds\haraidon\radar.dds,hudname=radar,hudmake=display
+:state=1:state=2
+
+;End of Script

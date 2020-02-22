@@ -1,0 +1,40 @@
+
+
+;header
+desc          = mbox1
+
+;ai
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\MysteryBox\MysteryBoxAlone\entity_mbox_a.fpi
+aidestroy     = disappear1.fpi
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+model         = MBox.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+scale         = 80
+materialindex = 4
+soundset      = audiobank\ww2\scenery\doors\open.wav
+soundset1     = audiobank\ww2\scenery\doors\close.wav
+
+;visualinfo
+textured      = entitybank\Script_Pack_10_Nazi_Zombies\mysterybox\MBox.dds
+texturealtd   = 
+effect        = effectbank\bumpcubereflectalpha\bumpcubereflectalpha.fx
+
+;identity details
+strength      = 0
+isimmobile    = 1
+
+;animationinfo
+animmax       = 1
+anim0         = 0,30

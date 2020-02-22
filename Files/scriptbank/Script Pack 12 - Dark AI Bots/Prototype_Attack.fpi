@@ -1,0 +1,60 @@
+;Старт скрипта
+:state=0:addaiteam=1,aiaddenemy=1 2,setaiactive=1,aiattackwareness=0,aiautofactionoff=1,reloadweapon,alwaysactive=1,state=1
+
+
+;Определение цели
+;-Обновление целей
+:state=1:aicleartarget
+:state=1,aicanshoot=1:aisettarget
+:state=2:aicleartarget
+:state=2,aicanshoot=1:aisettarget
+:state=3:aicleartarget
+:state=3,aicanshoot=1:aisettarget
+:state=4:aicleartarget
+:state=4,aicanshoot=1:aisettarget
+:state=5:aicleartarget
+:state=5,aicanshoot=1:aisettarget
+:state=6:aicleartarget
+:state=6,aicanshoot=1:aisettarget
+
+;Атака
+:state=1,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=2,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=3,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=4,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=5,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=0,rundecal=6,activate=11
+:state=6,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=0,rundecal=6,activate=11
+
+;Перезарядка
+;-Перезарядиться, если игрок рядом
+:state=1,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=2,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=3,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=4,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=5,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=6,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+;-Анимация перезарядки
+:state=8:incframe=6
+:state=8,frameatend=6:reloadweapon,setaiactive=1,aisetviewrange=800,state=2
+;--Игрок отдалился и сейчас далеко (прекратить перезарядку)
+;:state=8,plrdistfurther=250:setaiactive=1,aisetviewrange=50,state=7,stopsound=1
+
+;Sound Engine
+;-Бот стреляет
+:state=1,activated=11:activate=0,state=50
+:state=2,activated=11:activate=0,state=50
+:state=3,activated=11:activate=0,state=50
+:state=4,activated=11:activate=0,state=50
+:state=5,activated=11:activate=0,state=50
+:state=6,activated=11:activate=0,state=50
+;-Бот перезаряжается
+:state=8,activated=12:activate=0,state=51
+;-Расстояние источника звука до игрока
+;--Выстрел
+:state=50,plrdistwithin=500,plrcanbeseen:state=6,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_1.ogg
+:state=50,plrdistwithin=500,plrcannotbeseen:state=6,activate=0,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_2.ogg
+:state=50,plrdistfurther=500:state=6,activate=10,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_3.ogg
+;--Перезарядка
+:state=51,plrdistwithin=500,plrcanbeseen:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_1.ogg
+:state=51,plrdistwithin=500,plrcannotbeseen:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_2.ogg
+:state=51,plrdistfurther=500:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_3.ogg

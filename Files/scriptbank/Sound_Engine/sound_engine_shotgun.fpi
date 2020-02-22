@@ -1,0 +1,25 @@
+;прототип звукового движка для оружия
+:state=0,random=10:setframe=27,activate=10,useweapon,rundecal=6,state=1
+:state=1:incframe=27
+:state=1,frameatend=27:setframe=26,activate=11,state=2
+:state=2:incframe=26
+:state=2,frameatend=26:reloadweapon,state=0
+
+;-Sound Engine (activated=10 - FIRE)
+;-Игрок на одном уровне (этаже) с ботом
+:activated=10,plrhigher=10,plrdistwithin=200:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_cls_1.ogg
+:activated=10,plrhigher=10,plrdistwithin=300:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_cls_2.ogg
+:activated=10,plrhigher=10,plrdistwithin=350:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_mid_1.ogg
+:activated=10,plrhigher=10,plrdistwithin=450:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_mid_2.ogg
+:activated=10,plrhigher=10,plrdistwithin=550:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_far_1.ogg
+:activated=10,plrhigher=10,plrdistfurther=550:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_far_2.ogg
+;-Игрок ниже, чем бот
+:activated=10,plrhigher=-100,plrdistwithin=600:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_far_2.ogg
+:activated=10,plrhigher=-200,plrdistwithin=600:activate=0,sound=audiobank\Sound_Engine\shotgun_fire_room_far_2.ogg
+;-Sound Engine (activated=11 - COCK)
+:activated=11,plrhigher=10,plrdistwithin=150:activate=0,sound=audiobank\Sound_Engine\shotgun_cock_room_cls_1.ogg
+:activated=11,plrhigher=10,plrdistwithin=200:activate=0,sound=audiobank\Sound_Engine\shotgun_cock_room_cls_2.ogg
+:activated=11,plrhigher=10,plrdistwithin=250:activate=0,sound=audiobank\Sound_Engine\shotgun_cock_room_mid_1.ogg
+:activated=11,plrhigher=10,plrdistwithin=300:activate=0,sound=audiobank\Sound_Engine\shotgun_cock_room_mid_2.ogg
+:activated=11,plrhigher=10,plrdistwithin=350:activate=0,sound=audiobank\Sound_Engine\shotgun_cock_room_far_1.ogg
+:activated=11,plrhigher=10,plrdistfurther=350:activate=0,sound=audiobank\Sound_Engine\shotgun_cock_room_far_2.ogg

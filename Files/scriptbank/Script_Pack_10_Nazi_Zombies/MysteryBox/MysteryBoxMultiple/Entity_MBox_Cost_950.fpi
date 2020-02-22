@@ -1,0 +1,79 @@
+;Описание: MB1W1 маркировка
+;                 MB1 - Mystery Box № 1
+;                  W1 - Weapon № 1
+;       Var MBAttempt - кол-во попыток до уничтожения ящика
+; activateifused=100 - убрать пушку из ящика 
+; activateifused=101 - показать пушку №1
+; activateifused=102 - показать пушку №2
+; activateifused=103 - показать пушку №3
+; activateifused=104 - показать пушку №4
+
+;--Начало скрипта (подготовка всех эффектов)--
+:state=0:floorlogic,coloff,nobulletcol=1,activateifused=1,state=901
+:state=901:state=902,activateifused=2
+:state=902:state=903,activateifused=3
+:state=903:state=904,activateifused=4
+:state=904:state=905,activateifused=5
+:state=905:state=999,activateifused=0
+
+;--Ящик скрыт--
+:state=999,activated=0:hide,activateifused=5
+:state=999,activated=1:show,activateifused=4,alwaysactive=1,state=100
+
+;--Кол-во попыток--
+:state=100,random=5:setvar=MBAttempt 2,state=1
+:state=100,random=5:setvar=MBAttempt 3,state=1
+
+;\\\Недостаточно денег\\\
+:state=1,varless=cash 949,inview=1,plrfacing=50,plrdistwithin=50,keypressed=33 1:state=11
+:state=11,plrdistfurther=50:state=999
+:state=11,plrfacing=50,plrdistwithin=50,keypressed=33 0:state=1,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy_no_money.wav
+
+;\\\Взаимодействие с игроком\\\
+;--Игрок близко--
+:state=1,plrnotfacing=50:hudunshow=weapon950
+:state=1,plrdistfurther=50:hudunshow=weapon950
+:state=1,inview=1,plrfacing=50,plrdistwithin=50:hudshow=weapon950
+
+;--Игрок покупает попытку в ящике--
+:state=1,inviev=1,plrfacing=50,plrdistwithin=50,keypressed=33 1,vargreater=cash 949:state=2
+:state=2,plrdistfurther=50:state=1
+:state=2,plrnotfacing=50:state=1
+:state=2,plrfacing=50,plrdistwithin=50,keypressed=33 0:state=3,activateifused=1,hudunshow=weapon950,subvar=MBAttempt 1,subvar=cash 950,sound=audiobank\Script_Pack_10_Nazi_Zombies\box_weapon.ogg
+
+;--Ящик открывается--
+:state=3:setframe=0,sound=$0,state=4
+:state=4:incframe=0
+:state=4,frameatend=0:etimerstart,state=5
+
+;--Респ случайной пушки--
+:state=5,etimergreater=1500:state=6
+:state=6,varnotequal=MBAttempt 0,random=10:activateifused=101,state=7
+:state=6,varnotequal=MBAttempt 0,random=10:activateifused=102,state=7
+:state=6,varnotequal=MBAttempt 0,random=10:activateifused=103,state=7
+:state=6,varnotequal=MBAttempt 0,random=10:activateifused=104,state=7
+
+;--Выпал череп--
+:state=6,varequal=MBAttempt 0:activateifused=0,state=10,sound=audiobank\Script_Pack_10_Nazi_Zombies\box_dead.ogg
+
+;--Задержка, игрок не взял пушку--
+:state=7:etimerstart,state=8,sound=audiobank\Script_Pack_10_Nazi_Zombies\box_done.ogg
+:state=8,etimergreater=7000:activateifused=100,etimerstart,state=50
+
+;--Игрок покупает оружие--
+:state=8,plrnotfacing=50:hudunshow=weapontake
+:state=8,plrdistfurther=50:hudunshow=weapontake
+:state=8,inview=1,plrfacing=50,plrdistwithin=50:hudshow=weapontake
+;--Дать оружие игроку--
+:state=8,inviev=1,plrfacing=50,plrdistwithin=50,keypressed=33 1:etimerstart,activateifused=199,activate=1,hudunshow=weapontake,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy.ogg,state=50
+
+;--Cброс параметров--
+:state=50,etimergreater=70:activateifused=0,state=9
+
+;--Закрытие--
+:state=9:decframe=0
+:state=9,frameatstart=0:state=1,sound=$1
+
+;\\\Уничтожение ящика\\\
+:state=10:etimerstart,activateifused=3,state=20
+:state=20,etimergreater=4000:addvar=cash 950,activate=0,activateifused=0,settargetname=MBox_Spawner,activatetarget=1,setframe=0,state=999

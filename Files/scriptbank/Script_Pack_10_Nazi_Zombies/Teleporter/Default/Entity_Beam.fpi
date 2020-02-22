@@ -1,0 +1,27 @@
+;Описание
+;Activated=0 - Неактивен
+;Activated=1 - Активен
+
+;Начало скрипта
+:state=0:floorlogic,coloff,hide,activate=0,state=1
+
+;Выключен
+:state=1:setalphafade=0,setframe=0
+
+;Включение
+:state=1,activated=1:activate=0,show,setframe=1,settargetname=TLight,activatetarget=1,state=2
+:state=2:incframe=2
+:state=2,frameatend=2:state=3
+
+;Работает
+:state=3:animate=2,incalphafade=100
+:state=3,activated=1:rotatey=-4
+:state=3,activated=2:rotatey=-8
+:state=3,activated=3:rotatey=-15
+:state=3,activated=4:rotatey=-23
+:state=3,activated=1:activate=0,hide,settargetname=TLight,activatetarget=0,state=1
+
+;Тряска камеры
+:stategreater=1,statelesser=4,plrdistfurther=150:camshake=0
+:stategreater=1,statelesser=4,plrdistwithin=100:camshake=1
+:stategreater=1,statelesser=4,plrdistwithin=50:camshake=2

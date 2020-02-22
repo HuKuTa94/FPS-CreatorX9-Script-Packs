@@ -1,0 +1,17 @@
+desc          = Ву Никита
+
+:state=0:timeflow=100
+:state=0,plrhealthless=1:state=1
+
+:state=1,random=1:state=10
+:state=1,random=5:state=20
+
+:state=10:sound=audiobank\Script Pack 5 - Zombie Mode\game_over1.wav,state=11,etimerstart
+:state=11:timeflow=40
+:state=11,etimergreater=4000:state=0,stopsound
+
+:state=20:sound=audiobank\Script Pack 5 - Zombie Mode\game_over2.wav,state=21,etimerstart
+:state=21:timeflow=40
+:state=21,etimergreater=4000:state=0,stopsound
+
+;End of Script

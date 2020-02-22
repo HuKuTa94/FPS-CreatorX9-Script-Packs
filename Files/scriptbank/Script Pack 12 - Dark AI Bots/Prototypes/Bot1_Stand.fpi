@@ -1,0 +1,29 @@
+;-Команда и предустановки бота
+:state=0:addaiteam=2,aiaddenemy=2 1,alwaysactive=1,reloadweapon,aiattackawareness=0,state=1
+;-Анимация движения
+:ducking=0,strafingleft=1:animationnormal,animate=3
+:ducking=0,strafingright=1:animationnormal,animate=4
+:ducking=0,movingforwards=1:animationnormal,animate=2
+:ducking=0,runningforwards=1:animationnormal,animate=5
+:ducking=0,movingbackwards=1:animationreverse,animate=32
+:ducking=0,idle=1:animationnormal,animate=1
+:ducking=1,strafingleft=1:animationnormal,animate=32
+:ducking=1,strafingright=1:animationnormal,animate=32
+:ducking=1,movingforwards=1:animationnormal,animate=32
+:ducking=1,movingbackwards=1:animationreverse,animate=32
+:ducking=1,idle=1:animationnormal,animate=31
+;-Определение цели
+:state=1,aicanshoot=1,aihastarget=1:aicleartarget,aisettarget,airotatetotarget
+:state=1,aicanshoot=0:aicleartarget,aisettarget
+;-Атака
+:state=1,aicanshoot=1,aihastarget=1,ifweapon=1:useweapon,rundecal=6,aiusefullaim=1
+:state=1,aicanshoot=0,aihastarget=1,aitargetdistfurther=800:aimovetotarget
+;-Перезарядка
+:state=1,ducking=0,ifweapon=0:aistop,setaiactive=0,setframe=6,state=2
+:state=1,ducking=1,ifweapon=0:aistop,setaiactive=0,setframe=36,state=3
+;-(стоя)-
+:state=2:incframe=6
+:state=2,frameatend=6:reloadweapon,setaiactive=1,state=1
+;-(сидя)-
+:state=3:incframe=36
+:state=3,frameatend=36:reloadweapon,setaiactive=1,state=1

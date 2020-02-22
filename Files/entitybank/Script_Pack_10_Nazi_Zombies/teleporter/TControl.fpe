@@ -1,0 +1,43 @@
+
+desc          = TControl
+;ai
+aiinit         = appear1.fpi
+aimain         = Script_Pack_10_Nazi_Zombies\Teleporter\Default\Entity_Control.fpi
+aidestroy      = disappear1.fpi
+;AIUsed
+ifused        = TConsole
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+;orientation
+model         = DES_switch.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+fixnewy       = 0
+defaultstatic = 0
+materialindex = 3
+collisionmode = 1
+strength      = 0
+isimmobile    = 1
+soundset      =
+soundset1     =
+;visualinfo
+textured      = DES_switch_D2.dds
+texturealtd   = DES_switch_alt_D2.dds
+effect        = effectbank\bumpent\bumpent.fx
+castshadow    = 0
+
+
+;Animationinfo
+animmax      = 6
+anim0        = 1,1
+anim1        = 30,30
+anim2        = 50,50
+anim3        = 70,70
+anim4        = 90,90
+anim5        = 110,110

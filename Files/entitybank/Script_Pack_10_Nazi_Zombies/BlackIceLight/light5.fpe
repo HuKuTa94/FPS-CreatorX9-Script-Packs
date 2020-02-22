@@ -1,0 +1,36 @@
+
+
+;header
+
+desc          = light5
+
+;ai
+aiinit	      = Script_Pack_10_Nazi_Zombies\BlackIceLights\light5.fpi
+aimain	      = 
+aidestroy     = disappear1.fpi
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+
+model         = light.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+scale         = 60
+
+;statistics
+isimmobile    = 1
+
+;visualinfo
+
+textured      = light.dds
+effect        = 
+castshadow    = 0
+

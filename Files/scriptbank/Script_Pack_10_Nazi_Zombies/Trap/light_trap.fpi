@@ -1,0 +1,21 @@
+;Описание:
+;Activated=0 - выключен
+;Activated=1 - включен
+
+;Старт скрипта
+:state=0:activate=0,floorlogic,lightoff,lightintensity=500,state=1
+
+;Включение
+:state=1,activated=1:lighton,state=2
+
+;-Мерцающий свет
+:state=2,random=1:state=3
+:state=2,random=1:state=4
+:state=3:lighton,state=2
+:state=4:lightoff,state=2
+
+;Выключение
+:state=2,activated=0:state=5
+:state=3,activated=0:state=5
+:state=4,activated=0:state=5
+:state=5:lightoff,state=1

@@ -1,0 +1,7 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт "триггер-зоны" срабатывает один раз, если игрок близко, и удаляется из игры
+
+:state=0,plrwithinzone=1:activateifused=1,destroy

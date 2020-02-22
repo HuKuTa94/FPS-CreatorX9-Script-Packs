@@ -1,0 +1,4 @@
+:state=0:floorlogic,nobulletcol=1,hide,activate=1,state=2
+
+:state=1,plrdistwithin=60:colon,state=2
+:state=2,plrdistfurther=60:coloff,state=1

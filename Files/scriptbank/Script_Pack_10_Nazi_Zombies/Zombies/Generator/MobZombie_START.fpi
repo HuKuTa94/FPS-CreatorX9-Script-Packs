@@ -1,0 +1,10 @@
+;___________________________INIT BLOCK__________________________________________
+;-Hide bot
+:state=0:hide,setbulletcoloff=1,alwaysactive=0,setframe=92,state=1
+
+;-Player is close, respawn
+;-Anticrash random delay
+:state=1,activated=1,random=10:activate=0,show,setbulletcoloff=0,alwaysactive=1,state=2
+
+;-Init DarkAI
+:state=2:addaiteam=2,aiaddenemy=2 1,setaiactive=0,aiattackawareness=0,runfpidefault=1

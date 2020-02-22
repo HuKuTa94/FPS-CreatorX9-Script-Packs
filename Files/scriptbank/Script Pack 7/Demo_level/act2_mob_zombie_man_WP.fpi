@@ -1,0 +1,11 @@
+
+:state=0:animate=93
+:state=0,waypointstate=0:waypointstart,setalphafade=100
+:state=0,waypointstate=3:waypointnext
+:state=0,waypointstate=5:waypointstop,state=1
+:state=0,plrcanbeseen:waypointstop,state=1
+
+:state=1:runfpi=script pack 7\demo_level\act2_mob_zombie_man_ATTACK.fpi
+
+
+;End of Script

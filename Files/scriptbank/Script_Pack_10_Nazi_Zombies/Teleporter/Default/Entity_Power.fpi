@@ -1,0 +1,18 @@
+;Описание
+;Activated=0 - Неактивен
+;Activated=1 - Активен
+
+;Начало скрипта
+:state=0:floorlogic,activate=0,state=1
+
+:state=1:setframe=0
+
+;Включение
+:state=1,activated=1:activateifused=1,setframe=2,state=2
+:state=2:incframe=2
+:state=2,frameatend=2:activate=0,state=3
+
+;Выключение
+:state=3,activated=1:activateifused=1,state=4
+:state=4:decframe=2
+:state=4,frameatstart=2:activate=0,state=1

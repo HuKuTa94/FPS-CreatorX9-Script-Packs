@@ -1,0 +1,47 @@
+;Скрипт имитации аккустики помещения (шагов игрока)
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 17.06.2012
+;Требования: необходим патч 1.19 и выше. 
+;Версия скрипта: 1.0
+;Описание: зона для большого помещения 15х15
+;Использование: разместите зону в помещение, в котором хотели бы имитировать акустику помещения. Растяните зону на всю комнату.
+;Примичание: скрипт имитирует эхо большого помещения, не помещайте такую зону в маленькие комнаты.
+
+:state=0:dimlocalvar=plrtimer,dimlocalvar=plrreverb,state=1
+
+:vargreater=plrreverb 4:setvar=plrreverb 1
+
+:varequal=plrtimer 1,varequal=plrreverb 1,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA1_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 1,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA4_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 2,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA2_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 2,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA1_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 3,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA3_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 3,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA2_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 4,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA4_large_verb.ogg
+:varequal=plrtimer 1,varequal=plrreverb 4,random=2:setvar=plrtimer 0,sound=audiobank\station13\player\1stoneA1_large_verb.ogg
+
+;===Когда игрок в зоне Large_Verb, к шагам игрока добавляется реверберация===
+;=Игрок бежит=
+:state=1,plrwithinzone=1,plronground=1,plrrunning,plrnotcrouched,keypressed=17 1:addvar=plrreverb 1,setvar=plrtimer 1,etimerstart,state=2
+:state=2,keypressed=17 0:state=1,setvar=plrtimer 0
+:state=2,etimergreater=275,keypressed=17 1:state=1,setvar=plrtimer 0
+
+;=Игрок идет вперед=
+:state=1,plrwithinzone=1,plronground=1,plrnotrunning,plrnotcrouched,keypressed=17 1:addvar=plrrevrb 1,setvar=plrtimer 1,etimerstart,state=3
+:state=3,keypressed=17 0:state=1,setvar=plrtimer 0
+:state=3,etimergreater=340,keypressed=17 1:state=1,setvar=plrtimer 0
+
+;=Игрок идет назад=
+;:state=1,plrwithinzone=1,plronground=1,varequal=plrrun 0,plrnotcrouched,keypressed=31 1:addvar=plrrevrb 1,setvar=plrtimer 1,etimerstart,state=4
+:state=4,keypressed=31 0:state=1,setvar=plrtimer 0
+:state=4,etimergreater=340,keypressed=31 1:state=1,setvar=plrtimer 0
+
+;=Игрок идет влево=
+;:state=1,plrwithinzone=1,plronground=1,varequal=plrrun 0,plrnotcrouched,keypressed=30 1:addvar=plrrevrb 1,setvar=plrtimer 1,etimerstart,state=5
+:state=5,keypressed=30 0:state=1,setvar=plrtimer 0
+:state=5,etimergreater=340,keypressed=30 1:state=1,setvar=plrtimer 0
+
+;=Игрок идет вправо=
+;:state=1,plrwithinzone=1,plronground=1,varequal=plrrun 0,plrnotcrouched,keypressed=32 1:addvar=plrrevrb 1,setvar=plrtimer 1,etimerstart,state=6
+:state=6,keypressed=32 0:state=1,setvar=plrtimer 0
+:state=6,etimergreater=340,keypressed=32 1:state=1,setvar=plrtimer 0

@@ -1,0 +1,39 @@
+;header
+
+desc          = gameover
+;ai
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\Gameplay\Trigger_GameOver.fpi
+aidestroy     = disappear1.fpi
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+model         = Box.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+defaultstatic = 0
+materialindex = 0
+scale         = 300
+
+;statistics
+
+strength      = 0
+isimmobile    = 1
+PhysicsOn     = 0
+explodable    = 0
+debrisshape   = 0
+
+;visualinfo
+
+textured      = GameOver.png
+effect        = 
+castshadow    = 0
+

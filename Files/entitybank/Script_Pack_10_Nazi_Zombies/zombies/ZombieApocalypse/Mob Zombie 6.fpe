@@ -1,0 +1,100 @@
+;header
+
+desc          = ZL1
+
+;ai
+aiinit	      = Script_Pack_10_Nazi_Zombies\Zombies\MobZombie_START.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\Zombies\MobZombie_Jump_MAIN.fpi
+aidestroy     = Script_Pack_10_Nazi_Zombies\Zombies\MobZombie_DESTROY.fpi
+aishoot       = 
+soundset      = 
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+model         = entitybank\Zombie Apocalypse\mobzombie6.X
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+scale         = 91
+fixnewy       = 180
+
+;cone of sight
+coneheight    = 53
+coneangle     = 40
+
+;visualinfo
+textured      = entitybank\Zombie Apocalypse\mobzombie6_D2.tga
+effect        = effectbank\ps_2_0\zombie_apocalypse\zombie_apocalypse.fx
+transparency  = 1
+reducetexture =-1
+
+;decals
+decalmax      = 2
+decal0        = red
+decal1        = blood
+
+;identity details
+strength      = 5
+ischaracter   = 1
+hasweapon     = 
+isobjective   = 0
+cantakeweapon = 1
+defaultheight = 0
+speed         = 115
+
+
+;bodypartslimbinfo (1=head/2=body/3+4=armslr/5+6=legslr)
+limbmax       = 99
+limb54 = 1
+limb55 = 1
+limb25 = 2
+
+;animationinfo
+animmax       = 109
+;Появление
+anim0         = 190,209
+anim1         = 523,552
+anim2         = 882,911
+;Смерть
+anim11        = 0,0
+anim12        = 0,0
+anim13        = 0,0
+anim14        = 0,0
+anim15        = 0,0
+anim16        = 0,0
+anim17        = 0,0
+anim18        = 0,0
+anim20        = 0,0
+anim21        = 0,0
+anim67        = 0,0
+anim68        = 0,0
+anim70        = 0,0
+anim71        = 0,0
+;Прыжок
+anim40        = 443,462
+anim41        = 463,492
+;Zombie Apocalypse
+anim92        = 2501,2519
+anim93        = 2527,2545
+anim94        = 2553,2602
+anim95        = 2609,2658
+anim96        = 2665,2714
+anim97        = 2721,2770
+anim98        = 2776,2848
+anim99        = 2861,2904
+anim100       = 2916,2969
+anim101       = 2981,3034
+anim102       = 3046,3094
+anim103       = 3104,3154
+anim104       = 3165,3235
+anim105       = 3245,3300
+anim106       = 3310,3370
+anim107       = 3380,3440
+anim108       = 3245,3300

@@ -1,0 +1,7 @@
+:state=0:state=2
+
+;-All generators are destroyed
+:state=2,varequal=generatorAlive 0:ambience=15,activateifused=1,sound=audiobank\Script_Pack_10_Nazi_Zombies\energy_off.ogg,state=3
+
+;-All generators are repaired
+:state=3,varequal=generatorAlive %generatorCount:ambience=70,activateifused=0,sound=audiobank\Script_Pack_10_Nazi_Zombies\energy_on.ogg,state=2

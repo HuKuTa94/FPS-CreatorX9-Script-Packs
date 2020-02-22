@@ -1,0 +1,61 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 18.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: удоляет ИИ из Dark AI 
+
+;===Удаляет ИИ из Dark AI===
+:state=0:setaiactive=0,coloff,state=1
+
+;===Случайная анимация смерти===
+:state=1,random=5:setframe=7,state=2
+:state=1,random=5:setframe=8,state=3
+:state=1,random=5:setframe=9,state=4
+:state=1,random=5:setframe=16,state=5
+:state=1,random=5:setframe=17,state=6
+:state=1,random=5:setframe=18,state=7
+:state=1,random=5:setframe=20,state=8
+:state=1,random=5:setframe=21,state=9
+:state=1,random=5:setframe=31,state=10
+:state=1,random=5:setframe=32,state=11
+:state=1,random=5:setframe=33,state=12
+
+;--Body hit 1--
+:state=2:incframe=7
+:state=2,frameatend=7:state=107
+;--Body hit 2--
+:state=3:incframe=8
+:state=3,frameatend=8:state=107
+;--Body hit 3--
+:state=4:incframe=9
+:state=4,frameatend=9:state=107
+;--Left arm hit 1--
+:state=5:incframe=16
+:state=5,frameatend=16:state=107
+;--Left arm hit 2--
+:state=6:incframe=17
+:state=6,frameatend=17:state=107
+;--Left leg die 1--
+:state=7:incframe=18
+:state=7,frameatend=18:state=107
+;--Left leg die 2--
+:state=8:incframe=20
+:state=8,frameatend=20:state=107
+;--Right arm hit 1--
+:state=9:incframe=21
+:state=9,frameatend=21:state=107
+;--Right arm hit 2--
+:state=10:incframe=31
+:state=10,frameatend=31:state=107
+;--Right leg die 1--
+:state=11:incframe=32
+:state=11,frameatend=32:state=107
+;--Right leg die 2--
+:state=12:incframe=33
+:state=12,frameatend=33:state=107
+
+;--Исчезновениe--
+:state=107:airemove,destroy
+
+;Конец Скрипта

@@ -1,0 +1,16 @@
+;Скрипт написал: Кошелев Никита
+;Описание: зона бронежилета.
+;Скрипт расчитан на максимальное здоровье 100 хп. 
+
+:state=0:dimvar=armor,setvar=armor 0,state=1
+
+:state=1:hudreset,hudx=25,hudy=2,hudsizex=16,hudsizey=16,hudtext=ARMOR,hudname=armor,hudmake=display
+:state=1:hudreset,hudx=24.5,hudy=8,hudsizex=16,hudsizey=16,hudimage=gamecore\huds\numeric1.dds,hudname=arm,hudtype=6,huduservar=armor,hudmake=numeric
+:state=1:state=2,plraddhealth=100
+
+:state=2,plrhealthless=100:plraddhealth=100,subvar=armor 15
+:state=2,varless=armor 10:state=3,setvar=armor 0
+:state=3,vargreater=armor 1:state=2
+
+
+;End of Script

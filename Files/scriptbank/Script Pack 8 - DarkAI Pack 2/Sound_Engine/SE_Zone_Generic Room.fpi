@@ -1,0 +1,121 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 12.07.2013
+;Требования: необходим патч 1.17 и выше 
+;Версия скрипта: 1.0
+;Описание: "звуковой движок" (общая комната)
+; "VAR=reverb Х" - расстояние от источника звука до игрока (1 - близко, 2 - среднее, 3 - далеко)
+; "VAR=SE Х"  - текущее состояние звукового движка (аналог "state=X")
+; "VAR=Die Х" - смерть\оживление персонажей
+; "VAR=WeaponFire Х" - показывает из какого оружия был осуществлен выстрел
+;__________________________________________________________________________________________________________________________________
+;\\\Sound Engine Run\\\
+:state=0:dimvar=reverb,setvar=reverb 0,dimvar=Die,setvar=Die 0,dimvar=WeaponFire,setvar=WeaponFire 0,dimvar=Zombie,setvar=Zombie 0
+:state=0:state=1
+;____________________________________________________________________________________Люди______________________________________________________________________
+;---Смерть людей--- Значения "VAR=Die X" ( -1 - оживление; 1, 2 - смерть мужчины; 2, 3 - смерть женщины; )
+:varequal=reverb 1,varequal=Die 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\male_die1_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\male_die1_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\male_die1_3.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 1,varequal=Die 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\male_die2_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\male_die2_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\male_die2_3.ogg,setvar=reverb 0,setvar=Die 0
+;---Оживление---
+:varequal=reverb 1,varequal=Die -1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\revived1_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die -1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\revived1_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die -1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\revived1_3.ogg,setvar=reverb 0,setvar=Die 0
+;____________________________________________________________________________________Зомби______________________________________________________________________
+;---Смерть зомби--- Значения "VAR=Die X" ( 4,5,6,7,8 - смерть зомби; )
+:varequal=reverb 1,varequal=Die 4:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die1_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 4:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die1_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 4:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die1_3.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 1,varequal=Die 5:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die2_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 5:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die2_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 5:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die2_3.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 1,varequal=Die 6:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die3_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 6:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die3_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 6:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die3_3.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 1,varequal=Die 7:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die4_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 7:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die4_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 7:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die4_3.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 1,varequal=Die 8:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die5_1.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 2,varequal=Die 8:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die5_2.ogg,setvar=reverb 0,setvar=Die 0
+:varequal=reverb 3,varequal=Die 8:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_die5_3.ogg,setvar=reverb 0,setvar=Die 0
+;---Атака зомби--- Значения "VAR=Zombie X" ( 1,2,3 - атака зомби; 4,5,6,7,8 - удар по зомби )
+:varequal=reverb 1,varequal=Zombie 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack1_1.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 2,varequal=Zombie 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack1_2.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 3,varequal=Zombie 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack1_3.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 1,varequal=Zombie 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack2_1.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 2,varequal=Zombie 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack2_2.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 3,varequal=Zombie 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack2_3.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 1,varequal=Zombie 3:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack3_1.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 2,varequal=Zombie 3:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack3_2.ogg,setvar=reverb 0,setvar=Zombie 0
+:varequal=reverb 3,varequal=Zombie 3:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\zombie_attack3_3.ogg,setvar=reverb 0,setvar=Zombie 0
+
+;___________________________________________________________________________________Оружие_____________________________________________________________________
+;---Значения "VAR=WeaponFire X"---
+;                           (0)  - N\A
+;                           (1)  - Shotgun1 fire
+;                           (2)  - Shotgun1 cock
+;                           (3)  - Magnum fire
+;                           (4)  - Magnum reload
+;                           (5)  - Pistol fire
+;                           (6)  - Pistol reload
+;                           (7)  - Snipe bolt action fire
+;                           (8)  - Snipe bolt action cock
+;                           (9)  - Shotgun2 fire
+;                           (10) - Shotgun2 cock
+;                           (11) - Snipe semi-auto fire
+;                           (12) - Snipe semi-auto reload
+;                           (13) - AK fire
+;                           (14) - AK reload
+;_____________________________________________________________________________Shotgun 1________________________________________________________________________________
+
+:varequal=reverb 1,varequal=WeaponFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun1_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun1_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 1:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun1_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun1_cock_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun1_cock_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 2:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun1_cock_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+;______________________________________________________________________________Magnum_________________________________________________________________________________
+:varequal=reverb 1,varequal=WeaponFire 3:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\magnum_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 3:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\magnum_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 3:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\magnum_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 4:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\magnum_reload_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 4:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\magnum_reload_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 4:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\magnum_reload_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+;______________________________________________________________________________Pistol_________________________________________________________________________________
+:varequal=reverb 1,varequal=WeaponFire 5:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\pistol_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 5:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\pistol_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 5:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\pistol_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 6:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\pistol_reload_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 6:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\pistol_reload_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 6:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\pistol_reload_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+;_________________________________________________________________________Snipe Bolt Action___________________________________________________________________________
+:varequal=reverb 1,varequal=WeaponFire 7:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe1_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 7:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe1_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 7:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe1_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 8:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe1_cock_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 8:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe1_cock_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 8:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe1_cock_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+;___________________________________________________________________________Shotgun 2__________________________________________________________________________________
+:varequal=reverb 1,varequal=WeaponFire 9:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun2_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 9:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun2_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 9:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun2_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 10:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun2_cock_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 10:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun2_cock_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 10:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\shotgun2_cock_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+;_________________________________________________________________________Snipe Semi-Auto___________________________________________________________________________
+:varequal=reverb 1,varequal=WeaponFire 11:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe2_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 11:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe2_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 11:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe2_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 12:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe2_reload_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 12:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe2_reload_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 12:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\snipe2_reload_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+;___________________________________________________________________________AK 47\74\_____________________________________________________________________________
+:varequal=reverb 1,varequal=WeaponFire 13:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 13:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 13:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_3.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 1,varequal=WeaponFire 14:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_1.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 2,varequal=WeaponFire 14:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_2.ogg,setvar=reverb 0,setvar=WeaponFire 0
+:varequal=reverb 3,varequal=WeaponFire 14:sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_3.ogg,setvar=reverb 0,setvar=WeaponFire 0

@@ -1,0 +1,143 @@
+;Описание: скрипт-инструмент
+;Управление (по умолчанию):
+; TAB - показать\скрыть управление
+; F - включить\выключить туман
+;---------------------------------------------ОБЪЯВЛЕНИЕ ПЕРЕМЕННЫХ И КАРТИНОК----------------------------------------------
+;-Переменные начала и конца тумана
+:state=0:dimlocalvar=fog,dimlocalvar=fogstart,dimlocalvar=fogend,setvar=fog 0,setvar=fogstart 0,setvar=fogend 0
+;-Переменные цвета тумана
+:state=0:dimlocalvar=fogred,dimlocalvar=fogblue,dimlocalvar=foggreen,setvar=fogred 0,setvar=fogblue 0,setvar=foggreen 0
+;-Переменные освещения
+:state=0:dimlocalvar=ambred,dimlocalvar=ambblue,dimlocalvar=ambgreen,setvar=ambred 255,setvar=ambblue 255,setvar=ambgreen 255,dimlocalvar=amb,setvar=amb 50
+;-Переменные данного скрипта-инструмента (вызов панели управления)
+:state=0:dimlocalvar=FogEditor,setvar=FogEditor 0
+
+;-Отображение значений переменных
+:always:fog=%fog,fogstart=%fogstart,fogend=%fogend,fogred=%fogred,fogblue=%fogblue,foggreen=%foggreen,ambience=%amb,ambiencered=%ambred,ambienceblue=%ambblue,ambiencegreen=%ambgreen
+
+;Загрузка картинок
+;-Заголовки
+:state=0:hudreset,hudx=51,hudy=83,hudsizex=598,hudsizey=258,hudimagefine=gamecore\huds\House\DevelopTool\Panel.png,hudname=panel,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=51,hudy=68.5,hudsizex=120,hudsizey=17,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FogEditor.png,hudname=fogeditor,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=35,hudy=71.5,hudsizex=70,hudsizey=15,hudimagefine=gamecore\huds\House\DevelopTool\Control.png,hudname=control,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=55,hudy=71.5,hudsizex=33,hudsizey=15,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\Fog.png,hudname=FogTitle,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=70,hudy=71.5,hudsizex=80,hudsizey=15,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\Ambience.png,hudname=AmbTitle,hudhide=1,hudmake=display
+;-Кнопки управления туманом
+:state=0:hudreset,hudx=29,hudy=74.5,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubFogStart.png,hudname=SFS,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=77.0,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddFogStart.png,hudname=AFS,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=79.5,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubFogEnd.png,hudname=SFE,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=82.0,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddFogEnd.png,hudname=AFE,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=84.5,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubAmbience.png,hudname=SA,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=87.0,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddAmbience.png,hudname=AA,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=89.5,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubFogRed.png,hudname=SFR,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=92.0,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddFogRed.png,hudname=AFR,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=94.5,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubFogBlue.png,hudname=SFB,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=29,hudy=97.0,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddFogBlue.png,hudname=AFB,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=39,hudy=74.5,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubFogGreen.png,hudname=SFG,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=39,hudy=77.0,hudsizex=90,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddFogGreen.png,hudname=AFG,hudhide=1,hudmake=display
+;-Кнопки управления цвета освещения
+:state=0:hudreset,hudx=40.4,hudy=82.0,hudsizex=120,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubAmbienceRed.png,hudname=SAR,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40.4,hudy=84.5,hudsizex=120,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddAmbienceRed.png,hudname=AAR,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40.4,hudy=87.0,hudsizex=120,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubAmbienceBlue.png,hudname=SAB,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40.4,hudy=89.5,hudsizex=120,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddAmbienceBlue.png,hudname=AAB,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40.4,hudy=92.0,hudsizex=120,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\SubAmbienceGreen.png,hudname=SAG,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40.4,hudy=94.5,hudsizex=120,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AddAmbienceGreen.png,hudname=AAG,hudhide=1,hudmake=display
+;-Другие кнопки управления
+:state=0:hudreset,hudx=36.6,hudy=79.5,hudsizex=40,hudsizey=11,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FFog.png,hudname=FFog,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=41.3,hudy=97.3,hudsizex=140,hudsizey=12,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\DHold.png,hudname=HHold,hudhide=1,hudmake=display
+;-Статус-картинки тумана
+:state=0:hudreset,hudx=54,hudy=75.5,hudsizex=30,hudsizey=15,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\StatusFog.png,hudname=SF,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=56.5,hudy=75.5,hudsizex=15,hudsizey=15,hudimagefine=gamecore\huds\House\DevelopTool\Off.png,hudname=Off,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=56.5,hudy=75.5,hudsizex=15,hudsizey=15,hudimagefine=gamecore\huds\House\DevelopTool\On.png,hudname=On,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=51,hudy=79.5,hudsizex=83,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FogStart.png,hudname=FS,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50.8,hudy=82.5,hudsizex=81,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FogEnd.png,hudname=FE,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=51.1,hudy=85.5,hudsizex=82,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FogRed.png,hudname=FR,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=51.1,hudy=88.5,hudsizex=82,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FogBlue.png,hudname=FB,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=51.5,hudy=91.5,hudsizex=96,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\FogGreen.png,hudname=FG,hudhide=1,hudmake=display
+;-Статус-картинки освещения
+:state=0:hudreset,hudx=69,hudy=75.5,hudsizex=95,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\StatusAmbience.png,hudname=StatusA,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=67,hudy=79.5,hudsizex=122,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AmbienceRed.png,hudname=StatusAR,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=67,hudy=82.5,hudsizex=122,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AmbienceBlue.png,hudname=StatusAB,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=67.5,hudy=85.5,hudsizex=141,hudsizey=19,hudimagefine=gamecore\huds\House\DevelopTool\FogEditor\AmbienceGreen.png,hudname=StatusAG,hudhide=1,hudmake=display
+;-Статус-картинки отображения значений тумана
+:state=0:hudreset,hudx=56,hudy=79.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusFS,hudtype=6,huduservar=fogstart,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=56,hudy=82.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusFE,hudtype=6,huduservar=fogend,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=56,hudy=85.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusFR,hudtype=6,huduservar=fogred,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=56,hudy=88.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusFB,hudtype=6,huduservar=fogblue,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=56.7,hudy=91.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusFG,hudtype=6,huduservar=foggreen,hudhide=1,hudmake=numeric
+;-Статус-картинки отображения значений освещения
+:state=0:hudreset,hudx=74,hudy=75.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusAmb,hudtype=6,huduservar=amb,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=73.7,hudy=79.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusAmbR,hudtype=6,huduservar=ambred,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=73.7,hudy=82.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusAmbB,hudtype=6,huduservar=ambblue,hudhide=1,hudmake=numeric
+:state=0:hudreset,hudx=74.7,hudy=85.5,hudsizex=11,hudsizey=11,hudimage=gamecore\huds\House\DevelopTool\numeric3.png,hudname=StatusAmbG,hudtype=6,huduservar=ambgreen,hudhide=1,hudmake=numeric
+
+;Конец объявления
+:state=0:alwaysactive=1,coloff,floorlogic,hide,state=1
+
+;-------------------------------------------------УПРАВЛЕНИЕ---------------------------------------------------
+;-Сброс всех настроек
+:srate=1,varequal=FogEditor 1,keypressed=32 1:state=4
+:state=4,random=150:state=5,setvar=fog 0,setvar=fogstart 0,setvar=fogend 0,setvar=fogred 0,setvar=fogblue 0,setvar=foggreen 0,setvar=ambred 255,setvar=ambblue 255,setvar=ambgreen 255,dimlocalvar=amb,setvar=amb 50
+:state=4,keypressed=32 0:state=1
+:state=5,keypressed=32 0:state=1
+
+;-Вызов панели управления
+:state=2,keypressed=15 0:state=1
+:state=1,varequal=FogEditor 0,keypressed=15 1:state=2,setvar=FogEditor 1
+:state=1,varequal=FogEditor 1,keypressed=15 1:state=2,setvar=FogEditor 0
+;-Отображение всех элементов панели
+:varequal=FogEditor 0:hudunshow=fogeditor,hudunshow=panel,hudunshow=control,hudunshow=FogTitle,hudunshow=AmbTitle,hudunshow=FFog,hudunshow=SFS,hudunshow=AFS,hudunshow=SFE,hudunshow=AFE,hudunshow=SA,hudunshow=AA,hudunshow=AFR,hudunshow=SFR,hudunshow=AFB,hudunshow=SFB,hudunshow=AFG,hudunshow=SFG,hudunshow=SAR,hudunshow=AAR,hudunshow=SAB,hudunshow=AAB,hudunshow=SAG,hudunshow=AAG,hudunshow=SF,hudunshow=On,hudunshow=Off,hudunshow=FS,hudunshow=FE,hudunshow=FR,hudunshow=FB,hudunshow=FG,hudunshow=StatusFS,hudunshow=StatusFE,hudunshow=StatusFR,hudunshow=StatusFB,hudunshow=StatusFG,hudunshow=StatusA,hudunshow=StatusAR,hudunshow=StatusAB,hudunshow=StatusAG,hudunshow=StatusAmb,,hudunshow=StatusAmbR,hudunshow=StatusAmbB,hudunshow=StatusAmbG,hudunshow=HHold
+:varequal=FogEditor 1:plrfreeze=100,hudshow=fogeditor,hudshow=panel,hudshow=control,hudshow=FogTitle,hudshow=AmbTitle,hudshow=FFog,hudshow=SFS,hudshow=AFS,hudshow=SFE,hudshow=AFE,hudshow=SA,hudshow=AA,hudshow=AFR,hudshow=SFR,hudshow=AFB,hudshow=SFB,hudshow=AFG,hudshow=SFG,hudshow=SAR,hudshow=AAR,hudshow=SAB,hudshow=AAB,hudshow=SAG,hudshow=AAG,hudshow=SF,hudshow=FS,hudshow=FE,hudshow=FR,hudshow=FB,hudshow=FG,hudshow=StatusFS,hudshow=StatusFE,hudshow=StatusFR,hudshow=StatusFB,hudshow=StatusFG,hudshow=StatusA,hudshow=StatusAR,hudshow=StatusAB,hudshow=StatusAG,hudshow=StatusAmb,hudshow=StatusAmbR,hudshow=StatusAmbB,hudshow=StatusAmbG,hudshow=HHold
+
+;-Туман вкл\выкл
+:state=3,keypressed=33 0:state=1
+:varequal=FogEditor 1,varequal=fog 0:hudshow=Off,hudunshow=On
+:varequal=FogEditor 1,varequal=fog 1:hudshow=On,hudunshow=Off
+:state=1,varequal=FogEditor 1,varequal=fog 0,keypressed=33 1:setvar=fog 1,state=3
+:state=1,varequal=FogEditor 1,varequal=fog 1,keypressed=33 1:setvar=fog 0,state=3
+;-Управление командой FOGSTART=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=2 1,varnotequal=fogstart 0:subvar=fogstart 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=3 1:addvar=fogstart 1
+;-Управление командой FOGEND=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=4 1,varnotequal=fogend 0:subvar=fogend 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=5 1:addvar=fogend 1
+;-Управление командой FOGRED=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=16 1,varnotequal=fogred 0:subvar=fogred 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=17 1,varnotequal=fogred 255:addvar=fogred 1
+;-Управление командой FOGBLUE=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=30 1,varnotequal=fogblue 0:subvar=fogblue 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=31 1,varnotequal=fogblue 255:addvar=fogblue 1
+;-Управление командой FOGGREEN=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=44 1,varnotequal=foggreen 0:subvar=foggreen 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=45 1,varnotequal=foggreen 255:addvar=foggreen 1
+
+;-Управление AMBIENCE=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=6 1,varnotequal=amb 0:subvar=amb 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=7 1,varnotequal=amb 100:addvar=amb 1
+;-Управление AMBIENCERED=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=20 1,varnotequal=ambred 0:subvar=ambred 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=21 1,varnotequal=ambred 255:addvar=ambred 1
+;-Управление AMBIENCEBLUE=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=34 1,varnotequal=ambblue 0:subvar=ambblue 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=35 1,varnotequal=ambblue 255:addvar=ambblue 1
+;-Управление AMBIENCEGREEN=X
+;Sub Volue
+:state=1,varequal=FogEditor 1,keypressed=48 1,varnotequal=ambgreen 0:subvar=ambgreen 1
+;Add Volue
+:state=1,varequal=FogEditor 1,keypressed=49 1,varnotequal=ambgreen 255:addvar=ambgreen 1

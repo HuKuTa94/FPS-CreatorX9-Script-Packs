@@ -1,0 +1,37 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 03.09.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;ИИ
+
+:state=0:animate=1
+:state=0,keypressed=33 1:alwaysactive=1,state=3,scale=80
+
+;Проверка местоположение игрока
+:state=1,activated=1:activate=0,state=2
+:state=1,activated=2:activate=0,state=2
+:state=1,activated=3:activate=0,state=2
+:state=1,activated=4:activate=0,state=2
+
+;Проверка местоположение бота
+:state=2,activated=1:activate=0,state=3
+:state=2,activated=2:activate=0,state=3
+:state=2,activated=3:activate=0,state=3
+:state=2,activated=4:activate=0,state=4
+
+;Начинает двигаться по ВП сначала
+:state=3:runfore=5,animate=92
+:state=3,waypointstate=0:waypointstart
+:state=3,waypointstate=3:waypointnext
+:state=3,waypointstate=5:waypointstop,state=5
+;:state=3,nearactivatable=11:waypointstop,state=5
+
+;Начинает двигаться по ВП с конца
+:state=4:runfore=5,animate=5
+:state=4,waypointstate=0:waypointstart
+:state=4,waypointstate=3:waypointprev
+:state=4,nearactivatable=11:waypointstop,state=5
+
+:state=5:rotatetoplr
+
+:state=5,keypressed=33 1:state=1

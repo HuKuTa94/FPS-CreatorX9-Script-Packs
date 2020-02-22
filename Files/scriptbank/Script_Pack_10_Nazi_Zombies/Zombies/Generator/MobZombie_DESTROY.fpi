@@ -1,0 +1,23 @@
+;-Remove DarkAI
+:state=0:aistop,airemove,setbulletcoloff=1,coloff,state=1
+;-Random animation
+:state=1,random=2:setframe=104,state=2,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie2.ogg
+:state=1,random=2:setframe=105,state=3,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie3.ogg
+:state=1,random=2:setframe=106,state=4,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie4.ogg
+:state=1,random=2:setframe=107,state=5,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie5.ogg
+;-Animation 1
+:state=2:incframe=104
+:state=2,frameatend=104:state=6
+;-Animation 2
+:state=3:incframe=105
+:state=3,frameatend=105:state=6
+;-Animation 3
+:state=4:incframe=106
+:state=4,frameatend=106:state=6
+;-Animation 1
+:state=5:incframe=107
+:state=5,frameatend=107:state=6
+
+;-Disappear
+:state=6:hide,state=7
+:state=7,soundfinished=1:destroy

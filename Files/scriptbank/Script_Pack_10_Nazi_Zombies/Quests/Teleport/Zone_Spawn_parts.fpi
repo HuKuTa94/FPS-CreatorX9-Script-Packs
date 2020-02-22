@@ -1,0 +1,93 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 29.10.2013
+;Требования: необходим патч 1.18
+;Версия скрипта: 1.0
+;Описание: скрипт, который произвольно спавнит предметы в игре
+
+;\\\\Начало скрипта\\\\
+:state=0:floorlogic,state=100
+:state=100,plrwithinzone=1:state=101
+;---Респавн предметов---
+:state=101:settargetname=settargetname=Tpart1_1,activatetarget=1
+:state=101:settargetname=settargetname=Tpart1_2,activatetarget=1
+:state=101:settargetname=settargetname=Tpart1_3,activatetarget=1
+:state=101:settargetname=settargetname=Tpart2_1,activatetarget=1
+:state=101:settargetname=settargetname=Tpart2_2,activatetarget=1
+:state=101:settargetname=settargetname=Tpart2_3,activatetarget=1
+:state=101:settargetname=settargetname=Tpart3_1,activatetarget=1
+:state=101:settargetname=settargetname=Tpart3_2,activatetarget=1
+:state=101:settargetname=settargetname=Tpart3_3,activatetarget=1,etimerstart,state=102
+
+;---Задержка перед рандомным появлением частей---
+:state=102,etimergreater=500:state=1
+
+;_____________________________ТЕЛЕПОРТ____________________________
+;\\\\Появление части № 1\\\\\
+;----Место появления № 1-----
+:state=1,random=5:settargetname=Tpart1_1,activatetarget=1,state=11
+;----Место появления № 2-----
+:state=1,random=5:settargetname=Tpart1_2,activatetarget=1,state=12
+;----Место появления № 3-----
+:state=1,random=5:settargetname=Tpart1_3,activatetarget=1,state=13
+
+;\\\\Удаление неиспользованных частей\\\\
+;---Удаление частей из мест № 2 и № 3---
+:state=11:settargetname=Tpart1_2,activatetarget=2
+:state=11:settargetname=Tpart1_3,activatetarget=2
+:state=11:state=2
+;---Удаление частей из мест № 1 и № 3---
+:state=12:settargetname=Tpart1_1,activatetarget=2
+:state=12:settargetname=Tpart1_3,activatetarget=2
+:state=12:state=2
+;---Удаление частей из мест № 1 и № 2---
+:state=13:settargetname=Tpart1_1,activatetarget=2
+:state=13:settargetname=Tpart1_2,activatetarget=2
+:state=13:state=2
+
+;\\\\Появление части № 2\\\\\
+;----Место появления № 1-----
+:state=2,random=5:settargetname=Tpart2_1,activatetarget=1,state=21
+;----Место появления № 2-----
+:state=2,random=5:settargetname=Tpart2_2,activatetarget=1,state=22
+;----Место появления № 3-----
+:state=2,random=5:settargetname=Tpart2_3,activatetarget=1,state=23
+
+;\\\\Удаление неиспользованных частей\\\\
+;---Удаление частей из мест № 2 и № 3---
+:state=21:settargetname=Tpart2_2,activatetarget=2
+:state=21:settargetname=Tpart2_3,activatetarget=2
+:state=21:state=3
+;---Удаление частей из мест № 1 и № 3---
+:state=22:settargetname=Tpart2_1,activatetarget=2
+:state=22:settargetname=Tpart2_3,activatetarget=2
+:state=22:state=3
+;---Удаление частей из мест № 1 и № 2---
+:state=23:settargetname=Tpart2_1,activatetarget=2
+:state=23:settargetname=Tpart2_2,activatetarget=2
+:state=23:state=3
+
+;\\\\Появление части № 3\\\\\
+;----Место появления № 1-----
+:state=3,random=5:settargetname=Tpart3_1,activatetarget=1,state=31
+;----Место появления № 2-----
+:state=3,random=5:settargetname=Tpart3_2,activatetarget=1,state=32
+;----Место появления № 3-----
+:state=3,random=5:settargetname=Tpart3_3,activatetarget=1,state=33
+
+;\\\\Удаление неиспользованных частей\\\\
+;---Удаление частей из мест № 2 и № 3---
+:state=31:settargetname=Tpart3_2,activatetarget=2
+:state=31:settargetname=Tpart3_3,activatetarget=2
+:state=31:state=4
+;---Удаление частей из мест № 1 и № 3---
+:state=32:settargetname=Tpart3_1,activatetarget=2
+:state=32:settargetname=Tpart3_3,activatetarget=2
+:state=32:state=4
+;---Удаление частей из мест № 1 и № 2---
+:state=33:settargetname=Tpart3_1,activatetarget=2
+:state=33:settargetname=Tpart3_2,activatetarget=2
+:state=33:state=4
+
+;\\\\Конец скрипта\\\\
+:state=4:destroy

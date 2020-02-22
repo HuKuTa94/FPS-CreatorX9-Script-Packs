@@ -1,0 +1,6 @@
+;Triggers
+
+:state=0,activated=1:state=1,etimerstart
+:state=1,etimergreater=1500:state=2,destroy
+
+;End of Script

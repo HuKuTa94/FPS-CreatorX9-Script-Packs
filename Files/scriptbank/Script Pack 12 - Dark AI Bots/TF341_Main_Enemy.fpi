@@ -1,0 +1,23 @@
+;Старт скрипта
+:state=0:addaiteam=2,aiaddenemy=2 1,aiattackwareness=1,aiautofactionoff=1,setaiactive=1,reloadweapon,alwaysactive=0,state=10
+
+;Анимации передвижения
+;-Игрок смотрит на бота
+:state=2,inview=1:state=1
+:state=1,idle=1:animate=1
+:state=1,strafingleft=1:setanimatespeed=150,aisetspeed=120,animate=3
+:state=1,strafingright=1:setanimatespeed=150,aisetspeed=120,animate=4
+:state=1,movingforwards=1:setanimatespeed=130,aisetspeed=280,animate=5
+:state=1,runningforwards=1:setanimatespeed=130,aisetspeed=200,animate=5
+;-Игрок не смотрит на бота
+:state=1,inview=0:state=2
+
+;Определение цели
+:state=1:aicleartarget
+:state=1,aicanshoot=1:aisettarget
+;Атака
+:state=1,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6
+;Перезарядка
+:state=1,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,state=4
+:state=4:incframe=6
+:state=4,frameatend=6:reloadweapon,setaiactive=1,aisetspeed=120,state=1

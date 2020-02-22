@@ -1,0 +1,77 @@
+;Описание:
+;Ящик марки ALONE используется только один на карте, он не уничтожается
+;Activated=100 - Игрок взял оружие, закрыть ящик
+;Activate=200 - желтый свет выключен
+;Activate=201 - желтый свет включен
+;Activate=202 - желтая деколь выключен
+;Activate=203 - желтая деколь включен
+;Activate=99  - сделать все пушки возле этого ящика активными на момент прокрутки вероятности
+;Activate=98  - сделать все пушки возле этого ящика неактивными после прокрутки вероятности
+;Activate=0   - спрятать оружие
+;Activate=1   - показать оружие 1
+
+;Начало скрипта
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\weapon950.dds,hudname=weapon950,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\weapontake.dds,hudname=weapontake,hudhide=1,hudmake=display
+;-Ящик появляется сразу
+:state=0:show,floorlogic,coloff,activateifused=1,alwaysactive=0,state=1
+
+;Взаимодействие с игроком
+;-Игрок близко
+:state=1,plrdistwithin=50,plrfacing=50:hudshow=weapon950,state=2
+;-Игрок далеко
+:state=2,plrnotfacing=50:hudunshow=weapon950,state=1
+:state=2,plrdistfurther=50:hudunshow=weapon950,state=1
+;-Игрок покупает оружие в ящике
+:state=2,plrdistwithin=50,keypressed=33 1,vargreater=cash 949:state=3
+:state=3,plrdistfurther=50:state=2
+:state=3,plrnotfacing=50:state=2
+:state=3,plrdistwithin=50,keypressed=33 0:state=4,alwaysactive=1,hudunshow=weapon950,subvar=cash 950,sound=audiobank\Script_Pack_10_Nazi_Zombies\box_weapon.ogg
+;-Недостаточно денег
+:state=2,plrdistwithin=50,keypressed=33 1,varless=cash 949:state=31
+:state=31,plrdistfurther=50:state=2
+:state=31,plrdistwithin=50,keypressed=33 0:state=2,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy_no_money.ogg
+
+
+;Выбор случайного оружия
+;-Сделать все оружие возле этого ящика активным
+:state=4:activateifused=99,state=5
+;-Включение эффектов (если есть)
+:state=5,nearactivatable=200:settarget,activatetarget=201
+:state=5,nearactivatable=202:settarget,activatetarget=203,state=6
+;--Переход к следующей строчке, если нет эффектов
+:state=5:state=6
+;-Ящик открывается
+:state=6:setframe=0,sound=audiobank\ww2\scenery\doors\open.wav,state=7
+:state=7:incframe=0
+:state=7,frameatend=0:etimerstart,state=8
+;-Прокрутка случайных пушек
+:state=8,etimergreater=1500:state=9
+:state=9,random=10:activateifused=1,state=10
+:state=9,random=10:activateifused=2,state=10
+:state=9,random=10:activateifused=3,state=10
+:state=9,random=10:activateifused=4,state=10
+:state=9,random=10:activateifused=5,state=10
+
+;Случайное оружие выбрано
+;-Сделать другие пушки неактивными (которые не выбраны)
+:state=10:etimerstart,state=11
+:state=11,etimergreater=20:activateifused=98,state=12
+;-Время нахождения оружия в ящике
+:state=12,etimergreater=50:etimerstart,sound=audiobank\Script_Pack_10_Nazi_Zombies\box_done.ogg,state=13
+;-Игрок взял оружие
+:state=13,activated=100:activate=0,activateifused=0,state=14
+;-Кончилось время нахождения оружия в ящике
+:state=13,etimergreater=9000:activateifused=0,state=14
+
+;Закрытие ящика
+;-Отключение эффектов (если есть)
+:state=14,nearactivatable=201:settarget,activatetarget=200
+:state=14,nearactivatable=203:settarget,activatetarget=202,state=15
+;--Переход к следующей строчке, если нет эффектов
+:state=14:state=15
+;-Спрятать оружие
+:state=15:activateifused=0,state=16
+;-Закрытие
+:state=16:decframe=0
+:state=16,frameatstart=0:alwaysactive=0,sound=audiobank\ww2\scenery\doors\close.wav,state=1

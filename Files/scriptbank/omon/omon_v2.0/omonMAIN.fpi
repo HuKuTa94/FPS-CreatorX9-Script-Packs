@@ -1,0 +1,33 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = script amon v2.0 (By Никита)
+
+;Triggers
+
+:state=0:animate=1
+:state=0,noiseheard=85:rotateheadrandom=85,sound=audiobank\omon\noiseheard.wav,timerstart,state=25
+:state=0,shotdamage=1:state=8
+:state=0,plrcanbeseen:state=9
+
+:state=8:state=10,sound=audiobank\omon\shotdamage1.wav
+:state=9:state=10,sound=audiobank\omon\canbeseen.wav
+
+:state=10,plrhealthless=1:state=30,setframe=6,sound=audiobank\omon\plrdead.wav
+:state=10,plrcanbeseen:rotatetoplr
+:state=10,ifweapon=1,plrcanbeseen:settarget,rotatetoplr,useweapon,rundecal=6
+:state=10,ifweapon=0:rotatetoplr,state=20
+:state=10,plrdistfurther=200:rotatetoplr,animate=5,runfore=10
+
+:state=20:incframe=6
+:state=20,frameatend=6:rotatetoplr,reloadweapon,state=10
+
+:state=25,plrcanbeseen:state=9
+:state=25,shotdamage=1:state=8
+:state=25,timergreater=2000:state=0,sound=audiobank\omon\none.wav
+
+:state=30:incframe=6
+:state=30,frameatend=6:state=0
+
+;End of Script

@@ -1,0 +1,86 @@
+;Описание: зона, управляющая всеми компонентами лифта
+;Обозначение компонентов лифта:
+;LOutside1 - кнопка вызова лифта на этаже № 1 и т.д.
+;LInside1Floor0 - внутренняя кнопка управления лифта на этаже № 1, при нажатии кнопки лифт отправляется на этаж № 0 и т.д.
+;LDoor1 - Дверь лифта на этаже № 1 и т.д.
+;Обозначение параметров ACTIVATED=X:
+;Х=10 - нажата кнопка на этаже № 0, вызов лифта на этаж № 0
+;Х=11 - нажата кнопка на этаже № 1, вызов лифта на этаж № 1
+;Х=12 - нажата кнопка на этаже № 2, вызов лифта на этаж № 2
+;X=0  - нажата кнопка внутри лифта, лифт едет на этаж № 0
+;X=1  - нажата кнопка внутри лифта, лифт едет на этаж № 1
+;X=2  - нажата кнопка внутри лифта, лифт едет на этаж № 2
+;Х=100 - лифт приехал на этаж № 0
+;Х=101 - лифт приехал на этаж № 1
+;Х=102 - лифт приехал на этаж № 2
+;Х=200 - закрылась дверь лифта на этаже № 0
+;Х=201 - закрылась дверь лифта на этаже № 1
+;Х=202 - закрылась дверь лифта на этаже № 2
+;Х=300 - открылась дверь лифта на этаже № 0
+;Х=301 - открылась дверь лифта на этаже № 1
+;Х=302 - открылась дверь лифта на этаже № 2
+;Х=400 - нейтральное значение
+;__________________________________________________________________________________________________________
+;\\\Начало скрипта\\\
+;---Лифт по умолчанию находится на этаже № 1---
+;-Включение внешних кнопок вызова лифта только на этаже № 1-
+:state=0:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=1,settargetname=LOutside0,activatetarget=0
+;-Включение внутренних кнопки управления лифтом на всех этажах-
+:state=0:settargetname=LInside2Floor1,activatetarget=1,settargetname=LInside2Floor0,activatetarget=1,settargetname=LInside1Floor2,activatetarget=1,settargetname=LInside1Floor0,activatetarget=1,settargetname=LInside0Floor1,activatetarget=1,settargetname=LInside0Floor2,activatetarget=1
+;-Закрытие всех дверей кроме двери на этаже № 1-
+:state=0:settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=1,settargetname=LDoor0,activatetarget=0
+;-Активация платформы лифта на нейтральное значение-
+:state=0:settargetname=Lift,activatetarget=400
+;-Активация скрипта на нейтральное значение-
+:state=0:activate=400
+;--Запуск скрипта--
+:state=0:state=1
+
+;______________________________________________________________________________________________________________________________
+
+;\\\Лифт едет на этаж № 0\\\
+;--Если нажата кнопка лифта на этаже № 0, то отключить все внешние и внутренние кнопки, закрыть открытую дверь лифта--
+:state=1,activated=10:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=0,settargetname=LOutside0,activatetarget=0,settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=0,settargetname=LDoor0,activatetarget=0,settargetname=LInside2Floor1,activatetarget=0,settargetname=LInside2Floor0,activatetarget=0,settargetname=LInside1Floor2,activatetarget=0,settargetname=LInside1Floor0,activatetarget=0,settargetname=LInside0Floor1,activatetarget=0,settargetname=LInside0Floor2,activatetarget=0,activate=400,state=2
+;--Если нажата внутренняя кнопка лифта, то отключить все внешние и внутренние кнопки, закрыть открытую дверь лифта--
+:state=1,activated=0:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=0,settargetname=LOutside0,activatetarget=0,settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=0,settargetname=LDoor0,activatetarget=0,settargetname=LInside2Floor1,activatetarget=0,settargetname=LInside2Floor0,activatetarget=0,settargetname=LInside1Floor2,activatetarget=0,settargetname=LInside1Floor0,activatetarget=0,settargetname=LInside0Floor1,activatetarget=0,settargetname=LInside0Floor2,activatetarget=0,activate=400,state=2
+;--Если дверь закрылась на этаже № 1, то отправить лифт на этаж № 0--
+:state=2,activated=201:settargetname=Lift,activatetarget=100,activate=400,state=3
+;--Если дверь закрылась на этаже № 2, то отправить лифт на этаж № 0--
+:state=2,activated=202:settargetname=Lift,activatetarget=100,activate=400,state=3
+;--Если лифт приехал на этаж № 0, то включить внешнюю кнопку на этаже № 0, открыть дверь на этаже № 0--
+:state=3,activated=100:settargetname=LOutside0,activatetarget=1,settargetname=LDoor0,activatetarget=1,activate=400,state=4
+;--Если дверь лифта открылась на этаже № 0, то включить все внутренние кнопки лифта, активировать лифт на нейтральное значение--
+:state=4,activated=300:settargetname=LInside2Floor1,activatetarget=1,settargetname=LInside2Floor0,activatetarget=1,settargetname=LInside1Floor2,activatetarget=1,settargetname=LInside1Floor0,activatetarget=1,settargetname=LInside0Floor1,activatetarget=1,settargetname=LInside0Floor2,activatetarget=1,settargetname=Lift,activatetarget=400,activate=400,state=1
+
+;______________________________________________________________________________________________________________________________
+
+;\\\Лифт едет на этаж № 1\\\
+;--Если нажата кнопка лифта на этаже № 1, то отключить все внешние и внутренние кнопки, закрыть открытую дверь лифта--
+:state=1,activated=11:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=0,settargetname=LOutside0,activatetarget=0,settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=0,settargetname=LDoor0,activatetarget=0,settargetname=LInside2Floor1,activatetarget=0,settargetname=LInside2Floor0,activatetarget=0,settargetname=LInside1Floor2,activatetarget=0,settargetname=LInside1Floor0,activatetarget=0,settargetname=LInside0Floor1,activatetarget=0,settargetname=LInside0Floor2,activatetarget=0,activate=400,state=20
+;--Если нажата внутренняя кнопка лифта, то отключить все внешние и внутренние кнопки, закрыть открытую дверь лифта--
+:state=1,activated=1:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=0,settargetname=LOutside0,activatetarget=0,settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=0,settargetname=LDoor0,activatetarget=0,settargetname=LInside2Floor1,activatetarget=0,settargetname=LInside2Floor0,activatetarget=0,settargetname=LInside1Floor2,activatetarget=0,settargetname=LInside1Floor0,activatetarget=0,settargetname=LInside0Floor1,activatetarget=0,settargetname=LInside0Floor2,activatetarget=0,activate=400,state=20
+;--Если дверь закрылась на этаже № 0, то отправить лифт на этаж № 1--
+:state=20,activated=200:settargetname=Lift,activatetarget=101,activate=400,state=30
+;--Если дверь закрылась на этаже № 2, то отправить лифт на этаж № 1--
+:state=20,activated=202:settargetname=Lift,activatetarget=101,activate=400,state=30
+;--Если лифт приехал на этаж № 1, то включить внешнюю кнопку на этаже № 1, открыть дверь на этаже № 1--
+:state=30,activated=101:settargetname=LOutside1,activatetarget=1,settargetname=LDoor1,activatetarget=1,activate=400,state=40
+;--Если дверь лифта на этаже № 1 открылась, то включить все внутренние кнопки лифта, активировать лифт на нейтральное значение--
+:state=40,activated=301:settargetname=LInside2Floor1,activatetarget=1,settargetname=LInside2Floor0,activatetarget=1,settargetname=LInside1Floor2,activatetarget=1,settargetname=LInside1Floor0,activatetarget=1,settargetname=LInside0Floor1,activatetarget=1,settargetname=LInside0Floor2,activatetarget=1,settargetname=Lift,activatetarget=400,activate=400,state=1
+
+;______________________________________________________________________________________________________________________________
+
+;\\\Лифт едет на этаж № 2\\\
+;--Если нажата кнопка лифта на этаже № 2, то отключить все внешние и внутренние кнопки, закрыть открытую дверь лифта--
+:state=1,activated=12:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=0,settargetname=LOutside0,activatetarget=0,settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=0,settargetname=LDoor0,activatetarget=0,settargetname=LInside2Floor1,activatetarget=0,settargetname=LInside2Floor0,activatetarget=0,settargetname=LInside1Floor2,activatetarget=0,settargetname=LInside1Floor0,activatetarget=0,settargetname=LInside0Floor1,activatetarget=0,settargetname=LInside0Floor2,activatetarget=0,activate=400,state=200
+;--Если нажата внутренняя кнопка лифта, то отключить все внешние и внутренние кнопки, закрыть открытую дверь лифта--
+:state=1,activated=2:settargetname=LOutside2,activatetarget=0,settargetname=LOutside1,activatetarget=0,settargetname=LOutside0,activatetarget=0,settargetname=LDoor2,activatetarget=0,settargetname=LDoor1,activatetarget=0,settargetname=LDoor0,activatetarget=0,settargetname=LInside2Floor1,activatetarget=0,settargetname=LInside2Floor0,activatetarget=0,settargetname=LInside1Floor2,activatetarget=0,settargetname=LInside1Floor0,activatetarget=0,settargetname=LInside0Floor1,activatetarget=0,settargetname=LInside0Floor2,activatetarget=0,activate=400,state=200
+;--Если дверь закрылась на этаже № 0, то отправить лифт на этаж № 2--
+:state=200,activated=200:settargetname=Lift,activatetarget=102,activate=400,state=300
+;--Если дверь закрылась на этаже № 1, то отправить лифт на этаж № 2--
+:state=200,activated=201:settargetname=Lift,activatetarget=102,activate=400,state=300
+;--Если лифт приехал на этаж № 2, то включить внешнюю кнопку на этаже № 2, открыть дверь на этаже № 2--
+:state=300,activated=102:settargetname=LOutside2,activatetarget=1,settargetname=LDoor2,activatetarget=1,activate=400,state=400
+;--Если дверь лифта на этаже № 2 открылась, то включить все внутренние кнопки лифта, активировать лифт на нейтральное значение--
+:state=400,activated=302:settargetname=LInside2Floor1,activatetarget=1,settargetname=LInside2Floor0,activatetarget=1,settargetname=LInside1Floor2,activatetarget=1,settargetname=LInside1Floor0,activatetarget=1,settargetname=LInside0Floor1,activatetarget=1,settargetname=LInside0Floor2,activatetarget=1,settargetname=Lift,activatetarget=400,activate=400,state=1
+

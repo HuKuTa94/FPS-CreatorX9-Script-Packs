@@ -1,0 +1,124 @@
+;UZI weapon spec
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 2
+muzzlesize     = 250
+brass          = 1
+smoke          = 1
+second         = 0
+damage         = 8
+damagetype     = 1
+scorchtype     = 1
+reloadqty      = 30
+iterate        = 0
+accuracy       = 5
+firerate       = 4
+
+;GUN Visuals
+
+textured      = gun_D2.tga
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+weapontype    = 2
+
+;GUN Sounds
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         = cock.wav
+sound5         =
+fireloop       = 2000
+
+;HUD muzzleflash position
+
+horiz          = 0
+vert           = 0
+forward        = -2
+alignx         = 30
+aligny         = -20
+alignz         = 140
+
+;HUD animation frames list
+
+keyframe ratio = 1
+select         = 0,17
+Idle           = 18,52
+Move           = 54,70
+Start fire     = 75,75
+automatic fire = 78,81
+end fire       = 83,86
+reload         = 88,137
+;reload		= 139,199
+
+useempty = 1
+empty reload = 139,198
+
+putaway	       = 1026,1040
+
+run		= 586,604
+
+
+;HUD sound frames list
+
+soundframes    = 3
+sframe0        = 76,1
+sframe1        = 139,2
+;sframe2        = 98,4
+
+;Airmod conditions graciously added by Shadowtroid
+
+
+
+zoomto =207,212
+zoom idle =213,233
+zoom move =236,259
+zoom start fire =264,264
+zoom automatic fire =267,270
+zoom end fire = 272,276
+zoomfrom =279,284
+
+simplezoom = 1
+simplezoomacc = 1
+simplezoomy = 0.1
+simplezoomanim = 1
+simplezoomflash = 1
+
+zoomalignx         = 0
+zoomaligny         = -20
+zoomalignz         = 140
+
+melee start 	= 714,719
+melee end	= 720,733
+
+nofullreload = 1
+chamberedround	= 1
+
+simplezoomspeed=6
+runy = -7
+runaccuracy = 60
+forcezoomout =1
+recoily = 10
+recoilyreturn = 88
+recoilx = 5
+recoilxreturn = 80
+
+zoomrecoily = 8
+zoomrecoilyreturn = 90
+zoomrecoilx = 1
+zoomrecoilxreturn = 95
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3
+zoomgunlagspeed = 6
+zoomgunlagxmax = 4
+zoomgunlagymax = 6
+
+zoomwalkspeed = 0.4
+zoomturnspeed = 0.15

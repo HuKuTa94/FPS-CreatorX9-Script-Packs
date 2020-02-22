@@ -1,0 +1,22 @@
+;Artificial Intelligence Script
+; 0-once face player
+; 1-once keep angle
+; 2-loop face player
+; 3-loop keep angle
+; 4-once face up
+; 5-loop face up
+; 6-character-spot-decal (at end of entity characters gun if available)
+; 7-particle based decal
+
+
+:activated=1,plrdistfurther=400:state=10,rundecal=0,destroy
+:state=0,activated=1:state=1
+
+:state=1:etimerstart,state=2
+:state=2,etimergreater=1000:rundecal=1,state=5
+:state=3,etimergreater=1000:state=1
+
+:state=5,random=2:state=3,etimerstart,sound=audiobank\station13\zombies\dante_hit_metall.wav
+:state=5,random=2:state=3,etimerstart,sound=audiobank\station13\zombies\dante_hit_metall2.wav
+
+;End of Script

@@ -1,0 +1,17 @@
+;-Freeze! Don't move!
+:always:freeze
+
+;-DarkAI init
+:state=0:addaiteam=1,aiaddenemy=1 2,aisetspeed=0,setaiactive=0,aiattackawareness=0,aiautofactionoff=1,alwaysactive=1,state=1
+
+;-Generator was attacked
+:state=1,isdarkai=1,shotdamage=1:aicallteam=1500
+
+;-Generator destoyed
+:state=1,healthless=%healthmin:activateifused=0,airemove,sethealth=4000,alwaysactive=0,setbulletcoloff=1,subvar=generatorAlive 1,sound=audiobank\Script_Pack_10_Nazi_Zombies\break1.ogg,state=2
+
+;-Generator repaired
+:state=2,healthgreater=%healthmax:sethealth=%healthmax,activateifused=1,setbulletcoloff=0,sound=audiobank\Script_Pack_10_Nazi_Zombies\light_on.ogg,state=0
+
+;-Debug
+:state=2,plrdistwithin=100:sethealth=5555,addvar=generatorAlive 1

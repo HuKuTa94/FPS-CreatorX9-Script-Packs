@@ -1,0 +1,11 @@
+;Описание:
+;Activated=0 - выключен
+;Activated=1 - включен
+
+;-Старт скрипта
+:state=0:activate=0,floorlogic,state=1
+
+;-Включение
+:state=1,activated=1:rundecal=3,state=2
+;-Выключение
+:state=2,activated=0:rundecal=-1,state=1

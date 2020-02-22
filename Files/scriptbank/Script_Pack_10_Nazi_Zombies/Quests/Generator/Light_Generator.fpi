@@ -1,0 +1,3 @@
+:state=0:floorlogic,lightintensity=400,activate=1,state=1
+:state=1,activated=0:state=2,lightoff
+:state=2,activated=1:state=1,lighton

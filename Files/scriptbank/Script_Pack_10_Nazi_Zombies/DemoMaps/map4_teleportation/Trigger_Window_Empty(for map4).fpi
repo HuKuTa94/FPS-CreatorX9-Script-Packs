@@ -1,0 +1,10 @@
+;Описание 
+;W1P1 - Window №1 Plank №1 и т.д. 
+;Activated=3 - Все доски сломаны
+;Activated=2 - Бездействие триггера
+;Activated=1 - Зомби сломал доску
+;Activated=0 - Игрок восстановил доску
+
+;Начальное состояние
+:state=0:floorlogic,nobulletcol=1,coloff,hide,state=1
+:state=1:activate=100

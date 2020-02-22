@@ -1,0 +1,6 @@
+;Скрипт написал: Кошелев Никита.
+;Описание: броня (100 единиц).
+
+:state=0,varless=armor 100:state=1,playertake,setvar=armor 100
+
+;End of Script

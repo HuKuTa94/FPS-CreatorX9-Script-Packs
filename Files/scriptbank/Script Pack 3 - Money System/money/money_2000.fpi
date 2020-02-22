@@ -1,0 +1,17 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Money $2000 (By Никита) 
+
+;===Установка худа "Вы нашли предмет"===
+:state=0:hudreset,hudx=50,hudy=90,hudimagefine=gamecore\text\pressentertouse.tga,hudname=moneypickup,hudhide=1,hudmake=display,state=1
+
+;===Показать худ когда игрок близко===
+:state=1,plrdistwithin=50:hudshow=moneypickup,hudunshow=moneypickup
+
+;===Игрок взял предмет (деньги)===
+:state=1,plrdistwithin=50,plrusingaction=1:hudfadeout=moneypickup,destroy,addvar=moneysys 2000,plrsound=audiobank\items\pickup.wav,state=2
+
+;End of Script
+

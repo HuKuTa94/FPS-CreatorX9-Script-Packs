@@ -1,0 +1,32 @@
+;header
+
+desc          = DebrisBlock1
+
+;ai
+aiinit        = appear1.fpi
+aimain        = Script_Pack_10_Nazi_Zombies\Debris\entity_block_plr.fpi
+aidestroy     = disappear1.fpi
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+
+model         = BlockPlr.x
+offx          = 0
+offy          = 50
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+;materialindex = 
+textured      = BlockPlr.jpg
+
+;statistics
+collisionmode = 0
+strength = 0
+physics on = 1
+Scale = 97
+isimmobile = 1

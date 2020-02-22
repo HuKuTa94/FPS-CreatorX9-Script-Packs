@@ -1,0 +1,56 @@
+;Описание:
+;Activated=0 - ловушка выключена
+;Activated=1 - ловушка включена
+;Activated=2 - ловушка включена противоположным рубильником (с другой стороны)
+;Activated=3 - ловушка заряжена, сделать активными все рубильники
+
+;ХУД
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\activation1500.dds,hudname=activation1500,hudhide=1,hudmake=display
+
+;Начало скриптпа
+:state=0:coloff,nobulletcol=1,alwaysactive=0,state=1
+
+;Взаимодействие с игроком
+;-Игрок близко
+:state=1,plrfacing=50,plrdistwithin=50:hudshow=activation1500,state=2
+:state=2,plrnotfacing=50:hudunshow=activation1500,state=1
+:state=2,plrdistfurther=50:hudunshow=activation1500,state=1
+;--Недостаточно денег
+:state=2,varless=cash 1499,plrdistwithin=50,keypressed=33 1:state=3
+:state=3,plrdistfurther=50:state=2
+:state=3,plrnotfacing=50:state=2
+:state=3,plrfacing=50,plrdistwithin=50,keypressed=33 0:state=2,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy_no_money.wav
+;--Игрок активирует ловушку
+:state=2,vargreater=cash 1499,plrdistwithin=50,keypressed=33 1:state=4
+:state=4,plrdistfurther=50:state=2
+:state=4,plrnotfacing=50:state=2
+:state=4,keypressed=33 0:hudunshow=activation1500,subvar=cash 1500,alwaysactive=1,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy.wav,activateifused=2,state=13
+
+;Включение ловушки
+:state=1,activated=2:state=16
+:state=2,activated=2:state=16
+:state=3,activated=2:state=16
+:state=4,activated=2:state=16
+;-Анимация
+;--Активирована ловушка игроком
+:state=13:setframe=0,state=14
+:state=14:incframe=0
+:state=14,frameatend=0:activateifused=1,etimerstart,loopsound=audiobank\atmos\electrichum.wav,state=15
+;--Активированна ловушка c другой стороны
+:state=16:setframe=0,state=17
+:state=17:incframe=0
+:state=17,frameatend=0:state=18
+
+;Время работы ловушки завершилось
+:state=18,activated=3:alwaysactive=0,state=20
+:state=15,etimergreater=50000:activateifused=0,stopsound=audiobank\atmos\electrichum.wav,state=21
+;-Анимация отключения
+;--Активирована ловушка игроком
+:state=19:decframe=0
+:state=19,frameatstart=0:state=1
+;--Активированна ловушка c другой стороны
+:state=20:decframe=0
+:state=20,frameatstart=0,activated=3:state=1
+;-Время зарядки ловушки
+:state=21:etimerstart,state=22
+:state=22,etimergreater=3000:activateifused=3,sound=audiobank\Script_Pack_10_Nazi_Zombies\alarm1.ogg,alwaysactive=0,state=19

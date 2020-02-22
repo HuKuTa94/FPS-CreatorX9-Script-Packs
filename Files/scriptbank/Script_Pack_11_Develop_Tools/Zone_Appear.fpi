@@ -1,0 +1,7 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт оптимизирует триггер-зону
+
+:state=0:floorlogic,runfpidefault=1

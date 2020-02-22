@@ -1,0 +1,5 @@
+;Начало скрипта
+:state=0:floorlogic,state=1
+;Скрипт
+:state=1,plrwithinzone=1:activateifused=1,state=2
+:state=2,plrwithinzone=0:activateifused=0,state=1

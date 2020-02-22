@@ -1,0 +1,99 @@
+desc          = By Никита
+
+:state=0:dimvar=point1_kick,setvar=point1_kick 0,dimvar=point1_zombie3_wpstop,setvar=point1_zombie3_wpstop 0
+
+:state=0:animate=92
+:state=0,waypointstate=0:waypointstart
+:state=0,waypointstate=3:waypointnext
+:state=0,waypointstate=5:waypointstop,state=50,setvar=point1_zombie2_wpstop 1
+:varequal=point1_zombie3_wpstop 1:waypointstop
+
+:state=50,varequal=point1_plank1 1:state=51
+:state=50,varequal=point1_plank1 0:state=60
+:state=60,varequal=point1_plank2 1:state=53
+:state=60,varequal=point1_plank2 0:state=70
+:state=70,varequal=point1_plank3 1:state=55
+:state=70,varequal=point1_plank3 0:state=80
+:state=80,varequal=point1_plank4 1:state=57
+:state=80,varequal=point1_plank4 0:state=90
+:state=90,varequal=point1_plank5 1:state=59
+:state=90,vareqial=point1_plank5 0:state=1
+
+;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+;===Ломает палку 1===
+:state=51:setframe=93,incframe=93,state=52
+:state=52,framebeyond=93 55:setvar=point1_kick 1,sound=audiobank\Script Pack 5 - Zombie Mode\plank_break1.wav,state=522
+:state=522,frameatend=93:state=60,setvar=point1_kick 0
+
+;===Ломает палку 2===
+:state=53:setframe=93,incframe=93,state=54
+:state=54,framebeyond=93 55:setvar=point1_kick 2,sound=audiobank\Script Pack 5 - Zombie Mode\plank_break2.wav,state=544
+:state=544,frameatend=93:state=70,setvar=point1_kick 0
+
+;===Ломает палку 3===
+:state=55:setframe=93,incframe=93,state=56
+:state=56,framebeyond=93 55:setvar=point1_kick 3,sound=audiobank\Script Pack 5 - Zombie Mode\plank_break3.wav,state=566
+:state=566,frameatend=93:state=80,setvar=point1_kick 0
+
+;===Ломает палку 4===
+:state=57:setframe=93,incframe=93,state=58
+:state=58,framebeyond=93 55:setvar=point1_kick 4,sound=audiobank\Script Pack 5 - Zombie Mode\plank_break4.wav,state=588
+:state=588,frameatend=93:state=90,setvar=point1_kick 0
+
+;===Ломает палку 5===
+:state=59:setframe=93,incframe=93,state=61
+:state=61,framebeyond=93 55:setvar=point1_kick 5,sound=audiobank\Script Pack 5 - Zombie Mode\plank_break5.wav,state=611
+:state=611,frameatend=93:,state=1,setvar=point1_kick 0
+;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+:state=1:etimerstart,state=2
+:state=2:animate=92,movefore=2
+:state=2,etimergreater=1000:state=4,rotatetoplr
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;===Перемещение===
+:state=4:rotatetoplr,animate=92,movefore=2
+:state=4,plrdistwithin=70:state=5
+
+:state=5:animate=92,rotatetoplr,movefore=2
+:state=5,plrdistfurther=71:state=4
+:state=5,plrdistwithin=40:state=7
+
+;===Выбор атаки===
+:state=7,plrdistfurther=41:state=4
+:state=7,random=2:state=10
+:state=7,random=2:state=20
+
+;===Удар===
+:state=10,plrdistwithin=40:rotatetoplr,setframe=93,state=11
+:state=11,framebeyond=93 55,plrdistwithin=60:plraddhealth=-50,state=12
+:state=11:incframe=93,rotatetoplr
+:state=11,frameatend=93:state=7
+:state=12:incframe=93
+:state=12,frameatend=93:state=7
+
+;===Захват===
+:state=20,plrdistwithin=40:plrfreeze=100,rotatetoplr,setframe=95,state=21
+
+:state=21,framewithin=95 7:movefore=2
+:state=21,framebeyond=95 44,plrdistwithin=60:plraddhealth=-20,plrfreeze=100,state=22
+:state=21,plrdistwithin=40:incframe=95,plrfreeze=100,rotatetoplr
+:state=21,plrdistfurther=40:plrfreeze=0,rotatetoplr,state=7
+:state=21,frameatend=95:state=7
+
+:state=22,framebeyond=95 66,plrdistwithin=60:plraddhealth=-25,plrfreeze=100,state=23
+:state=22,plrdistwithin=40:incframe=95,plrfreeze=100,rotatetoplr
+:state=22,plrdistfurther=40:plrfreeze=0,rotatetoplr,state=5
+:state=22,frameatend=95:state=5
+
+:state=23,framebeyond=95 90,plrdistwithin=60:plraddhealth=-35,plrfreeze=0,state=24
+:state=23,plrdistwithin=40:incframe=95,plrfreeze=100,rotatetoplr
+:state=23,plrdistfurther=40:plrfreeze=0,rotatetoplr,state=7
+:state=23,frameatend=95:state=7
+
+:state=24:plrfreeze=0,incframe=95
+:state=24,frameatend=95:state=7
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;End of Script

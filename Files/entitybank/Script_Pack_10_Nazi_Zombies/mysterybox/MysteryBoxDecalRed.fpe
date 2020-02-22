@@ -1,0 +1,25 @@
+;header
+desc          = MB1
+
+;ai
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\MysteryBox\MysteryBoxMultiple\Decal_MBox_Red.fpi
+aidestroy     = disappear1.fpi
+
+;orientation
+model         = MBoxDecal.x
+textured      = MysteryBoxDecalRed.dds
+transparency  = 0
+defaultheight = 20
+roty          = 0
+
+
+;identity details
+strength      = 0
+isimmobile    = 1
+ismarker      = 4
+
+;decals
+decalmax      = 2
+decal0        = Script_Pack_10_Nazi_Zombies\mysteryboxRED
+decal1        = Script_Pack_10_Nazi_Zombies\mysteryboxYellow

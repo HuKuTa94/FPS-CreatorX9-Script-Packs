@@ -1,0 +1,84 @@
+desc          = Assault (By Никита) 
+
+:always,shotdamage=1:setvar=hitbody 1
+
+;===Оружие сразу заряжено===
+:state=0:state=1,reloadweapon
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;===Стоит на месте===
+:state=1,plrwithin:state=2
+:state=1,plrdistwithin=40:state=2,rotatetoplr
+:state=1:animate=1,rotateheadrandom=35
+:state=1,shotdamage=1:state=2,resethead
+:state=1,plrcanbeseen:state=2,resethead
+
+;///////////////////////////////////////////////////////////////////////////////////////
+
+;===Стреляет в игрока стоя===
+:state=2,plrcanbeseen:rotatetoplr,animate=1
+:state=2,plrcannotbeseen:state=4
+:state=2,plrcanbeseen,ifweapon=1:settarget,rundecal=6,useweapon
+:state=2,ifweapon=0:state=5,setframe=6
+
+;===Cтреляет в игрока сидя===
+:state=2,plrdistfurther=301:state=12
+:state=12,plrcannotbeseen:state=4
+:state=12,plrcanbeseen:rotatetoplr,animate=31
+:state=12,plrcanbeseen,ifweapon=1:settarget,rundecal=6,useweapon
+:state=12,ifweapon=0:state=7,setframe=36
+
+;===Отходит назад, если игрок слишком близко===
+:state=2,plrdistwithin=90:state=3
+:state=3,ifweapon=1:settarget,rundecal=6,useweapon
+:state=3,ifweapon=0:state=6,setframe=6
+:state=3,losetarget=5:state=13
+:state=3:setanimspeed=-100,animate=2,movefore=-2,rotatetoplr
+:state=3,plrdistfurther=91:state=2
+
+;===Cтреляет сидя===
+:state=13,plrdistfurther=91:state=2
+:state=13:animate=31,rotatetoplr
+:state=13,ifweapon=1:settarget,rundecal=6,useweapon
+:state=13,ifweapon=0:state=7,setframe=36
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;===Перезарежается стоя===
+:state=5,plrcanbeseen:rotatetoplr
+:state=5,plrcannotbeseen:followplr
+:state=5:incframe=6
+:state=5,frameatend=6:reloadweapon,state=2
+
+;===перезарежается стоя отходя назад===
+:state=6,plrdistwithin=90:movefore=-2
+:state=6:incframe=6
+:state=6,frameatend=6:reloadweapon,state=2
+
+;===Перезарежается сидя===
+:state=7,plrcanbeseen:rotatetoplr
+:state=7:incframe=36
+:state=7,frameatend=36:reloadweapon,state=2
+
+;///////////////////////////////////////////////////////////////////////////////////////
+
+;===Ищет игрока===
+:state=4:followplr,setanimspeed=100,animate=5,runfore=3,rotateheadrandom=140
+:state=4,losetarget=5:state=2,rotatetoplr
+:state=4,plrdistwithin=170:state=2,rotatetoplr
+:state=4,plrcanbeseen:state=2,resethead
+:state=4,shotdamage=1:state=8
+
+:state=8:settarget,rotatetotarget
+:state=8,plrcanbeseen:state=2
+:state=8,plrcannotbeseen:state=4
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;End of Script
+
+;Умный ИИ. Умеет делать практически все. Перезарежается из произвольного положения (сидя\стоя), ищет игрока в 
+;случаее его потери из зоны видимости. Отступает, если игрок вздумал протаранить ИИ. При отдалении игрока от ИИ
+;занимает сидячую позицию, для ведения более точного огня. 
+

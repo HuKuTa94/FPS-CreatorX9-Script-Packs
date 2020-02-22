@@ -1,0 +1,69 @@
+;-Деньги за попадание
+:shotdamage=1:addvar=cash 10
+
+;Старт скрипта (сброс настроек)
+:always:floorlogic
+:state=0:aisetspeed=100,setanimatespeed=140,setaiactive=0,animate=92,state=1
+
+;ПОИСК ПУТИ ДО ЦЕЛИ
+;-1)Бежит криволинейно на игрока
+;Игрок далеко (игрок смотрит на бота)
+:state=1:runfore=5,rotatetoplr
+;Игрок близко, переход к атаке
+:state=1,plrdistwithin=50:state=15,setanimatespeed=120
+
+;-3) Игрок очень далеко (задействовать Dark AI)
+:state=1,plrdistfurther=200:state=12
+:state=1,losetarget=10:state=12
+:state=1,plrcannotbeseen:state=12
+:state=12:etimerstart,addaiteam=1,setaiactive=1,aisetspeed=100,aiattackawareness=0,state=13
+:state=13,movingforwards=1:aisetspeed=200
+:state=13,runningforwards=1:aisetspeed=150
+:state=13:aifollowplr=1
+:state=13,plrdistwithin=200,plrcanbeseen,etimergreater=300:aisetspeed=100,airemove,state=0
+
+;АТАКА
+;-Выбор атаки
+:state=15,plrdistfurther=90:state=22
+:state=15,random=2:setframe=98,state=16,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie1.ogg 
+:state=15,random=2:setframe=99,state=19,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie3.ogg 
+:state=15,random=2:setframe=101,state=21,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie4.ogg
+:state=15,random=2:setframe=100,state=23,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie5.ogg
+;-Атака 1 (левой правой)
+:state=16:incframe=98,rotatetoplr
+:state=16,framebeyond=98 40,plrdistwithin=70:plraddhealth=-30,state=17
+:state=16,frameatend=98:state=25
+:state=17:incframe=98,rotatetoplr
+:state=17,framebeyond=98 60,plrdistwithin=70:plraddhealth=-30,state=18
+:state=17,frameatend=98:state=25
+:state=18:incframe=98,rotatetoplr
+:state=18,frameatend=98:state=25
+;-Атака 2 (левой)
+:state=19,framebeyond=99 50,plrdistwithin=70:plraddhealth=-40,state=20
+:state=19:incframe=99,rotatetoplr
+:state=19,frameatend=99,rotatetoplr:state=25
+:state=20:incframe=99
+:state=20,frameatend=99:state=25
+;-Атака 3 (двумя руками слева)
+:state=21:incframe=101,rotatetoplr
+:state=21,framebeyond=101 60,plrdistwithin=70:plraddhealth=-50,state=22
+:state=21,frameatend=101:state=25
+:state=22:incframe=101,rotatetoplr
+:state=22,frameatend=101:state=25
+;-Атака 4 (двумя руками справа)
+:state=23:incframe=100,rotatetoplr
+:state=23,framebeyond=100 60,plrdistwithin=70:plraddhealth=-50,state=24
+:state=23,frameatend=100:state=25
+:state=24:incframe=100,rotatetoplr
+:state=24,frameatend=100:state=25
+;-Игрок отдалился во время атаки
+:stategreater=15,stateless=25,plrdistfurther=100:state=25
+;-Конец атаки
+:state=25:setframe=92,state=0
+
+;Игрок далеко, удалить бота из игры
+:varnotequal=Area 0:aistop,airemove,subvar=ZombieInGame 1,addvar=ZombieInWave 1,destroy
+:varequal=ZombieInGame 0:aistop,airemove,addvar=ZombieInWave 1,destroy
+
+;-Конец игры-
+:plrhealthless=1:destroy

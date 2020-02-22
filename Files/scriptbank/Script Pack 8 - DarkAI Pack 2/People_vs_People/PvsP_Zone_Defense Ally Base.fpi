@@ -1,0 +1,16 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 05.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: зона восстановления базы союзников
+
+;===Игрок защищает базу союзников, когда находится в зоне защиты===
+:plrwithinzone=1,varless=allybase 2500:addvar=allybase 2,hudshow=CaptureFF
+:plrwithinzone=1,vargreater=allybase 2499:hudunshow=CaptureFF
+:plrwithinzone=0:hudunshow=CaptureFF
+:varnotequal=endgame 0:hudunshow=CaptureFF
+
+:plrwithinzone=1:subvar=allybase 10
+
+;Конец скрипта

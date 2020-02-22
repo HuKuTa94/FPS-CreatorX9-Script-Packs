@@ -1,0 +1,6 @@
+;Скрипт написал: Кошелев Никита
+;Описание: аптечка.
+
+:state=0,plrdistwithin=40:state=1,playertake,coloff,plrsound=audiobank\items\pickup.wav,addvar=med 1
+
+;End of Script

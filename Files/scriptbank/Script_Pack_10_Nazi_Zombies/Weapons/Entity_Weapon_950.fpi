@@ -1,0 +1,24 @@
+;ХУД
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\weapon950.dds,hudname=weapon950,hudhide=1,hudmake=display
+
+;Начало скрипта
+:state=0:coloff,nobulletcol=1,floorlogic,state=1
+
+;Взаимодействие с игроком
+;-Игрок близко
+:state=1,plrdistwithin=50,plrfacing=40:hudshow=weapon950,state=2
+;--Игрок далеко
+:state=2,plrnotfacing=40:hudunshow=weapon950,state=1
+:state=2,plrdistfurther=50:hudunshow=weapon950,state=1
+
+;-Игрок покупает оружие
+:state=2,plrdistwithin=50,keypressed=33 1,vargreater=cash 949:state=3
+:state=3,plrdistfurther=50:state2
+:state=3,plrnotfacing=40:state=2
+:state=3,keypressed=33 0:removecurrentweapon,hudunshow=weapon950,etimerstart,subvar=cash 950,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy.wav,state=4
+:state=4,etimergreater=930:playertake
+
+;Недостаточно денег
+:state=2,plrdistwithin=50,keypressed=33 1,varless=cash 949:state=5
+:state=5,plrdistfurther=50:state=2
+:state=5,plrdistwithin=50,keypressed=33 0:state=2,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy_no_money.wav

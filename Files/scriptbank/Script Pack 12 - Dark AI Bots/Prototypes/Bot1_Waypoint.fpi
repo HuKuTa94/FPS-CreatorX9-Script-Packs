@@ -1,0 +1,37 @@
+;-Команда и предустановки бота
+:state=0:addaiteam=2,aiaddenemy=2 1,alwaysactive=1,reloadweapon,aiattackawareness=0,state=4
+;-Waypoint
+:state=4,random=20:rotateheadrandom=40
+:state=4,waypointstate=0:animate=5,aisetspeed=200,waypointstart
+:state=4,waypointstate=3:animate=5,aisetspeed=200,waypointnext
+:state=4,waypointstate=4:animate=5,aisetspeed=200,waypointrandom
+:state=4,waypointstate=5:animate=5,aisetspeed=200,waypointreverse
+:state=4,aicanshoot=1:aisetspeed=100,aisettarget,waypointstop,aistop,state=1
+:state=4,shotdamage=1:aisetspeed=100,aisettarget,waypointstop,aistop,state=1
+;-Анимация движения
+:state=1,ducking=0,strafingleft=1:animationnormal,animate=3
+:state=1,ducking=0,strafingright=1:animationnormal,animate=4
+:state=1,ducking=0,movingforwards=1:animationnormal,animate=2
+:state=1,ducking=0,runningforwards=1:animationnormal,animate=5
+:state=1,ducking=0,movingbackwards=1:animationreverse,animate=32
+:state=1,ducking=0,idle=1:animationnormal,animate=1
+:state=1,ducking=1,strafingleft=1:animationnormal,animate=32
+:state=1,ducking=1,strafingright=1:animationnormal,animate=32
+:state=1,ducking=1,movingforwards=1:animationnormal,animate=32
+:state=1,ducking=1,movingbackwards=1:animationreverse,animate=32
+:state=1,ducking=1,idle=1:animationnormal,animate=31
+;-Определение цели
+:state=1,aicanshoot=1,aihastarget=1,aitargetdistwithin=800:aicleartarget,aisettarget,airotatetotarget
+:state=1,aicanshoot=0:aicleartarget,aisettarget,state=4
+;-Атака
+:state=1,aicanshoot=1,aihastarget=1,ifweapon=1,aitargetdistwithin=800:useweapon,rundecal=6,aiusefullaim=1
+;-Перезарядка
+:state=1,ducking=0,ifweapon=0:aistop,setaiactive=0,setframe=6,state=2
+:state=1,ducking=1,ifweapon=0:aistop,setaiactive=0,setframe=36,state=3
+;-(стоя)-
+:state=2:incframe=6
+:state=2,frameatend=6:reloadweapon,setaiactive=1,state=4
+;-(сидя)-
+:state=3:incframe=36
+:state=3,frameatend=36:reloadweapon,setaiactive=1,state=4
+

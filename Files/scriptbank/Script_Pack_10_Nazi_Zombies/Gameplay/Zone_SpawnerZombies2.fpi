@@ -1,0 +1,6 @@
+;Появление зомби, когда игрок в зоне
+:state=0,activated=1:floorlogic,state=1
+;-Игрок в зоне
+:state=1,plrwithinzone=1:activateifused=1
+;-Игрок не в зоне
+:state=1,plrwithinzone=0:activateifused=0

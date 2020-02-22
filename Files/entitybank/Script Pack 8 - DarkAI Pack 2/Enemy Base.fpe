@@ -1,0 +1,42 @@
+;Entity Spec
+
+;Header
+
+desc          = Enemy Base
+
+;AI
+aiinit	      = appear1.fpi
+aimain	      = Script Pack 8 - DarkAI Pack 2\People_vs_People\PvsP_Entity_Capture Enemy Base.fpi
+aidestroy     = disappear1.fpi
+
+;AIUsed
+ifused        = 
+
+;Spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;Orientation
+
+model         = meshbank\scifi\scenery\teleport\teleport_pad\teleport_pad.X
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+materialindex = 3
+textured      = enemy_base_d2.dds
+effect        = effectbank\illuminationent\illuminationent.fx
+
+;identity details
+strength      = 0
+isimmobile    = 1
+
+;Decals
+decalmax      = 1
+decal0        = teleport
+
+;Animationinfo
+animmax       = 0

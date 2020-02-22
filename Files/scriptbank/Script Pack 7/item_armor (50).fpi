@@ -1,0 +1,6 @@
+;Скрипт написал: Кошелев Никита.
+;Описание: броня (50 единиц).
+
+:state=0,plrdistwithin=35,varless=armor 50:state=1,playertake,plrsound=audiobank\items\pickup.wav,setvar=armor 50
+
+;End of Script

@@ -1,0 +1,54 @@
+;header
+
+desc          = generator
+
+;ai
+aiinit	      = Script_Pack_10_Nazi_Zombies\Quests\Generator\Entity_Generator_START.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\Quests\Generator\Entity_Generator_MAIN.fpi
+aidestroy     = disappear1.fpi
+
+;AIUsed
+ifused        = generator1_room
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+model         = meshbank\scifi\scenery\furniture\equipmentb\equipment_B.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+scale         = 100
+fixnewy       = 180
+
+;cone of sight
+coneheight    = 53
+coneangle     = 360
+
+;visualinfo
+textured      = texturebank\scifi\scenery\furniture\equipmentb\equipment_B_d2.tga
+effect        = effectbank\illuminationent\illuminationent.fx
+castshadow    = 0
+transparency  = 1
+
+;decals
+decalmax      = 2
+decal0        = red
+decal1        = sparks
+
+;identity details
+strength      = 5000
+ischaracter   = 1
+isimmobile    = 1
+cantakeweapon = 0
+defaultheight = 0
+speed         = 0
+
+;bodypartslimbinfo (1=head/2=body/3+4=armslr/5+6=legslr)
+limbmax       = 1
+limb0 = 2

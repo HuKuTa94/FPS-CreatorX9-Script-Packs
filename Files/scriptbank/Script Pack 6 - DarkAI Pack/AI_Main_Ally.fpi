@@ -1,0 +1,9 @@
+;Artificial Intelligence Script
+;Header
+desc          = 
+
+:state=0:setaiactive=1,alwaysactive=1,reloadweapon,activate=0,aiattackwareness=1,state=1
+:state=1,aihastarget=0:cleartarget
+:state=1,aihastarget=1:airotatetotarget,aisettarget
+
+;End of Script

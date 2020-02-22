@@ -1,0 +1,35 @@
+desc          = Ву Никита
+
+:state=0:hudreset,hudx=50,hudy=50,hudimagefine=languagebank\english\gamecore\huds\Script Pack 5 - Zombie Mode\Waves\1.png,hudname=wave1show,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=5,hudy=90,hudimagefine=languagebank\english\gamecore\huds\Script Pack 5 - Zombie Mode\Waves\1.png,hudname=wave1,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudimagefine=languagebank\english\gamecore\huds\Script Pack 5 - Zombie Mode\Waves\2.png,hudname=wave2show,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=5,hudy=90,hudimagefine=languagebank\english\gamecore\huds\Script Pack 5 - Zombie Mode\Waves\2.png,hudname=wave2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudimagefine=languagebank\english\gamecore\huds\Script Pack 5 - Zombie Mode\Waves\3.png,hudname=wave3show,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=5,hudy=90,hudimagefine=languagebank\english\gamecore\huds\Script Pack 5 - Zombie Mode\Waves\3.png,hudname=wave3,hudhide=1,hudmake=display
+
+
+:state=0:dimvar=kills,setvar=kills 0
+
+;===Раунд 1===
+:state=0:state=1,etimerstart,plrsound=audiobank\Script Pack 5 - Zombie Mode\splash_screen.wav,hudshow=wave1
+:state=1,etimergreater=5000:state=2,hudshow=wave1show,plrsound=audiobank\Script Pack 5 - Zombie Mode\round_start.wav,etimerstart,activateifused=1
+:state=2,etimergreater=1500:hudfadeout=wave1show,state=3
+:state=3,varequal=kills 10:etimerstart,plrsound=audiobank\Script Pack 5 - Zombie Mode\round_end.wav,state=4
+:state=4,etimergreater=5500:hudunshow=wave1,state=5
+
+;===Раунд 2===
+:state=5:hudshow=wave2,hudshow=wave2show,plrsound=audiobank\Script Pack 5 - Zombie Mode\round_start.wav,etimerstart,state=6
+:state=6,etimergreater=1500:hudfadeout=wave2show,state=7
+:state=7,varequal=kills 25:etimerstart,plrsound=audiobank\Script Pack 5 - Zombie Mode\round_end.wav,state=8
+:state=8,etimergreater=5500:hudunshow=wave2,state=9
+
+;===Раунд 3===
+:state=9:hudshow=wave3,hudshow=wave3show,plrsound=audiobank\Script Pack 5 - Zombie Mode\round_start.wav,etimerstart,state=10
+:state=10,etimergreater=1500:hudfadeout=wave3show,state=11
+:state=11,varequal=kills 40:etimerstart,plrsound=audiobank\Script Pack 5 - Zombie Mode\round_end.wav,state=12
+:state=12,etimergreater=5500:hudunshow=wave3,state=13
+
+;===Раунд 4===
+
+
+;End of Script

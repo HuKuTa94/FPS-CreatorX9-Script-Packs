@@ -1,0 +1,27 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Wall Med +1 (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $500,hudname=nomoneywallmed,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$500 Buy Regeration?,hudname=wallmed,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к предмету===
+:state=10,plrdistwithin=50:hudshow=wallmed,hudfadeout=wallmed
+
+;===Игрок купил аптечку (100)===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 500:subvar=moneysys 500,hudfadeout=mediumhealth,plrsound=audiobank\items\healthup.wav,etimerstart,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 500:state=15,etimerstart,hudunshow=mediumhealth
+
+:state=15:hudshow=nomoneymediumhealth
+:state=15,etimergreater=1000:hudunshow=mediumhealth,hudunshow=nomoneymediumhealth,state=10
+
+;===Регенерация===
+:state=20,etimergreater=9000:state=10
+:state=20,rateoffire,plrdistwithin=50:plraddhealth=1
+
+;End of Script

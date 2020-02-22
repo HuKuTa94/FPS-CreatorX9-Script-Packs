@@ -1,0 +1,45 @@
+;Описание
+;Activated=0 - Неактивен
+;Activated=1 - Телепорт в PAD1
+;Activated=2 - Телепорт в PAD2
+;Activated=3 - Телепорт в PAD3
+;Activated=4 - Телепорт в PAD4
+
+;Начало скрипта
+:state=0:floorlogic,coloff,activate=0,state=1
+
+;Отключен
+:state=1:setframe=0
+;PAD1
+:state=1,activated=1:setframe=1,state=2
+;PAD2
+:state=1,activated=2:setframe=2,state=2
+;PAD3
+:state=1,activated=3:setframe=3,state=2
+;PAD4
+:state=1,activated=4:setframe=4,state=2
+
+;Обратный отсчет
+:state=2:activate=0,alwaysactive=1,etimerstart,state=3
+;-Скорость 1
+:state=3,activated=1:activate=0:etimerstart,state=4
+:state=3,etimergreater=500:alttexture=1
+:state=3,etimergreater=1000:alttexture=0,etimerstart
+;-Скорость 2
+:state=4,activated=1:activate=0:etimerstart,state=5
+:state=4,etimergreater=200:alttexture=1
+:state=4,etimergreater=400:alttexture=0,etimerstart
+;-Скорость 3
+:state=5,activated=1:activate=0:etimerstart,state=6
+:state=5,etimergreater=100:alttexture=1
+:state=5,etimergreater=200:alttexture=0,etimerstart
+;-Скорость 4
+:state=6,activated=1:activate=0:etimerstart,state=7
+:state=6,etimergreater=50:alttexture=1
+:state=6,etimergreater=100:alttexture=0,etimerstart
+;-Скорость 5
+:state=7,activated=1:activate=0:etimerstart,alttexture=1,state=8
+:state=7,etimergreater=20:alttexture=1
+:state=7,etimergreater=40:alttexture=0,etimerstart
+;-Телепортация завершена
+:state=8,activated=1:activate=0,alttexture=0,alwaysactive=0,state=1

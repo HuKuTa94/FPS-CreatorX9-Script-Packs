@@ -1,0 +1,17 @@
+;Artificial Intelligence Script
+;Header
+desc          = 
+
+;:state=0:setaiactive=1,alwaysactive=1,reloadweapon,activate=0,aiattackawareness=1
+:state=0:rotatetoplr
+:state=0,activated=1:state=1
+
+:state=1:aimovetocover=1,animate=5,aisetspeed=150
+:state=1,aiatcover=1:state=2
+
+:state=2:shootplr
+
+;:state=2:animate=31
+;:state=2,aihastarget=0,aiattackawareness=1,aisettarget,airotatetotarget
+
+;End of Script

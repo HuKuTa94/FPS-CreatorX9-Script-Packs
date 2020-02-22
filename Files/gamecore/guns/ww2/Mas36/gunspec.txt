@@ -1,0 +1,100 @@
+;MAS36 weapon spec
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 4
+muzzlesize     = 180
+brass          = 0
+smoke          = 1
+second         = 0
+damage         = 67
+damagetype     = 2
+scorchtype     = 1
+reloadqty      = 5
+iterate        = 0
+accuracy       = 10
+zoommode       = 1
+range          = 9000
+shotgun        = 1
+
+;GUN Visuals
+textured      = 
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+zoomscope     = scope1.tga
+weapontype    = 3
+
+;GUN Sounds
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         = zoom.wav
+sound5		= open.wav
+sound6		= loadbullet.wav
+sound7		= close.wav
+
+;HUD muzzleflash position
+
+horiz          = 0
+vert           = 2
+forward        = -5
+alignx         = 15
+aligny         = -6
+alignz         = 140
+
+;HUD animation frames list
+
+keyframe ratio = 1
+select         = 0,17
+Idle           = 18,52
+Move           = 54,70
+start reload   = 79,91
+reload loop    = 92,103
+end reload     = 105,125
+;reload		= 126,174
+
+fire = 175,206
+
+putaway	       = 1026,1040
+run		= 586,604
+
+
+;HUD sound frames list
+
+soundframes    = 4
+sframe0        = 175,1
+;sframe1        = 126,2
+sframe1		= 79,5
+sframe2        =  92,6
+sframe3		= 105,7
+
+;AIRMOD conditions graciously added by Shadowtroid
+
+melee start 	= 714,719
+melee end	= 720,733
+
+simplezoom = 7
+simplezoomx = 100
+simplezoommode = 1
+simplezoomacc = 0
+simplezoomspeed=6
+runy = -7
+forcezoomout =1
+recoily = 35
+recoilyreturn = 90
+recoilx = 57
+recoilxreturn = 97
+
+zoomrecoily = 70
+zoomrecoilyreturn = 97
+zoomrecoilx = 70
+zoomrecoilxreturn = 99
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3

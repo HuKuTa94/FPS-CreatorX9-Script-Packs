@@ -1,0 +1,14 @@
+desc          = Auto Door No Collision (By Никита) for Station 13
+
+;Triggers
+:state=0,activated=1:etimerstart,state=1
+:state=1,etimergreater=8500:state=2
+
+:state=2:state=3,setframe=0,sound=$0,coloff
+:state=3:incframe=0
+:state=3,frameatend=0:state=4
+:state=4,activated=2:state=5,sound=$1,colon
+:state=5:decframe=0
+:state=5,frameatstart=0:state=0,setframe=0
+
+;End of Script

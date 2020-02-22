@@ -1,0 +1,162 @@
+;Старт скрипта
+:state=0:addaiteam=1,aiaddenemy=1 2,setaiactive=1,aiattackwareness=0,aiautofactionoff=1,reloadweapon,alwaysactive=1,state=1
+
+;Приказ игрока остаться на месте
+:state=1,plrdistwithin=65,plrfacing=50,keypressed=33 1:etimerstart,state=10
+:state=10,keypressed=33 1,etimergreater=900:aifollowplr=0,state=11
+:state=10,plrnotfacing=50:state=1
+:state=10,plrdistfurther=65:state=1
+;Передвижение бота во время удержания кнопки F
+:state=10,aicanshoot=0:rotatetoplr,rotatey=180
+:state=10,idle=1:animate=1,aifollowplr=0,airotatetotarget
+:state=10,movingforwards=1:animate=2,animationreverse,setanimatespeed=150,aisetspeed=100
+:state=10,movingbackwards=1,aicanshoot=0:animate=2,animationnormal,setanimatespeed=100,aisetspeed=90
+:state=10,movingbackwards=1,aicanshoot=1:animate=2,animationreverse,setanimatespeed=150,aisetspeed=100
+:state=10,plrdistfurther=65:aifollowplr=1
+
+;-----------------------------------------FOLLOW BLOCK START----------------------------------------
+;Передвижение бота
+;-Движение задом, когда игрок рядом (игрок смотрит на бота)
+:state=1,aicanshoot=0:rotatetoplr,rotatey=180
+:state=1,idle=1:animate=1,aifollowplr=0,airotatetotarget
+:state=1,movingforwards=1:animate=2,animationreverse,setanimatespeed=150,aisetspeed=100
+:state=1,movingbackwards=1,aicanshoot=0:animate=2,animationnormal,setanimatespeed=100,aisetspeed=90
+:state=1,movingbackwards=1,aicanshoot=1:animate=2,animationreverse,setanimatespeed=150,aisetspeed=100
+:state=1,plrdistfurther=65:aifollowplr=1
+;--(игрок не смотрит на бота)
+:state=1,inview=0:state=2
+:state=2,inview=1:state=1
+:state=2:rotatetoplr,rotatey=180
+:state=2,plrdistfurther=65:aifollowplr=1
+;-Движение передом, следует медленно за игроком (игрок смотрит на бота)
+:state=1,plrdistfurther=90:animate=2,state=3
+:state=3,plrdistwithin=70:state=1
+:state=3,movingforwards=1:animationnormal,setanimatespeed=140,aisetspeed=150,animate=2
+:state=3,movingbackwards=1:animationreverse,setanimatespeed=170,aisetspeed=150,animate=2
+:state=3,plrdistfurther=70:aifollowplr=1
+;--(игрок не смотрит на бота)
+:state=3,inview=0:state=4
+:state=4,inview=1:state=3
+:state=4,plrdistfurther=70:aifollowplr=1
+;-Движение передом, следует быстро за игроком (игрок смотрит на бота)
+:state=3,plrdistfurther=150:state=5
+:state=5,movingforwards=1,aicanshoot=0:animationnormal,setanimatespeed=100,aisetspeed=300
+:state=5,movingforwards=1,aicanshoot=1:animationreverse,setanimatespeed=80,aisetspeed=300
+:state=5,runningforwards=1,aicanshoot=0:animationnormal,setanimatespeed=100,aisetspeed=250
+:state=5,runningforwards=1,aicanshoot=1:animationreverse,setanimatespeed=80,aisetspeed=250
+:state=5:aifollowplr=1,animate=5
+:state=5,plrdistwithin=85:animate=2,aisetspeed=150,state=3
+;--(игрок не смотрит на бота)
+:state=5,inview=0:aisetspeed=220,state=6
+:state=6,inview=1:state=5
+:state=6:aifollowplr=1
+:state=6,plrdistwithin=85:animate=2,aisetspeed=150,state=4
+;-Догоняет игрока, когда нет патронов в магазине (общий для обеих случаев игрок видит\не видит бота)
+:state=7:aifollowplr=1,animate=5,animationnormal
+:state=7,movingforwards=1:setanimatespeed=100,aisetspeed=300
+:state=7,runningforwards=1:setanimatespeed=100,aisetspeed=250
+:state=7,plrdistwithin=85:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+
+;Определение цели
+;-Обновление целей
+:state=1:aicleartarget
+:state=1,aicanshoot=1:aisettarget
+:state=2:aicleartarget
+:state=2,aicanshoot=1:aisettarget
+:state=3:aicleartarget
+:state=3,aicanshoot=1:aisettarget
+:state=4:aicleartarget
+:state=4,aicanshoot=1:aisettarget
+:state=5:aicleartarget
+:state=5,aicanshoot=1:aisettarget
+:state=6:aicleartarget
+:state=6,aicanshoot=1:aisettarget
+:state=10:aicleartarget
+:state=10,aicanshoot=1:aisettarget
+
+;Атака
+:state=1,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=2,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=3,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=4,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=5,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=0,rundecal=6,activate=11
+:state=6,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=0,rundecal=6,activate=11
+:state=10,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=0,rundecal=6,activate=11
+
+;Перезарядка
+;-Перезарядиться, если игрок рядом
+:state=1,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=2,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=3,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=4,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=5,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+:state=6,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=8
+;-Анимация перезарядки
+:state=8:incframe=6
+:state=8,frameatend=6:reloadweapon,setaiactive=1,aisetviewrange=800,state=2
+;--Игрок отдалился и сейчас далеко (прекратить перезарядку)
+:state=8,plrdistfurther=250:setaiactive=1,aisetviewrange=50,state=7,stopsound=1
+
+;Sound Engine
+;-Бот стреляет
+:state=1,activated=11:activate=0,state=50
+:state=2,activated=11:activate=0,state=50
+:state=3,activated=11:activate=0,state=50
+:state=4,activated=11:activate=0,state=50
+:state=5,activated=11:activate=0,state=50
+:state=6,activated=11:activate=0,state=50
+;-Бот перезаряжается
+:state=8,activated=12:activate=0,state=51
+;-Расстояние источника звука до игрока
+;--Выстрел
+:state=50,plrdistwithin=500,plrcanbeseen:state=6,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_1.ogg
+:state=50,plrdistwithin=500,plrcannotbeseen:state=6,activate=0,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_2.ogg
+:state=50,plrdistfurther=500:state=6,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_3.ogg
+;--Перезарядка
+:state=51,plrdistwithin=500,plrcanbeseen:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_1.ogg
+:state=51,plrdistwithin=500,plrcannotbeseen:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_2.ogg
+:state=51,plrdistfurther=500:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_3.ogg
+;-----------------------------------------FOLLOW BLOCK END----------------------------------------
+
+
+;-----------------------------------------WAIT BLOCK START----------------------------------------
+;Приказ игрока следовать за ним
+:state=11,keypressed=33 1:etimerstart,state=13
+:state=13,keypressed=33 1,etimergreater=900:state=1
+:state=13,keypressed=33 0:animate=1,state=11
+
+;Определение цели
+;-Обновление целей
+:state=11:aicleartarget
+:state=11,aicanshoot=1:aisettarget,airotatetotarget
+:state=13:aicleartarget,airotatetotarget
+:state=13,aicanshoot=1:aisettarget,airotatetotarget
+
+;Атака
+:state=11,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+:state=13,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,activate=11
+
+;Перезарядка
+;-Перезарядиться, если игрок рядом
+:state=11,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,activate=12,state=12
+;-Анимация перезарядки
+:state=12:incframe=6
+:state=12,frameatend=6:reloadweapon,setaiactive=1,animate=1,state=11
+
+;Sound Engine
+;-Бот стреляет
+:state=11,activated=11:activate=0,state=52
+:state=13,activated=11:activate=0,state=52
+;-Бот перезаряжается
+:state=12,activated=12:activate=0,state=53
+:state=13,activated=12:activate=0,state=53
+;-Расстояние источника звука до игрока
+;--Выстрел
+:state=52,plrdistwithin=500,plrcanbeseen:state=11,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_1.ogg
+:state=52,plrdistwithin=500,plrcannotbeseen:state=11,activate=0,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_2.ogg
+:state=52,plrdistfurther=500:state=11,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_3.ogg
+;--Перезарядка
+:state=53,plrdistwithin=500,plrcanbeseen:state=12,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_1.ogg
+:state=53,plrdistwithin=500,plrcannotbeseen:state=12,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_2.ogg
+:state=53,plrdistfurther=500:state=12,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_3.ogg
+;-----------------------------------------WAIT BLOCK END----------------------------------------

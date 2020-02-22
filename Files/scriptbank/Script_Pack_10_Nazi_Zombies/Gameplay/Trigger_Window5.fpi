@@ -1,0 +1,90 @@
+;Описание 
+;W1P1 - Window №1 Plank №1 и т.д. 
+;Activated=3 - Все доски сломаны
+;Activated=2 - Бездействие триггера
+;Activated=1 - Зомби сломал доску
+;Activated=0 - Игрок восстановил доску
+
+;ХУД
+;-Используется худ из "Trigger_Window1.fpi"
+
+;Начальное состояние
+:state=0:activate=2,floorlogic,nobulletcol=1,coloff,hide,state=1
+
+;Триггер активатор\деактиватор досок
+;-Доска 1
+;--Сломана
+:state=1,activated=1:activate=2,settargetname=W5P1,activatetarget=11,state=2
+;--Взаимодействие с игроком (показать\спрятать худ)
+:state=2,plrdistwithin=40:hudshow=repair1,state=3
+:state=3,plrdistfurther=40:hudunshow=repair1,state=2
+;---Игрок восстановил доску
+:state=3,plrdistwithin=40,keypressed=33 1:etimerstart,state=4
+:state=4,plrdistfurther=40:state=3
+:state=4,keypressed=33 0:state=3
+:state=4,plrdistwithin=40,keypressed=33 1,etimergreater=1000:settargetname=W5P1,activatetarget=10,hudunshow=repair1,state=1
+
+;-Доска 2
+;--Сломана
+:state=2,activated=1:state=5
+:state=3,activated=1:state=5
+:state=4,activated=1:state=5
+:state=5:activate=2,settargetname=W5P2,activatetarget=11,state=6
+;--Взаимодействие с игроком (показать\спрятать худ)
+:state=6,plrdistwithin=40:hudshow=repair1,state=7
+:state=7,plrdistfurther=40:hudunshow=repair1,state=6
+;---Игрок восстановил доску
+:state=7,plrdistwithin=40,keypressed=33 1:etimerstart,state=8
+:state=8,plrdistfurther=40:state=7,hudunshow=repair1
+:state=8,keypressed=33 0:state=7
+:state=8,plrdistwithin=40,keypressed=33 1,etimergreater=1000:settargetname=W5P2,activatetarget=10,state=2
+
+;-Доска 3
+;--Сломана
+:state=6,activated=1:state=9
+:state=7,activated=1:state=9
+:state=8,activated=1:state=9
+:state=9:activate=2,settargetname=W5P3,activatetarget=11,state=10
+;--Взаимодействие с игроком (показать\спрятать худ)
+:state=10,plrdistwithin=40:hudshow=repair1,state=11
+:state=11,plrdistfurther=40:hudunshow=repair1,state=10
+;---Игрок восстановил доску
+:state=11,plrdistwithin=40,keypressed=33 1:etimerstart,state=12
+:state=12,plrdistfurther=40:state=11,hudunshow=repair1
+:state=12,keypressed=33 0:state=11
+:state=12,plrdistwithin=40,keypressed=33 1,etimergreater=1000:settargetname=W5P3,activatetarget=10,state=6
+
+;-Доска 4
+;--Сломана
+:state=10,activated=1:state=13
+:state=11,activated=1:state=13
+:state=12,activated=1:state=13
+:state=13:activate=2,settargetname=W5P4,activatetarget=11,state=14
+;--Взаимодействие с игроком (показать\спрятать худ)
+:state=14,plrdistwithin=40:hudshow=repair1,state=15
+:state=15,plrdistfurther=40:hudunshow=repair1,state=14
+;---Игрок восстановил доску
+:state=15,plrdistwithin=40,keypressed=33 1:etimerstart,state=16
+:state=16,plrdistfurther=40:state=15,hudunshow=repair1
+:state=16,keypressed=33 0:state=15
+:state=16,plrdistwithin=40,keypressed=33 1,etimergreater=1000:settargetname=W5P4,activatetarget=10,state=10
+
+;-Доска 5
+;--Сломана
+:state=14,activated=1:state=17
+:state=15,activated=1:state=17
+:state=16,activated=1:state=17
+:state=17:activate=2,settargetname=W5P5,activatetarget=11,state=18
+;--Взаимодействие с игроком (показать\спрятать худ)
+:state=18,plrdistwithin=40:hudshow=repair1,state=19
+:state=19,plrdistfurther=40:hudunshow=repair1,state=18
+;---Игрок восстановил доску
+:state=19,plrdistwithin=40,keypressed=33 1:etimerstart,state=20
+:state=20,plrdistfurther=40:state=19,hudunshow=repair1
+:state=20,keypressed=33 0:state=19
+:state=20,plrdistwithin=40,keypressed=33 1,etimergreater=1000:settargetname=W5P5,activatetarget=10,activate=2,state=14
+
+;Все доски сломаны
+:state=18:activate=3
+:state=19:activate=3
+:state=20:activate=3

@@ -1,0 +1,23 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Lasser Reafle (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $2.000,hudname=nomoneylr,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$2.000 Buy Lasser Reafle?,hudname=lr,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к оружию===
+:state=10,plrdistwithin=50:hudshow=lr,hudfadeout=lr
+
+;===Игрок купил оружие===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 2000:subvar=moneysys 2000,playertake,hudfadeout=lr,plrsound=audiobank\items\pickupweapon.wav,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 2000:state=15,etimerstart,hudunshow=lr
+
+:state=15:hudshow=nomoneylr
+:state=15,etimergreater=1000:hudunshow=lr,hudunshow=nomoneylr,state=10
+
+;End of Script

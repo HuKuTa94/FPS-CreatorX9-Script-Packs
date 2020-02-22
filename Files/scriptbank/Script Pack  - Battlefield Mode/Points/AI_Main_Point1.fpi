@@ -1,0 +1,9 @@
+desc          = Point 1 (By Никита)
+
+;===Захват саюзниками (Игрок)===
+:state=0,plrdistwithin=250:timerstart,state=1
+:state=1,timergreater=10000,plrdistwithin=250:hudunshow=flag1_N,hudshow=flag1_F
+
+;===Захват саюзниками (ИИ)===
+:varequal=point1_ai_F 1:state=2,timerstart
+:state=2,timergreater=4500:hudunshow=flag1_N,hudshow=flag1_F,addvar=point1_ai_F 2

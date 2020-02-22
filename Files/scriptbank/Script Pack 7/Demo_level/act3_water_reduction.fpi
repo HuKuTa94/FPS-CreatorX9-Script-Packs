@@ -1,0 +1,14 @@
+;Скрипт написал: Кошелев Никита (fpsc.forum24.ru)
+;Описание: после активации уровень воды уменьшается.
+;Для изменения уровня воды меняйте значение как вам необходимо (команда SETVAR=waterlevel X)
+; 100 = 1 слой
+
+
+:state=0,activated=1:dimlocalvar=waterlevel,SETVAR=waterlevel 300,waterheight=%waterlevel,water=1,waterspeed=10,waterfogdist=350,waterred=210,watergreen=230,state=2
+
+
+:state=2:addvar=waterlevel 0.2,waterheight=%waterlevel
+:state=2,vargreater=waterlevel 693:state=3,activateifused=1,activateifused=3
+:state=2,vargreater=waterlevel 400:activateifused=5
+
+;End of Script

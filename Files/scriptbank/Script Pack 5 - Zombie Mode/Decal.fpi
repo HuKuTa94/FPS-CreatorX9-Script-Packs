@@ -1,0 +1,21 @@
+;Artificial Intelligence Script
+; 0-once face player
+; 1-once keep angle
+; 2-loop face player
+; 3-loop keep angle
+; 4-once face up
+; 5-loop face up
+; 6-character-spot-decal (at end of entity characters gun if available)
+
+;Header
+desc          = Ву Никита
+
+:state=0,activated=1:rundecal=0,state=1
+:state=1,activated=2:rundecal=0,state=2
+:state=2,activated=3:rundecal=0,state=3
+:state=3,activated=4:rundecal=0,state=4
+:state=4,activated=5:rundecal=0,state=5
+
+;:state-5:destroy
+
+;End of Script

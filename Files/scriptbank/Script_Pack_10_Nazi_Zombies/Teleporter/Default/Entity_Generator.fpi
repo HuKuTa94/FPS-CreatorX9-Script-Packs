@@ -1,0 +1,28 @@
+;Описание
+;Activated=0 - Неактивен
+;Activated=1 - Активен
+
+;Начало скрипта
+:state=0:floorlogic,activate=0,state=1
+
+:state=1:setframe=0
+
+;Включение
+:state=1,activated=1:activate=0,alwaysactive=1,setframe=2,state=2
+;-Анимация
+:state=2:incframe=2
+:state=2,frameatend=2:activateifused=1,settargetname=TBeam,activatetarget=1,etimerstart,state=3
+
+;Обратный отсчет
+:state=3,etimergreater=3000:activateifused=1,settargetname=TBeam,activatetarget=2,state=4
+:state=4,etimergreater=4500:activateifused=1,settargetname=TBeam,activatetarget=3,state=5
+:state=5,etimergreater=5000:activateifused=1,settargetname=TBeam,activatetarget=4,state=6
+
+;Телепортирование
+:state=6,etimergreater=6000:activateifused=1,settargetname=TBeam,activatetarget=1,settargetname=TPad,activatetarget=5,state=7
+
+;Отключение
+:state=7,etimergreater=6500:activateifused=1,settargetname=TPower,activatetarget=1,state=8
+:state=8:decframe=2
+:state=8,frameatstart=2:settargetname=TControl,activatetarget=1,alwaysactive=0,state=1
+

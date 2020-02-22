@@ -1,0 +1,23 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Uzi Ammo (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $150,hudname=nomoneyuziammo,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$150 Buy Uzi ammo?,hudname=uziammo,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к оружию===
+:state=10,plrdistwithin=50:hudshow=uziammo,hudfadeout=uziammo
+
+;===Игрок купил оружие===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 150:subvar=moneysys 150,playertake,hudfadeout=uziammo,plrsound=audiobank\items\pickup.wav,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 150:state=15,etimerstart,hudunshow=uziammo
+
+:state=15:hudshow=nomoneyuziammo
+:state=15,etimergreater=1000:hudunshow=uziammo,hudunshow=nomoneyuziammo,state=10
+
+;End of Script

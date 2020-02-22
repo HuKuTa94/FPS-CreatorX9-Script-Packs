@@ -1,0 +1,16 @@
+;Описание: внутренняя кнопка лифта
+
+;--Начало скрипта--
+:state=0,activated=1:state=1,alttexture=0
+:state=1,activated=0:state=0,alttexture=1
+
+;\\\\Взаимодействие с игроком\\\\
+;---Игрок близко---
+:state=1,plrnotfacing=15:hudunshow=LiftUse1
+:state=1,plrdistfurther=50:hudunshow=LiftUse1
+:state=1,inview=1,plrfacing=15,plrdistwithin=50:hudshow=LiftUse1
+;---Игрок нажимает кнопку---
+:state=1,inviev=1,plrfacing=15,plrdistwithin=50,keypressed=33 1:state=11
+:state=11,plrdistfurther=50:state=1
+:state=11,plrnotfacing=15:state=1
+:state=11,plrfacing=15,plrdistwithin=50,keypressed=33 0:hudunshow=LiftUse1,settargetname=ZoneLift,activatetarget=0,activate=10,alttexture=1,state=0,sound=audiobank\Script_Pack_10_Nazi_Zombies\button2.ogg

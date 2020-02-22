@@ -1,0 +1,19 @@
+;Artificial Intelligence Script
+
+;desc          = Следует за игроком (не стреляет!) (Ву Никита)
+
+;===Анимации движения===
+:idle=1:animate=1,aisetspeed=80                              ; - Стоит
+:movingforwards=1:animate=2,animationnormal,aisetspeed=85    ; - Идет вперед 
+:movingbackwards=1:animate=2,animationreverse,aisetspeed=85  ; - Идет назад
+:runningforwards=1:animate=5,animationnormal,aisetspeed=200  ; - Бежит вперед
+
+;===Начало скрипта===
+:state=0:setaiactive=1,alwaysactive=1,aiatackwareness=1,state=1
+
+;===Тело скрипта===
+:state=1,plrcannotbeseen:aifollowplr=1    ; - Следует за игроком, если его не видит
+:state=1,plrdistfurther=61:aifollowplr=1  ; - Cледует за игроком, если он отдалился
+:state=1,plrdistwithin=60:aistop          ; - Останавливается, если игрок слишком близко
+
+;End of Script

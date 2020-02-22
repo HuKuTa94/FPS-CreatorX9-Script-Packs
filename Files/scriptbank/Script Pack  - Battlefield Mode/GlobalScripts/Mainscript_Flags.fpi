@@ -1,0 +1,20 @@
+desc          = Flags (By Никита)
+
+;===Установка флагов===
+;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+:state=0:hudreset,hudx=25,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_N.jpg,hudname=flag1_N,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=25,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_F.jpg,hudname=flag1_F,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=25,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_E.jpg,hudname=flag1_E,hudhide=1,hudmake=display
+;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+:state=0:hudreset,hudx=34,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_N.jpg,hudname=flag2_N,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=34,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_F.jpg,hudname=flag2_F,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=34,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_E.jpg,hudname=flag2_E,hudhide=1,hudmake=display
+;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+:state=0:hudreset,hudx=43,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_N.jpg,hudname=flag3_N,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=43,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_F.jpg,hudname=flag3_F,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=43,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_E.jpg,hudname=flag3_E,hudhide=1,hudmake=display
+;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+:state=0:hudreset,hudx=52,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_N.jpg,hudname=flag4_N,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=52,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_F.jpg,hudname=flag4_F,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=52,hudy=7,hudimagefine=gamecore\huds\Script Pack 5 - Battlefield Mode\flag_E.jpg,hudname=flag4_E,hudhide=1,hudmake=display,state=1
+;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

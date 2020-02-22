@@ -1,0 +1,5 @@
+;Описание: создает атмосферу уровня - туман и освещенность
+;Начало скрипта
+:state=0:floorlogic,state=1
+;Настройки уровня
+:state=1:fog=1,fogstart=200,fogend=600,fogred=30,fogblue=30,foggreen=30,ambience=30,ambiencered=130,ambienceblue=130,ambiencegreen=130

@@ -1,0 +1,33 @@
+;Created with Entity Workshop - made by Wehtam ( Wehtam.co.uk )
+desc          = platform
+;ai
+aiinit         = appear1.fpi
+aimain         = default.fpi
+aidestroy      = disappear1.fpi
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+;orientation
+model         = platform.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+fixnewy       = 0
+defaultstatic = 1
+materialindex = 3
+collisionmode = 1
+strength      = 0
+isimmobile    = 1
+soundset      =
+soundset1     =
+;visualinfo
+textured      = texturebank\scificom\platform_D2.dds
+effect        = effectbank\ps_3_0\entities\static\norm_alphaspec_tangentbasis.fx
+castshadow    = 0
+;Animationinfo
+animmax       = 0
+anim0         = 0,0

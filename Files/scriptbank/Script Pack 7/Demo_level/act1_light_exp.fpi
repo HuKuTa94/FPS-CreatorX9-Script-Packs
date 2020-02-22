@@ -1,0 +1,28 @@
+
+:state=0:dimlocalvar=l,setvar=l 500,state=1,lightintensity=%l
+
+:state=1:lighton
+:state=1,activated=1:lightred=220,lightgreen=125,lightblue=10,state=2
+
+;===¬спышка взрыва===
+:activated=1:lightintensity=%l
+:activated=2:state=999,destroy,lightoff
+
+:state=2:addvar=l 20
+:state=2,vargreater=l 700:state=3
+:state=3:subvar=l 10
+:state=3,varless=l 200:state=4
+
+;===Ёффект пламени===
+:state=4:addvar=l 30
+:state=4,vargreater=l 500:state=7
+
+:state=5:subvar=l 35
+:state=5,varless=l 200:state=6
+
+:state=7,random=2:setvar=l 200,state=5
+:state=7,random=2:setvar=l 400,state=5
+:state=6,random=2:setvar=l 300,state=4
+:state=6,random=2:setvar=l 500,state=4
+
+;End of Script

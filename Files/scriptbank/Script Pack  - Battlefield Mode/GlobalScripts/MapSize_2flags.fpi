@@ -1,0 +1,5 @@
+desc          = Map Size 2 flags (By Никита)
+
+;===Установка флагов, глобальных переменных===
+:state=0:hudshow=flag1_N,hudshow=flag2_N,dimvar=point1_F,setvar=point1_F 0,dimvar=point1_ai_F,setvar=point1_ai_F 0,state=1
+

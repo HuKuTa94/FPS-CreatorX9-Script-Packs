@@ -1,0 +1,43 @@
+:state=11,activated=2:state=998,destroy
+:state=1,activated=2:state=998,destroy
+
+;===Игрок мертв===
+:state=998:setframe=22,state=997
+:state=997:incframe=22,rotatetoplr
+:state=997,frameatend=22:state=23
+:state=23:setframe=2,state=22,etimerstart
+
+:state=22,etimergreater=2000:destroy
+
+;===Начало скрипта===
+:state=0:state=999,etimerstart
+:state=999,etimergreater=1000:state=1
+
+:state=1:rotatetoplr,setframe=2,state=11
+
+
+;------walk loop-------------
+
+:state=11,plrdistfurther=150:incframe=2,movefore=20
+:state=11,plrdistfurther=150,framebeyond=2 5:sound=audiobank\station13\zombies\dante_walk.wav,state=111
+:state=111:incframe=2,movefore=20
+:state=111,frameatend=2:state=1
+:state=11,frameatend=2:state=1
+
+:state=11:rotatetoplr
+:state=111:rotatetoplr
+:state=7:rotatetoplr,movefore=2
+:state=8:rotatetoplr,movefore=2
+
+
+;------end walk loop---------
+
+:state=11,plrdistwithin=150:setframe=23,state=7
+:state=1,plrdistwithin=150:setframe=23,state=7
+
+:state=7,framebeyond=23 50,plrdistwithin=150:plraddhealth=-100,setvar=med 0,setvar=armor 0,sound=audiobank\station13\zombies\zombie_hit1.wav,state=998
+:state=7,plrdistfurther=150,framewithin=23 50:runfore=10
+:state=7:incframe=23,rotatetoplr
+:state=7,frameatend=23:state=1
+:state=8:incframe=23
+:state=8,frameatend=23:state=1

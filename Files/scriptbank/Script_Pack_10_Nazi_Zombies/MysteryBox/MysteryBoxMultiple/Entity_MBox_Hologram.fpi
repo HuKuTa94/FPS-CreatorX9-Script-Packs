@@ -1,0 +1,6 @@
+;Описание: голограмма, показывающая местоположение ящика
+
+:state=0:alttexture=1,coloff,nobulletcol=1,floorlogic,state=1
+
+:state=1,activated=4:alttexture=0,alwaysactive=1
+:state=1,activated=5:alttexture=1,alwaysactive=0

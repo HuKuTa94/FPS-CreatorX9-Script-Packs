@@ -1,0 +1,45 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 18.06.2012
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 2.0
+;Описание: скрипт для зомби "Lobotomy" (медленный) из Model Pack'a 22. 
+
+;===Animations===
+:idle=1:animate=1                                            
+:movingforwards=1,:animate=94,animationnormal,aisetspeed=85  
+:movingbackwards=1:animate=94,animationreverse,aisetspeed=85 
+:runningforwards=1:animate=94,animationnormal,aisetspeed=85
+
+;===Starts script===
+:state=0:setaiactive=1,aiattackawareness=1,state=1
+
+;===Targeting===
+:aihastarget=1:airotatetotarget
+:state=1,aihastarget=0,aiheardsound=10000:aimovetosound,aicallteam=10000,aisettarget
+;:state=1,aihastarget=0,aicalled=10000:airespondtocall,aisettarget
+:state=1,aihastarget=1:aimovetotarget
+;:state=1,aihastarget=1:aicallteam=10000
+:state=1,aitargetdistwithin=60:state=10
+
+;////////////////////////////////////////////////////////////////////////////////////////////
+;//// Attack ////
+;===Random attack==
+:state=10,random=1:state=2,setframe=93,setaiactive=0,aistop,sound=audiobank\bond1\lobotomyvomit.wav
+:state=10,random=1:state=6,setframe=95,setaiactive=0,aistop,sound=audiobank\bond1\lobotomyvomit2.wav
+
+;===attack 1===
+:state=2:incframe=93,airotatetotarget,aisettarget,aisetspeed=120
+:state=2,framebeyond=93 80,aitargetdistwithin=60:state=3,aisetmeleedamage=50,aiusemelee=1,aicleartarget,aiattackawareness=1,sound=audiobank\misc\melee.wav
+:state=2,frameatend=93:state=4
+:state=3,frameatend=93:state=4
+:state=4:setaiactive=1,setframe=1,state=1
+
+;===Attack 2===
+:state=6:incframe=95,airotatetotarget,aisettarget,aisetspeed=120
+:state=6,framebeyond=95 60,aitargetdistwithin=60:state=7,aisetmeleedamage=50,aiusemelee=1,aicleartarget,aiattackawareness=1,sound=audiobank\misc\melee.wav
+:state=6,frameatend=95:state=8
+:state=7,frameatend=95:state=8
+:state=8:setaiactive=1,setframe=1,state=1
+
+;End

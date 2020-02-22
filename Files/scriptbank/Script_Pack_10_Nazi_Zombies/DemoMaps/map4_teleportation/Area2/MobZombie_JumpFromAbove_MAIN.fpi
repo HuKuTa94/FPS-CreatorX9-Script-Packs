@@ -1,0 +1,25 @@
+;-Деньги за попадание
+:shotdamage=1:addvar=cash 10
+;Начало скрипта
+:state=0:alwaysactive=0,setaiactive=0,state=1
+;-Идет к окну
+:state=1:animate=92,aisetspeed=200
+:state=1,waypointstate=0:waypointstart,state=2
+:state=2,waypointstate=3:waypointnext
+:state=2,waypointstate=4:waypointrandom
+:state=2,waypointstate=5:waypointstop,etimerstart,state=10
+
+;-Анимация приземления
+:state=10:incframe=41
+:state=10,etimergreater=400:setframe=0,state=11
+:state=11:incframe=0
+:state=11,frameatend=0:aisetspeed=130,state=12
+
+;-Запуск скрипта атаки
+:state=12:alwaysactive=1,runfpi=Script_Pack_10_Nazi_Zombies\DemoMaps\map4_teleportation\Area2\MobZombie_ATTACK3_nofloorlogic.fpi
+
+;Игрок далеко, удалить бота из игры
+:varnotequal=Area 2:aistop,airemove,subvar=ZombieInGame 1,addvar=ZombieInWave 1,destroy
+
+;-Конец игры-
+:plrhealthless=1:destroy

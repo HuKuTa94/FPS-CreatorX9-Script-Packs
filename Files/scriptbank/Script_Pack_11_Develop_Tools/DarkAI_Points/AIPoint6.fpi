@@ -1,0 +1,7 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 02.07.2013
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Создает ID маркер для DarkAI системы
+
+:state=0:destroy,aiaddpoint=6

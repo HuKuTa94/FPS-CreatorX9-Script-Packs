@@ -1,0 +1,74 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 12.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: глобальный скрипт режима игры "People vs Zombies"
+;__________________________________________________________________________________________________________________________________
+;\\\\Глобальные переменные\\\\
+;----Начало игры----
+:state=0:dimvar=start,setvar=start 0
+;----Оживление союзника игроком---
+:state=0:dimvar=revive,setvar=revive 0
+;__________________________________________________________________________________________________________________________________
+;\\\\HUDs\\\\
+;----Индикаторы оживления союзника----
+:state=0:hudreset,hudx=50,hudy=86,hudsize=24,hudfont=arial,hudtext=Hold F to revive,hudname=revbutton,,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=86,hudsize=24,hudfont=arial,hudtext=Reviving,hudname=revbar,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | | | | | | |,hudname=r25,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | | | | | | |,hudname=r24,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | | | | |   |,hudname=r23,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | | | |     |,hudname=r22,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | | |       |,hudname=r21,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | |         |,hudname=r20,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | |           |,hudname=r19,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | |             |,hudname=r18,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | |               |,hudname=r17,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | |                 |,hudname=r16,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | |                   |,hudname=r15,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | |                     |,hudname=r14,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | | | | | | | | | | | | | | |,hudname=r13,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | | |   | | | | | | | | | | | |,hudname=r12,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | | |       | | | | | | | | | | |,hudname=r11,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | | |           | | | | | | | | | |,hudname=r10,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | | |               | | | | | | | | |,hudname=r9,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | | |                   | | | | | | | |,hudname=r8,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | | |                       | | | | | | |,hudname=r7,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | | |                           | | | | | |,hudname=r6,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | | |                               | | | | |,hudname=r5,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | | |                                   | | | |,hudname=r4,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| | |                                       | | |,hudname=r3,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=| |                                             |,hudname=r2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsize=18,hudfont=arial,hudtext=|                                               |,hudname=r1,hudhide=1,hudmake=display
+
+:state=1,varequal=revive 0:hudunshow=r1,hudunshow=r2,hudunshow=r3,hudunshow=r4,hudunshow=r5,hudunshow=r6,hudunshow=r7,hudunshow=r8,hudunshow=r9,hudunshow=r10,hudunshow=r11,hudunshow=r12,hudunshow=r13,hudunshow=r14,hudunshow=r15,hudunshow=r16,hudunshow=r17,hudunshow=r18,hudunshow=r19,hudunshow=r20,hudunshow=r21,hudunshow=r22,hudunshow=r23,hudunshow=r24,hudunshow=r25
+:state=1,vargreater=revive 1,vargreater=revive 8:hudshow=r1
+:state=1,vargreater=revive 8,vargreater=revive 16:hudshow=r2
+:state=1,vargreater=revive 16,vargreater=revive 24:hudshow=r3
+:state=1,vargreater=revive 24,vargreater=revive 32:hudshow=r4
+:state=1,vargreater=revive 32,vargreater=revive 40:hudshow=r5
+:state=1,vargreater=revive 40,vargreater=revive 48:hudshow=r6
+:state=1,vargreater=revive 48,vargreater=revive 56:hudshow=r7
+:state=1,vargreater=revive 56,vargreater=revive 64:hudshow=r8
+:state=1,vargreater=revive 64,vargreater=revive 72:hudshow=r9
+:state=1,vargreater=revive 72,vargreater=revive 80:hudshow=r10
+:state=1,vargreater=revive 80,vargreater=revive 88:hudshow=r11
+:state=1,vargreater=revive 88,vargreater=revive 96:hudshow=r12
+:state=1,vargreater=revive 96,vargreater=revive 104:hudshow=r13
+:state=1,vargreater=revive 104,vargreater=revive 112:hudshow=r14
+:state=1,vargreater=revive 112,vargreater=revive 120:hudshow=r15
+:state=1,vargreater=revive 120,vargreater=revive 128:hudshow=r16
+:state=1,vargreater=revive 128,vargreater=revive 136:hudshow=r17
+:state=1,vargreater=revive 136,vargreater=revive 144:hudshow=r18
+:state=1,vargreater=revive 144,vargreater=revive 152:hudshow=r19
+:state=1,vargreater=revive 152,vargreater=revive 160:hudshow=r20
+:state=1,vargreater=revive 160,vargreater=revive 168:hudshow=r21
+:state=1,vargreater=revive 168,vargreater=revive 174:hudshow=r22
+:state=1,vargreater=revive 174,vargreater=revive 182:hudshow=r23
+:state=1,vargreater=revive 190,vargreater=revive 198:hudshow=r24
+:state=1,vargreater=revive 198,vargreater=revive 206:hudshow=r25
+;__________________________________________________________________________________________________________________________________
+;===Начало скрипта===
+:state=0:state=1
+
+;Конец скрипта

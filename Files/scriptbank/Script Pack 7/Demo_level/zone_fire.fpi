@@ -1,0 +1,12 @@
+;Скрипт написал: Кошелев Никита (fpsc.forum24.ru)
+
+
+:state=0,activated=1:state=1
+:state=1,activated=2:state=999,destroy
+
+:state=1,plrwithinzone=1:plraddhealth=-1
+:state=1,plrdistwithin=700:loopsound=$0
+:state=1,plrdistfurther=700:stopsound=$0
+
+
+;End of Script

@@ -1,0 +1,15 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 05.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: зона захвата вражеской базы
+
+;===Игрок захватывает вражескую базу, когда находится в зоне захвата===
+:plrdistwithin=200,vargreater=enemybase 0:subvar=enemybase 2,hudshow=CaptureEF
+:plrdistfurther=200:hudunshow=CaptureEF
+:varnotequal=endgame 0:hudunshow=CaptureEF
+
+:state=0:alwaysactive=1,state=1
+
+;Конец скрипта

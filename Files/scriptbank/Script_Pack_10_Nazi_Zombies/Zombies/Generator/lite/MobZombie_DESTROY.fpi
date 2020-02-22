@@ -1,0 +1,9 @@
+:state=0:aistop,aisetspeed=100,setanimatespeed=90,airemove,setbulletcoloff=1,coloff,dimlocalvar=anim,state=1
+:state=1,random=2:setvar=anim 104,state=2,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie2.ogg
+:state=1,random=2:setvar=anim 105,state=2,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie3.ogg
+:state=1,random=2:setvar=anim 106,state=2,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie4.ogg
+:state=1,random=2:setvar=anim 107,state=2,sound=audiobank\Script_Pack_10_Nazi_Zombies\zombie5.ogg
+:state=2:setframe=%anim,state=3
+:state=3:incframe=%anim
+:state=3,frameatend=%anim:hide,state=4
+:state=4,soundfinished=1:destroy

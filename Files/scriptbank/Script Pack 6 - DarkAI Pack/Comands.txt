@@ -1,0 +1,85 @@
+Dark AI FPI:
+ 
+addaiteam=X (action) x= the team number (1-20 range cap). Team 1 is defaulted to the player. Can be called at any time to change teams.
+aiteam=X (condition) x= team number defined by addaiteam=x  
+aicallteam=x (action) x= range of call broadcast from entity
+aicalled=x (condition) x=1/0
+airespondtocall (action) AI moves to location where aicallteam last heard
+ 
+aiplrcallteam=x (action) x= range of call broadcast from player
+aicalledbyplr=x (condition) x=1/0
+airespondtoplrcall (action) AI moves to location where aiplrcallteam last heard
+ 
+aiaddally=X Y|Y|Y|Y|Y (action - faction control);  Y= DAI Team(s) to add as allies to the DAI team X is equal to.  Allied teams share ai calls.
+
+aiaddenemy=X Y|Y|Y|Y|Y (action - faction control);  Y= DAI Team(s) to add as enemies to the DAI team X is equal to. Enemy teams are targetable.
+aiaddneutral=X Y|Y|Y|Y|Y (action - faction control);  Y= DAI Team(s) to add as neutral to the DAI team X is equal to. Neutral teams are ignored.
+aiautofactionoff=x (action); if x=1 automatic faction disposition reciprocity is disabled for the above actions allowing asymetric disposition.
+ 
+example of basic team assignments:
+Team 1: Player controllable ally (Team 1 is always the player team)
+Team 2: Enemy
+Team 3: Neutral
+Team 4: Non-controlable Player ally
+Team 5: Indescriminate Enemy
+ 
+ducking=x (condition); x=1 is true if DAI is ducking, x=0 is true if DAI is not ducking.
+
+strafingleft=x (condition); x=1 is true if DAI is strafing left, x=0 is true if DAI is not strafing left.
+
+strafingright=x (condition); x=1 is true if DAI is strafing right, x=0 is true if DAI is not strafing right.
+
+movingforwards=x (condition); x=1 is true if DAI is moving forewards, x=0 is true if DAI is not moving forewards (used mainly for setting animations).
+
+movingbackwards=x (condition); x=1 is true if DAI is moving backwards, x=0 is true if DAI is not moving backwards (used mainly for setting animations).
+
+runningforwards=x (condition); x=1 is true if DAI is running, x=0 is true if DAI is not running (used mainly for setting animations, DAI internally dictates when to run or not).
+
+idle=x (condition); x=1 is true if DAI is not moving, x=0 is true if DAI is moving (used mainly for setting animations).
+
+animationnormal (action); Normal anim playback
+animationreverse(action); Reverse anim playback
+ 
+aicanshoot=x (condition); x=1 is true if DAI can see an enemy, x=0 is true if DAI can not see an enemy.
+
+aisettarget (action); instruct the AI to target an enemy team member.
+ 
+AIONPOINT=X (condition) x=is the points id number - this will check if the entity is on the point (named by x)  
+AIGOTOPOINT=X (action) this will make the entity go from its current position to the point specified by x (to create a point use aiaddpoint=x) this path will avoid any obstacles  
+AIADDPOINT=X (action) x=is the points id number - this will create a point to be used with other ai point commands  
+
+ISDARKAI=X (condition) which is true if the entity has been loaded into the Dark AI system via ADDAITEAM FPI
+setaiactive=x (action); if x=1 DAI is activated, if x-0 DAI is deactivated.  Use mostly for pausing DAI animation override when reloading, etc.
+ 
+AIACTION=X (condition) x=0 if idle; x=1 if attacking; x=2 if in cover; x=3 if retreating
+AIFOLLOWPLR=X (action) if set to 1 this will allow AI ally entities to follow the player if set to 0 the AI ally will stop following  
+AIMOVERANDOM (action) to allow AI entities to move about randomly (must be looped or entity will stop moving after a while)  
+ 
+AICONDSOUNDFINISHED to allow sequence of WAV sounds to be played inside FPI scripts  
+aiheardsound=x (condition); x=unit range for DAI to listen for sounds (default 700 if no =x given)
+aimovetosound (action); Instructs DAI to pathfind to the location of the sound it heard.
+ 
+aiatcover=x (condition); x=1 if in cover, x=0 if exposed
+
+aimovetotarget (action) Instructs DAI to pathfind to its current target.
+
+aimovetocover=x (action); If X=1 DAI will seek the nearest trigger zone with the name "Safe Zone". If X=0 DAI seek the nearest cover it can find but if that cover is occupied they will seek the closest trigger zone with the name "Safe Zone".
+
+
+aistop (action) DAI will halt and clear any current pathfinding instructions.
+
+aiusemelee=x (action) if x=1 is given, blood shows
+aisetmeleedamage=x (action) Sets the amount of damage to be inflicted by aiusemelee.
+
+aitargetdistwithin=x (condition) is true if DAI target is within X units.
+
+aitargetdistfurther=x (condition) is true if DAI target is further than X units.
+ 
+aisetspeed=x (action) sets the move speed for the entity to the value of x
+ 
+airotatetotarget (action) AI rotates to face target 
+airotatetosound (action) AI rotates to face sound
+ 
+healthgreater=x (condition); x=entity health 
+
+airemove (action); completely removes the entity from the DAI system, allowing it to function as standard AI. 

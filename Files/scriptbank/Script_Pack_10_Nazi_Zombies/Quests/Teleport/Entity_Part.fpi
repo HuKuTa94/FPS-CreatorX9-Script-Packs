@@ -1,0 +1,32 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 15.11.2013
+;Требования: необходим патч 1.18
+;Версия скрипта: 1.0
+;Описание: необходимая часть, для работы телепорта
+
+;\\\\Начало скрипта\\\\
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\PickupDetail.dds,hudname=pickpart,hudhide=1,hudmake=display
+:state=0:coloff,floorlogic,state=2
+
+;\\\\Появление части в игре\\\\
+;---Появится---
+:state=1,activated=1:state=2
+;---Не появится---
+:activated=2:state=5
+
+;\\\\Взаимодействие части с игроком\\\\
+;---Игрок близко---
+:state=2,plrdistwithin=50,plrfacing=40:hudshow=pickpart
+:state=2,plrdistfurther=50:hudunshow=pickpart
+:state=2,plrnotfacing=40:hudunshow=pickpart
+;---Игрок берет деталь--
+:state=2,plrdistwithin=50,plrfacing=40,keypressed=33 1:hudunshow=pickpart,plrsound=scriptbank\Script Pack 9 - Quest Pack\Audio\PickupPart.ogg,state=3
+
+;\\\\Часть взята игроком\\\\
+;---Активация станка по сбору предметов на единицу---
+:state=3:settargetname=ToolTeleport,activatetarget=1,setalphafade=0,etimerstart,state=4
+
+;\\\\Конец скрипта\\\\
+:state=4,etimergreater=100:state=5
+:state=5:destroy

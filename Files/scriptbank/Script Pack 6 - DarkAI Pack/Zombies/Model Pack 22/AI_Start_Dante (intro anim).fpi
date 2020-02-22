@@ -1,0 +1,29 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 06.01.2011
+;Версия скрипта: 1.0
+;Описание: скрипт для появления зомби "Dante" из Model Pack'a 22
+
+
+;===Плавное появление и вступительная анимация===
+:state=0:setframe=22,state=1,setalphafade=0,addaiteam=2,aiaddenemy=2 1,aiaddenemy=1 2
+:state=1:incframe=22,incalphafade=80
+:state=1,frameatend=22:state=3,sound=audiobank\bond1\danteroar.wav
+
+:state=3:incalphafade=100
+:state=3,alphafadequal=100:state=4,runfpidefault=1
+
+;Конец Скрипта
+
+
+
+
+
+
+
+
+
+
+
+
+

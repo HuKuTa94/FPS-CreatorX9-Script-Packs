@@ -1,0 +1,93 @@
+;Описание:
+;БЛОК H1 - максимальное здоровье игрока без перка на дополнительное здоровье
+;БЛОК H2 - максимальное здоровье игрока  с перком на дополнительное здоровье
+;VARNAME = H  - текущее здоровье игрока
+;Activated = 0 - у игрока нет перка на дополнительное здоровье
+;Activated = 1 - у игрока есть перк на дополнительное здоровье
+
+;Востановление здоровья в течении нескольких секунд
+;ХУДы
+:state=0:hudreset,hudx=50,hudy=50,hudglobalx,hudglobaly,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\eyehud1.dds,hudname=hud1,changehudalpha=hud1 0,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudglobalx,hudglobaly,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\eyehud2.dds,hudname=hud2,changehudalpha=hud2 0,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudglobalx,hudglobaly,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\eyehud3.dds,hudname=hud3,changehudalpha=hud3 0,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudglobalx,hudglobaly,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\eyehud4.dds,hudname=hud4,changehudalpha=hud4 0,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudglobalx,hudglobaly,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\eyehud5.dds,hudname=hud5,changehudalpha=hud5 0,hudhide=1,hudmake=display
+
+;Переменные
+;-Прозрачность картинок крови
+:state=0:dimlocalvar=alpha1,setvar=alpha1 0
+:state=0:dimlocalvar=alpha2,setvar=alpha2 0
+:state=0:dimlocalvar=alpha3,setvar=alpha3 0
+:state=0:dimlocalvar=alpha4,setvar=alpha4 0
+:state=0:dimlocalvar=alpha5,setvar=alpha5 0
+
+;Установка здоровья игрока -Команда SHOTDAMAGE=1 для игрока
+:state=0:plrsethealth=500,dimlocalvar=H,setvar=H $PH,state=2
+
+;-----------------------------БЛОК H1-----------------------------
+;Игрок получил урон (включить таймер на восстановление здоровья)
+:state=2,plrhealthless=%H:state=30
+:state=4,plrhealthless=%H:state=30
+:state=5,plrhealthless=%H:state=30
+:state=6,plrhealthless=%H:state=30
+
+;Замедление скорости передвижения
+:state=30:plrspeedmod=40,state=10
+;Тряска камеры
+:state=10,random=2:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\hit1.ogg,state=11
+:state=10,random=2:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\hit2.ogg,state=11
+
+;Движение камеры вверх
+:state=11,random=1:plroffsetanglex=-2,state=12
+:state=12,random=1:plroffsetangley=-2,state=13
+:state=13:etimerstart,state=14
+:state=14,etimergreater=50:etimerstart,state=15
+:state=15:plroffsetanglex=1,plroffsetangley=1
+:state=15,etimergreater=100:state=25
+
+;Движение камеры вниз
+:state=11,random=1:plroffsetanglex=2,state=20
+:state=20,random=1:plroffsetangley=2,state=21
+:state=21:etimerstart,state=22
+:state=22,etimergreater=50:etimerstart,state=23
+:state=23:plroffsetanglex=-1,plroffsetangley=-1
+:state=23,etimergreater=100:state=25
+
+;Остановка движения
+:state=25:plrspeedmod=100,setvar=H $PH,plroffsetanglex=0,plroffsetangley=0,etimerstart,state=4
+
+;-Задержка перед восстановлением
+:state=4,etimergreater=8000:state=5
+;-Восстановление здоровья и обновление переменно Н (текущее здоровье)
+:state=5:plraddhealth=1,setvar=H $PH
+:state=5,plrhealthgreater=499:state=6
+
+;Смерть игрока
+:state=2,plrhealthless=401:state=8
+:state=4,plrhealthless=401:state=8
+:state=5,plrhealthless=401:state=8
+:state=6,plrhealthless=401:state=8
+:state=15,plrhealthless=401:state=8
+:state=23,plrhealthless=401:state=8
+:state=8:plraddhealth=-500,plroffsetanglex=0,plroffsetangley=0,stopsound=audiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\dead.ogg,state=9
+;-Звук смерти
+:state=9,plrhealthgreater=0:hudunshow=hud1,hudunshow=hud2,hudunshow=hud3,hudunshow=hud4,hudunshow=hud5,stopsound=audiobank\Script_Pack_10_Nazi_Zombies\dead.ogg,state=100
+
+;Управление худами крови
+;-Появление крови на экране во время задержки
+:state=4,plrhealthless=495,varless=alpha1 75:addvar=alpha1 10,hudshow=hud1,changehudalpha=hud1 %alpha1,plrwobble=1,plrwobble=0,stopsound=audiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg
+:state=4,plrhealthless=479,varless=alpha2 70:addvar=alpha2 10,addvar=alpha1 1,hudshow=hud1,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,plrwobble=1
+:state=4,plrhealthless=469,varless=alpha3 60:addvar=alpha3 10,addvar=alpha2 0.2,addvar=alpha1 0.5,hudshow=hud3,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,plrwobble=5
+:state=4,plrhealthless=459,varless=alpha4 55:addvar=alpha4 10,addvar=alpha3 0.2,addvar=alpha2 0.2,addvar=alpha1 0.5,hudshow=hud4,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,changehudalpha=hud4 %alpha4,plrwobble=25,loopsoundaudiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg
+:state=4,plrhealthless=449,varless=alpha5 35:addvar=alpha5 10,addvar=alpha4 0.1,addvar=alpha3 0.2,addvar=alpha2 0.3,addvar=alpha1 1,hudshow=hud5,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,changehudalpha=hud4 %alpha4,changehudalpha=hud5 %alpha5,plrwobble=30
+;-Появление крови на экране во время лечения
+:state=5,plrhealthless=495,varless=alpha1 75:addvar=alpha1 10,hudshow=hud1,changehudalpha=hud1 %alpha1,plrwobble=1,plrwobble=0,stopsound=audiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg
+:state=5,plrhealthless=479,varless=alpha2 70:addvar=alpha2 10,addvar=alpha1 1,hudshow=hud1,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,plrwobble=1
+:state=5,plrhealthless=469,varless=alpha3 60:addvar=alpha3 10,addvar=alpha2 0.2,addvar=alpha1 0.5,hudshow=hud3,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,plrwobble=5
+:state=5,plrhealthless=459,varless=alpha4 55:addvar=alpha4 10,addvar=alpha3 0.2,addvar=alpha2 0.2,addvar=alpha1 0.5,hudshow=hud4,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,changehudalpha=hud4 %alpha4,plrwobble=25,loopsoundaudiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg
+:state=5,plrhealthless=449,varless=alpha5 35:addvar=alpha5 10,addvar=alpha4 0.1,addvar=alpha3 0.2,addvar=alpha2 0.3,addvar=alpha1 1,hudshow=hud5,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,changehudalpha=hud4 %alpha4,changehudalpha=hud5 %alpha5,plrwobble=30
+;-Исчезновение худов после лечения
+:state=6:subvar=alpha1 3,subvar=alpha2 1,subvar=alpha3 1,subvar=alpha4 1,subvar=alpha5 1,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,changehudalpha=hud4 %alpha4,changehudalpha=hud5 %alpha5
+:state=6,varless=alpha1 0,varless=alpha2 0,varless=alpha3 0,varless=alpha4 0,varless=alpha4 0:state=7
+;-Чистый экран
+:state=7:plrwobble=0,stopsound=audiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg,setvar=H $PH,setvar=alpha1 0,setvar=alpha2 0,setvar=alpha3 0,setvar=alpha4 0,setvar=alpha5 0,,changehudalpha=hud1 %alpha1,changehudalpha=hud2 %alpha2,changehudalpha=hud3 %alpha3,changehudalpha=hud4 %alpha4,changehudalpha=hud5 %alpha5,hudunshow=hud1,hudunshow=hud2,hudunshow=hud3,hudunshow=hud4,hudunshow=hud5,state=2

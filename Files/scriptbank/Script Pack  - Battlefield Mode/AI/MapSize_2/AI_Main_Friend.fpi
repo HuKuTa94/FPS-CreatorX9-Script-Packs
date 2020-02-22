@@ -1,0 +1,9 @@
+desc          = Friend (By Никита)
+
+:state=0,waypointstate=0:animate=2,waypointstart
+:state=0,waypointstate=3:animate=2,waypointnext
+:state=0,waypointstate=5:animate=2,waypointstop,state=1
+
+;===Захватывает флаг===
+:state=1:addvar=point1_ai_F 1,state=2
+:state=2,varequal=point1_aiF 2:waypointreverse,state=0

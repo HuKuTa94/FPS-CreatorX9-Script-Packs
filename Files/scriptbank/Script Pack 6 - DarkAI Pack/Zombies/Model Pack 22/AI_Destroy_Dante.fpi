@@ -1,0 +1,15 @@
+;Artificial Intelligence Script
+
+;desc          = Dante Beast Death
+
+:state=0:state=1,coloff
+:state=1:setframe=13,state=2
+:state=2:incframe=13
+:state=2,frameatend=13:state=3,setframe=25,sound=audiobank\bond1\danteroar.wav
+:state=3:incframe=25
+:state=3,frameatend=25:state=4
+
+:state=4:suspend,coloff
+
+;End of Script
+

@@ -1,0 +1,92 @@
+;Minigun weapon spec
+
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 3
+muzzlesize     = 300
+brass          = 2
+smoke          = 1
+damage         = 17
+damagetype     = 2
+scorchtype     = 2
+reloadqty      = 200
+iterate        = 0
+accuracy       = 15
+
+;GUN Visuals
+textured      = gun_D2.tga
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+weapontype    = 4
+
+;GUN Sounds
+
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         = windup.wav
+sound5         =
+fireloop       = 2000
+
+;HUD muzzleflash position
+
+horiz          = -6
+vert           = 2
+forward        = -5
+alignx         = 14
+aligny         = -25
+alignz         = 190
+
+;HUD animation frames list
+
+keyframe ratio = 1
+
+select         = 0,17
+Idle           = 18,52
+Move           = 53,70
+Start fire     = 72,89
+automatic fire = 91,93
+end fire       = 96,110
+reload		= 112,198
+
+putaway	       = 1026,1040
+
+run		= 586,604
+
+
+;HUD sound frames list
+
+soundframes    = 3
+sframe0        = 90,1
+sframe1        = 130,2
+sframe2        = 72,4
+
+
+;Airmod conditions graciously added by Shadowtroid
+
+
+firerate = 3
+
+melee start 	= 714,719
+melee end	= 720,733
+
+nofullreload = 1
+chamberedround	= 1
+
+runy = -7
+runaccuracy = 60
+recoily = 20
+recoilyreturn = 92
+recoilx = 12
+recoilxreturn = 95
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3
+	

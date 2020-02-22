@@ -1,0 +1,49 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 05.01.2011
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 1.0
+;Описание: скрипт для зомби "Dogman" (быстрый!) из Model Pack'a 22. 
+
+
+;===Анимации движения===
+:idle=1:animate=1                                            ; - Стоит
+:movingforwards=1,:animate=5,animationnormal,aisetspeed=260  ; - Бежит вперед
+:movingbackwards=1:animate=5,animationreverse,aisetspeed=260 ; - Бежит назад
+:runningforwards=1:animate=5,animationnormal,aisetspeed=260  ; - Бежит вперед
+
+;===Начало скрипта===
+:state=0:setaiactive=1,alwaysactive=1,aiatackwareness=1,state=1
+
+;===Определение цели===
+:state=1,aihastarget=0:aisettarget
+:state=1,aihastarget=1:state=2
+:state=1,aiheardsound=1800:aimovetosound
+:state=1,plrdistwithin=200:loopsound=audiobank\bond1\dogmanloop.wav
+
+:state=2,aitargetdistfurther=80:airotatetotarget,setaiactive=1,aisetspeed=230,aimovetotarget
+:state=2,aitargetdistwithin=80:aistop,airotatetotarget,aisetspeed=115,setaiactive=0,state=10,stopsound=audiobank\bond1\dogmanloop.wav
+:state=2,aihastarget=0:state=1,aicleartarget
+
+;////////////////////////////////////////////////////////////////////////////////////////////
+;//// Атака ////
+;===Выбор атаки==
+:state=10,random=1:state=20,setframe=22,setaiactive=0,aistop,sound=audiobank\bond1\dogmanintro.wav
+:state=10,random=1:state=26,setframe=23,setaiactive=0,aistop,sound=audiobank\bond1\dogmanintro.wav
+
+;===Атака 1===
+:state=20:incframe=22,airotatetotarget,aisettarget,aisetspeed=120
+:state=20,framebeyond=22 65,aitargetdistwithin=80:state=23,aisetmeleedamage=50,aiusemelee=1,aicleartarget,aiattackawareness=1,sound=audiobank\misc\melee.wav
+:state=20,frameatend=22:state=24
+:state=23:incframe=22,airotatetotarget,aisettarget
+:state=23,frameatend=22:state=24
+:state=24:setaiactive=1,setframe=1,state=1
+
+;===Атака 2===
+:state=26:incframe=23,airotatetotarget,aisettarget,aisetspeed=120
+:state=26,framebeyond=23 55,aitargetdistwithin=80:state=27,aisetmeleedamage=50,aiusemelee=1,aicleartarget,aiattackawareness=1,sound=audiobank\misc\melee.wav
+:state=26,frameatend=23:state=28
+:state=27,frameatend=23:state=28
+:state=28:setaiactive=1,setframe=1,state=1
+
+;Конец Скрипта

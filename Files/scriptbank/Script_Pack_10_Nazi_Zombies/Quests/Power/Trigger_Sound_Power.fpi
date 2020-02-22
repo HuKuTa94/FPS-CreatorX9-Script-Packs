@@ -1,0 +1,11 @@
+;\\\Начало скрипта\\\
+:state=0:floorlogic,nobulletcol=1,coloff,hide,alwaysactive=1
+:state=0:uselightnumber=500,setlighttoentityrot,movelighttoentity,movelightred=0,movelightgreen=255,movelightblue=255,movelightrange=300,movelightoff,state=1
+
+;---Энергия включена, шатание камеры игрока, если он близко---
+:state=1,activated=1:state=2,movelighton
+:state=2,activated=0:state=1,movelightoff
+:state=2,plrdistfurther=250:camshake=0
+:state=2,plrdistwithin=250:camshake=1
+:state=2,plrdistwithin=180:camshake=3
+

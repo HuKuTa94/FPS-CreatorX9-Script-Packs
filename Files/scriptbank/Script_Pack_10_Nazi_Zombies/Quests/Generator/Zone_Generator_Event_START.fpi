@@ -1,0 +1,5 @@
+;-Init
+:state=0:floorlogic,dimvar=generatorCount,setvar=generatorCount 0,dimvar=generatorAlive,setvar=generatorAlive 0,etimerstart,state=1
+
+;-Wait for the generators init
+:state=1,etimergreater=500:runfpidefault=1

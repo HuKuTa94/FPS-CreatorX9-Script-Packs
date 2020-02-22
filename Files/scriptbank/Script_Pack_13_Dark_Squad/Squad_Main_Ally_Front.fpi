@@ -1,0 +1,48 @@
+;Старт скрипта
+:state=0:addaiteam=1,aiaddenemy=1 2,setaiactive=1,aiattackwareness=0,aisetspeed=150,aisetviewrange=800,aiautofactionoff=1,reloadweapon,alwaysactive=1,state=1
+
+;Передвижение бота 
+;-вперед к маркеру
+:state=1,idle=1:animate=1
+:state=1,movingforwards=1:animationnormal,setanimatespeed=140,aisetspeed=150,animate=2
+:state=1,runningforwards=1:animationnormal,setanimatespeed=140,aisetspeed=150,animate=2
+:state=1,plrdistwithin=130:aigotopoint=1
+:state=1,plrdistfurther=130:aistop
+;-назад к игроку
+:state=1,plrdistfurther=200:state=2
+:state=2,movingforwards=1:animationnormal,setanimatespeed=140,aisetspeed=150,animate=2
+:state=2,runningforwards=1:animationnormal,setanimatespeed=100,aisetspeed=250,animate=5
+:state=2,plrdistwithin=100:aifollowpl=0,aistop,state=1
+:state=2:aifollowplr=1
+
+;Определение цели
+;-Увидел врага
+:state=1,aicanshoot=1:aistop,state=3
+:state=2,aicanshoot=1:aistop,state=3
+;-Обновление целей
+:state=3:aicleartarget,aistop
+:state=3,aihastarget=0:aisettarget,airotatetotarget
+;-Нет целей
+:state=3,aihastarget=0:animate=1,state=1
+
+;Атака
+:state=3,aicanshoot=1,aihastarget=1,ifweapon=1:aisettarget,useweapon,aiusefullaim=1,rundecal=6,animate=28,state=50
+
+;Перезарядка
+;-Перезарядиться
+:state=3,ifweapon=0:aisetspeed=90,setaiactive=0,setframe=6,state=51
+
+;-Анимация перезарядки
+:state=8:incframe=6
+:state=8,frameatend=6:reloadweapon,setaiactive=1,state=2
+
+;Sound Engine
+;-Расстояние источника звука до игрока
+;--Выстрел
+:state=50,plrdistwithin=500,plrcanbeseen:state=3,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_1.ogg
+:state=50,plrdistwithin=500,plrcannotbeseen:state=3,activate=0,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_2.ogg
+:state=50,plrdistfurther=500:state=3,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_fire_3.ogg
+;--Перезарядка
+:state=51,plrdistwithin=500,plrcanbeseen:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_1.ogg
+:state=51,plrdistwithin=500,plrcannotbeseen:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_2.ogg
+:state=51,plrdistfurther=500:state=8,sound=audiobank\Script Pack 8 - DarkAI Pack 2\SoundEngine\GenericRoom\ak_reload_3.ogg

@@ -1,0 +1,35 @@
+;прототип звукового движка для водопада
+:state=0:etimerstart,activate=1,state=1
+;-Sound Engine
+;-Игрок не в подвале
+:state=1,activated=1,etimergreater=1000,plrhigher=10,plrdistwithin=350:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_cls_1.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=10,plrdistwithin=350:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_cls_1.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=10,plrdistwithin=350:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_cls_1.ogg
+
+:state=1,activated=1,etimergreater=1000,plrhigher=10,plrdistwithin=550:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_cls_2.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=10,plrdistwithin=550:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_cls_2.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=10,plrdistwithin=550:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_cls_2.ogg
+
+:state=1,activated=1,etimergreater=1000,plrhigher=10,plrdistwithin=600:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_mid_1.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=10,plrdistwithin=600:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_mid_1.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=10,plrdistwithin=600:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_mid_1.ogg
+
+:state=1,activated=1,etimergreater=1000,plrhigher=10,plrdistwithin=750:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_mid_2.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=10,plrdistwithin=750:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_mid_2.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=10,plrdistwithin=750:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_mid_2.ogg
+
+:state=1,activated=1,etimergreater=1000,plrhigher=10,plrdistwithin=900:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_far_1.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=10,plrdistwithin=900:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_far_1.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=10,plrdistwithin=900:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_far_1.ogg
+
+:state=1,activated=1,etimergreater=1000,plrhigher=10,plrdistwithin=1100:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_far_2.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=10,plrdistwithin=1100:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_far_2.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=10,plrdistwithin=1100:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_far_2.ogg
+
+;-Игрок в подвале
+:state=1,activated=1,etimergreater=1000,plrhigher=-70:etimerstart,activate=2,sound=audiobank\Sound_Engine\waterfall_far_2.ogg
+:state=1,activated=2,etimergreater=1000,plrhigher=-70:etimerstart,activate=3,sound=audiobank\Sound_Engine\waterfall_far_2.ogg
+:state=1,activated=3,etimergreater=1000,plrhigher=-70:etimerstart,activate=1,sound=audiobank\Sound_Engine\waterfall_far_2.ogg
+
+
+

@@ -1,0 +1,33 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 13.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: критический урон
+
+;===Начало скрипта===
+:state=0:state=1,coloff,airemove,bloodsplash=50,bloodspurt=1,hidelimb=1
+
+;===Падает без головы===
+;--случайный выбор анимации смерти--
+:state=1,random=20:state=11,setframe=13
+:state=1,random=20:state=21,setframe=14
+:state=1,random=20:state=31,setframe=15
+
+;--Анимация 1--
+:state=11:incframe=13
+:state=11,frameatend=13:state=2
+;--Анимация 2--
+:state=21:incframe=14
+:state=21,frameatend=14:state=2
+;--Анимация 3--
+:state=31:incframe=15
+:state=31,frameatend=15:state=2
+
+;===Destroy скрипт===
+:state=2:etimerstart,state=3
+:state=3,etimergreater=3000:state=4
+:state=4,alphafadeequal=100:decalphafade=0
+:state=4,alphafadeequal=0:state=5,destroy
+
+;Конец Скрипта

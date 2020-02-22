@@ -1,0 +1,11 @@
+;Описание:
+;Activated=200 - выключен
+;Activated=201 - желтый свет
+
+;-Старт скрипта
+:state=0:activate=200,lighton,lightintensity=1000,lightrange=400,lightred=255,lightgreen=255,lightblue=128,floorlogic,state=1
+
+;-Горит желтый свет
+:state=1,activaed=201:lighton,state=2
+;-Выключен желтый свет
+:state=2,activated=200:lightoff,state=1

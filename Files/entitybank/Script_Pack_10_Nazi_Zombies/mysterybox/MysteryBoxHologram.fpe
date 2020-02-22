@@ -1,0 +1,27 @@
+desc          = MB1
+
+;ai
+aiinit        = appear1.fpi
+aimain        = Script_Pack_10_Nazi_Zombies\MysteryBox\MysteryBoxMultiple\Entity_MBox_Hologram.fpi
+aidestroy     = disappear1.fpi
+
+;orientation
+
+model         = meshbank\common\overlay.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = -90
+roty          = 0
+rotz          = 0
+defaultheight = 60
+isimmobile    = 1
+
+;visualinfo
+Transparency  = 1
+Scale         = 30
+textured      = entitybank\Script_Pack_10_Nazi_Zombies\map4_teleportation\MBox_Hologram1.dds
+texturealtd   = entitybank\Script_Pack_10_Nazi_Zombies\mysterybox\alpha_D2.dds
+effect        = effectbank\illuminationent\illuminationent.fx
+
+

@@ -1,0 +1,11 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт "триггер-бокса" срабатывает один раз, если активирован другим триггером и если кто-угодно близко, и удаляется из игры
+
+;Триггер-бокс активирован
+:state=0,activated=1:state=1
+
+;Скрипт "...Activate_Once.fpi"
+:state=1:runfpi=Script_Pack_11_Develop_Tools\Trigger_Any_Sound_RandomOnce.fpi

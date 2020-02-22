@@ -1,0 +1,49 @@
+;-Деньги за попадание
+:shotdamage=1:addvar=cash 10
+;Начало скрипта
+:state=0:alwaysactive=0,setaiactive=0,state=1
+;-Идет к окну
+:state=1:animate=92,aisetspeed=200
+:state=1,waypointstate=0:waypointstart,state=2
+:state=2,waypointstate=3:waypointnext
+:state=2,waypointstate=4:waypointrandom
+:state=2,waypointstate=5:waypointstop,aisetspeed=110,state=3
+
+;-Ломает доски
+:state=3,nearactivatable=2,random=5:setframe=100,state=4
+:state=3,nearactivatable=2,random=5:setframe=101,state=7
+
+;Анимация 1
+:state=4:incframe=100
+:state=4,framebeyond=100 50,nearactivatable=2:settarget,activatetarget=1,state=5
+;-Нанести игроку урон, если он близко
+:state=5,framebeyond=100 50,plrdistwithin=60:plraddhealth=-50,state=6
+:state=5,plrdistfurther=60:state=6
+:state=6:incframe=100
+:state=6,frameatend=100:state=3
+
+;Анимация 2
+:state=7:incframe=101
+:state=7,framebeyond=101 50,nearactivatable=2:settarget,activatetarget=1,state=8
+;-Нанести игроку урон, если он близко
+:state=8,framebeyond=101 50,plrdistwithin=60:plraddhealth=-50,state=9
+:state=8,plrdistfurther=60:state=9
+:state=9:incframe=101
+:state=9,frameatend=101:state=3
+
+;-Доски сломаны
+:state=3,nearactivatable=3:setframe=41,aisetspeed=70,state=10
+;-Прыжок
+:state=10:incframe=41,runfore=20
+:state=10,framebeyond=41 70:setframe=0,state=11
+:state=11:incframe=0
+:state=11,frameatend=0:aisetspeed=130,state=12
+
+;-Запуск скрипта атаки
+:state=12:alwaysactive=1,runfpi=Script_Pack_10_Nazi_Zombies\DemoMaps\map4_teleportation\Area3\MobZombie_ATTACK3.fpi
+
+;Игрок далеко, удалить бота из игры
+:varnotequal=Area 3:aistop,airemove,subvar=ZombieInGame 1,addvar=ZombieInWave 1,destroy
+
+;-Конец игры-
+:plrhealthless=1:destroy

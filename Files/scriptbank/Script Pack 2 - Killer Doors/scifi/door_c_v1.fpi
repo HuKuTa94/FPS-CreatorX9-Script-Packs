@@ -1,0 +1,15 @@
+desc          = Killer Door C (By Никита) Verssion 1 Открывается сразу
+
+;===Открытие двери===
+:state=0:state=1,setframe=0,colon,sound=$0
+:state=1:incframe=0
+:state=1,framebeyond=0 25:coloff 
+
+;===Закрытие двери===
+:state=1,frameatend=0:state=2,decframe=0,sound=$1,coloff
+
+;===Игрок проходит через дверь в момент закрытия===
+:state=2,framewithin=0 20,plrdistwithin=30:plraddhealth=-100
+:state=2,frameatstart=0:state=0
+
+;End of Script

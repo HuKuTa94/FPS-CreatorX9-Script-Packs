@@ -1,0 +1,17 @@
+;Скрипт написал: кто-то из разработчиков FPSC.
+;Скрипт модифицировал\дополнил: Кошелев Никита.
+;Телепорт 1 - вход
+
+
+:state=0:coloff,state=1
+
+:state=1,plrdistwithin=50:state=2,plrsound=audiobank\scifi\scenery\lifts\teleport.wav,plrmoveifused
+:state=2,plrdistfurther=55:state=10
+
+:state=10,plrdistwithin=50:state=11
+:state=11,plrdistfurther=55:state=12
+
+:state=12,plrdistwithin=50:state=13,plrsound=audiobank\scifi\scenery\lifts\teleport.wav,plrmoveifused
+:state=13,plrdistfurther=55:state=10
+
+;End of Script

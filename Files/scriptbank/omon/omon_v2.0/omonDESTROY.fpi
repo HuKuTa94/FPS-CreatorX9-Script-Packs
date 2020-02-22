@@ -1,0 +1,11 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Dead Amon v2.0 (By Никита)
+
+;Triggers
+
+:state=0:state=1,coloff
+:state=1:sound=audiobank\omon\dead.wav,suspend
+;End of Script

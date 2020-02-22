@@ -1,0 +1,147 @@
+;Маркировка: W1L1Z1 - Wave 1, Location 1, Zombie spawn 1
+;ZombieInWave - кол-во зомби в раунде 
+;ZombieInGame - Кол-во зомби, которые появились
+;BossWave - определяет волну с боссом
+;BossHealth - здоровье босса в данной волне
+;Z - обнуление счетчика зомби в игре, если они застряли
+
+;-Глобальные переменные
+:state=0:dimvar=Wave,setvar=Wave -1,dimvar=BossWave,setvar=BossWave -1,dimvar=BossHealth,setvar=BossHealth 500,dimvar=ZombieInWave,setvar=ZombieInWave 0,dimvar=ZombieInGame,setvar=ZombieInGame 0
+:state=0:hudreset,hudx=45,hudy=94,hudsizex=40,hudsizey=23,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\numeric3.dds,hudname=zwave,hudtype=6,huduservar=ZombieInWave,hudmake=numeric
+:state=0:hudreset,hudx=55,hudy=94,hudsizex=40,hudsizey=23,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\numeric3.dds,hudname=zgame,hudtype=6,huduservar=ZombieInGame,hudmake=numeric
+;-Волны (счетчик)
+:state=0:hudreset,hudx=2,hudy=98,hudsizex=32,hudsizey=28,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\numeric3.dds,hudname=rounds,hudhide=1,hudtype=6,huduservar=Wave,hudmake=numeric
+;-Черный экран
+:state=0:hudreset,hudx=50,hudy=50,hudglobalx,hudsizey=2000,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\black_screen.dds,hudname=black,hudhide=1,hudmake=display
+:state=0:plrfreeze=2000,plrdisable=2000,etimerstart,hudshow=black,state=1
+:state=1,etimergreater=2000:hudfadeout=black,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_splash.ogg,etimerstart,plrdisable=0,state=2
+
+;-Обнуление переменной, если появившиеся боты застряли
+;:state=0:hudreset,hudx=65,hudy=94,hudsizex=40,hudsizey=23,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\numeric3.dds,hudname=z,hudtype=6,huduservar=Z,hudmake=numeric
+;:state=0:dimlocalvar=Z,setvar=Z 0
+;:varnotequal=Z %ZombieInGame:setvar=Z %ZombieInGame,etimerstart
+:etimergreater=60000:setvar=ZombieInGame 0,setvar=Z $ZombieInGame,etimerstart
+
+;WAVE 1
+;-Start Wave
+:state=2,etimergreater=5000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=3,etimerstart
+:state=3,etimergreater=4000:setvar=Wave 1,setvar=BossWave 1,setvar=BossHealth 500,setvar=ZombieInWave 1,hudshow=rounds,state=4
+;-End Wave
+:state=4,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=5
+
+;WAVE 2
+;-Start Wave
+:state=5,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=6
+:state=6,random=100:setvar=BossWave 2,setvar=ZombieInWave 4,state=7
+:state=6,random=100:setvar=BossWave 2,setvar=ZombieInWave 5,state=7
+;-End Wave
+:state=7,varequal=ZombieInWave 0,varequal=ZombieInGame 0:setvar=ZombieSpawn 0,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=8
+
+;WAVE 3
+;-Start Wave
+:state=8,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=9
+:state=9,random=100:setvar=BossWave 3,setvar=ZombieInWave 5,state=10
+:state=9,random=100:setvar=BossWave 3,setvar=ZombieInWave 6,state=10
+;-End Wave
+:state=10,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=11
+
+;WAVE 4
+;-Start Wave
+:state=11,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=12
+:state=12,random=100:setvar=BossWave 4,setvar=ZombieInWave 5,state=13
+:state=12,random=100:setvar=BossWave 4,setvar=ZombieInWave 6,state=13
+;-End Wave
+:state=13,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=14
+
+;WAVE 5
+;-Start Wave
+:state=14,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=15
+:state=15,random=100:setvar=BossWave 5,setvar=ZombieInWave 6,state=16
+:state=15,random=100:setvar=BossWave 5,setvar=ZombieInWave 7,state=16
+;-End Wave
+:state=16,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=17
+
+;WAVE 6
+;-Start Wave
+:state=17,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=18
+:state=18,random=100:setvar=BossWave 6,setvar=ZombieInWave 6,state=19
+:state=18,random=100:setvar=BossWave 6,setvar=ZombieInWave 7,state=19
+;-End Wave
+:state=19,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=20
+
+;WAVE 7
+;-Start Wave
+:state=20,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=21
+:state=21,random=100:setvar=BossWave 7,setvar=ZombieInWave 7,state=22
+:state=21,random=100:setvar=BossWave 7,setvar=ZombieInWave 8,state=22
+;-End Wave
+:state=22,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=23
+
+;WAVE 8
+;-Start Wave
+:state=23,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=24
+:state=24,random=100:setvar=BossWave 8,setvar=ZombieInWave 8,state=25
+:state=24,random=100:setvar=BossWave 8,setvar=ZombieInWave 9,state=25
+;-End Wave
+:state=25,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=26
+
+;WAVE 9
+;-Start Wave
+:state=26,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=27
+:state=27,random=100:setvar=BossWave 9,setvar=ZombieInWave 10,state=28
+:state=27,random=100:setvar=BossWave 9,setvar=ZombieInWave 12,state=28
+;-End Wave
+:state=28,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=29
+
+;WAVE 10
+;-Start Wave
+:state=29,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=30
+:state=30,random=100:setvar=BossWave 10,setvar=ZombieInWave 11,state=31
+:state=30,random=100:setvar=BossWave 10,setvar=ZombieInWave 13,state=31
+;-End Wave
+:state=31,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=32
+
+;WAVE 11
+;-Start Wave
+:state=32,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=33
+:state=33,random=100:setvar=BossWave 11,setvar=ZombieInWave 12,state=34
+:state=33,random=100:setvar=BossWave 11,setvar=ZombieInWave 14,state=34
+;-End Wave
+:state=34,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=35
+
+;WAVE 12
+;-Start Wave
+:state=35,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=36
+:state=36,random=100:setvar=BossWave 12,setvar=ZombieInWave 13,state=37
+:state=36,random=100:setvar=BossWave 12,setvar=ZombieInWave 15,state=37
+;-End Wave
+:state=37,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=38
+
+;WAVE 13
+;-Start Wave
+:state=38,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=39
+:state=39,random=100:setvar=BossWave 13,setvar=ZombieInWave 15,state=40
+:state=39,random=100:setvar=BossWave 13,setvar=ZombieInWave 18,state=40
+;-End Wave
+:state=40,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=41
+
+;WAVE 14
+;-Start Wave
+:state=41,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=42
+:state=42,random=100:setvar=BossWave 14,setvar=ZombieInWave 17,state=43
+:state=42,random=100:setvar=BossWave 14,setvar=ZombieInWave 20,state=43
+;-End Wave
+:state=43,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=44
+
+;WAVE 15
+;-Start Wave
+:state=44,etimergreater=7000:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_start.ogg,state=45
+:state=45,random=100:setvar=BossWave 15,setvar=ZombieInWave 20,state=46
+:state=45,random=100:setvar=BossWave 15,setvar=ZombieInWave 23,state=46
+;-End Wave
+:state=46,varequal=ZombieInWave 0,varequal=ZombieInGame 0:plrsound=audiobank\Script_Pack_10_Nazi_Zombies\wave_end.ogg,etimerstart,state=47
+
+;-Игрок мертв. Конец игры
+;Смерть игрока
+:plrhealthless=1,statelesser=49:state=50,stopsound=audiobank\Script_Pack_10_Nazi_Zombies\heartbeat.ogg,sound=audiobank\Script_Pack_10_Nazi_Zombies\dead.ogg
+:state=50,plrhealthgreater=1:hudunshow=rounds,setvar=Wave 0,destroy

@@ -1,0 +1,43 @@
+desc          = Friend (By Никита) 
+
+::setanimspeed=30
+;===Оружие сразу заряжено===
+:state=0:state=1,reloadweapon
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;===Стоит на месте, оглядывается===
+:state=1:rotateheadrandom=35,animate=1
+:state=1,plrdistfurther=120:state=2,resethead
+
+;===Догоняет игрока===
+:state=2:followplr,animate=5,runfore=5
+:state=2,plrdistwithin=60:state=3
+:state=3,random=10:rotatey=45,state=1
+:state=3,random=10:rotatey=90,state=1
+:state=3,random=10:rotatey=180,state=1
+:state=3,random=10:rotatey=-45,state=1
+:state=3,random=10:rotatey=-90,state=1
+:state=3,random=10:rotatey=-180,state=1
+
+:state=1,keypressed=33 1:state=4,resethead
+
+
+;===Атакует врага 1===
+:state=4:settargetname=enemy1,activatetarget,rotatetotarget
+:state=4,reachtarget=1:state=1
+:state=4,targetactive=1,ifweapon=1:useweapon,settarget,rundecal=6
+:state=4,ifweapon=0:setframe=6,incframe=6,state=5
+:state=4,plrdistfurther=121:followplr,animate=5,runfore=5,rotatetotarget
+
+:state=5,reachtarget=1:state=1
+:state=5:setanimspeed=40
+:state=5,frameatend=6:reloadweapon,state=4
+
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;End of Script
+
+; 
+

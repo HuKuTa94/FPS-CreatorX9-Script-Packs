@@ -1,0 +1,17 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 15.11.2013
+;Требования: необходим патч 1.18
+;Версия скрипта: 1.0
+;Описание: свет для телепорта
+
+;\\\\Начало скрипта\\\\
+:state=0:state=1,lighton,lightintensity=500
+
+;\\\\Цвет света\\\\
+;---Красный---
+:state=1:lightred=255,lightgreen=0,lightblue=0
+:state=1,activated=1:state=2
+;---Голубой---
+:state=2:lightred=0,lightgreen=255,lightblue=255
+:state=2,activated=0:state=1

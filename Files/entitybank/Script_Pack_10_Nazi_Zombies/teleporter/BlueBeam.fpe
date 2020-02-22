@@ -1,0 +1,45 @@
+
+desc          = TBeam
+
+;ai
+aiinit         = appear1.fpi
+aimain         = Script_Pack_10_Nazi_Zombies\Teleporter\Default\Entity_Beam.fpi
+aidestroy      = disappear1.fpi
+;AIUsed
+ifused        = 
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+;orientation
+model         = beamblue.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+fixnewy       = 0
+defaultstatic = 0
+materialindex = 0
+collisionmode = 1
+strength      = 0
+isimmobile    = 1
+soundset      =
+soundset1     =
+scale         = 90
+speed         = 200
+
+;visualinfo
+textured      = beam_D2.dds
+effect	  =
+castshadow    = 0
+
+
+;Animationinfo
+animmax       = 5
+anim0         = 80,100
+anim1         = 66,74
+anim2         = 10,69
+anim3         = 60,74
+anim4         = 10,69

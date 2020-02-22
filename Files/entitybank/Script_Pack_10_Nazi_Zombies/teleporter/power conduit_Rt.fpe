@@ -1,0 +1,39 @@
+;Created with Entity Workshop - made by Wehtam ( Wehtam.co.uk )
+desc          = TPower
+;ai
+aiinit         = appear1.fpi
+aimain         = Script_Pack_10_Nazi_Zombies\Teleporter\Default\Entity_Power.fpi
+aidestroy      = disappear1.fpi
+ifused         = TPower
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+;orientation
+model         = power rod rt.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+fixnewy       = 0
+defaultstatic = 0
+materialindex = 3
+collisionmode = 1
+strength      = 0
+isimmobile    = 1
+soundset      =
+soundset1     =
+speed         = 5
+;visualinfo
+textured      = power conduit_D2.dds
+effect        = effectbank\ps_2_0\entities\dynamic\diffuse_spriteatlas_4x4_15fps.fx
+castshadow    = 0
+
+;Animationinfo
+animmax       = 4
+anim0         = 1,1
+anim1         = 51,68
+anim2         = 20,50
+anim3         = 71,99

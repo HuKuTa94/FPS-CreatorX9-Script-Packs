@@ -1,0 +1,76 @@
+desc          = Ву Никита
+
+
+:state=0:dimvar=plr0_state,setvar=plr0_state 0
+:state=0:state=1,etimerstart
+
+:varequal=plr0_state 0,etimergreater=2000,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\power_out_00.wav,setvar=plr0_state 1
+:varequal=plr0_state 0,etimergreater=1970,random=7:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\power_out_02.wav,setvar=plr0_state 1
+:varequal=plr0_state 0,etimergreater=1950,random=5:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\power_out_04.wav,setvar=plr0_state 1
+
+:varequal=plr0_state 1,varequal=kills 1:setvar=plr0_state 2
+:varequal=plr0_state 2,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_00.wav,setvar=plr0_state 3
+:varequal=plr0_state 2,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_03.wav,setvar=plr0_state 3
+:varequal=plr0_state 2,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 3
+
+:varequal=plr0_state 3,varequal=kills 3:setvar=plr0_state 4
+:varequal=plr0_state 4,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_03.wav,setvar=plr0_state 5
+:varequal=plr0_state 4,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_00.wav,setvar=plr0_state 5
+:varequal=plr0_state 4,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 5
+
+:varequal=plr0_state 5,varequal=kills 6:setvar=plr0_state 6
+:varequal=plr0_state 6,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_00.wav,setvar=plr0_state 7
+:varequal=plr0_state 6,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_03.wav,setvar=plr0_state 7
+:varequal=plr0_state 6,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 7
+
+:varequal=plr0_state 7,varequal=kills 8:setvar=plr0_state 8
+:varequal=plr0_state 8,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 9
+:varequal=plr0_state 8,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_04.wav,setvar=plr0_state 9
+:varequal=plr0_state 8,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_06.wav,setvar=plr0_state 9
+
+:varequal=plr0_state 9,varequal=kills 11:setvar=plr0_state 10
+:varequal=plr0_state 10,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_killstreak_02.wav,setvar=plr0_state 11
+:varequal=plr0_state 10,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_killstreak_08.wav,setvar=plr0_state 11
+:varequal=plr0_state 10,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_killstreak_13.wav,setvar=plr0_state 11
+
+:varequal=plr0_state 11,varequal=kills 13:setvar=plr0_state 12
+:varequal=plr0_state 12,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_00.wav,setvar=plr0_state 13
+:varequal=plr0_state 12,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_03.wav,setvar=plr0_state 13
+:varequal=plr0_state 12,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 13
+
+:varequal=plr0_state 13,varequal=kills 16:setvar=plr0_state 14
+:varequal=plr0_state 14,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_02.wav,setvar=plr0_state 15
+:varequal=plr0_state 14,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_03.wav,setvar=plr0_state 15
+:varequal=plr0_state 14,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_05.wav,setvar=plr0_state 15
+
+:varequal=plr0_state 15,varequal=kills 19:setvar=plr0_state 16
+:varequal=plr0_state 16,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_04.wav,setvar=plr0_state 17
+:varequal=plr0_state 16,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_06.wav,setvar=plr0_state 17
+:varequal=plr0_state 16,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_05.wav,setvar=plr0_state 17
+
+:varequal=plr0_state 17,varequal=kills 22:setvar=plr0_state 18
+:varequal=plr0_state 18,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_03.wav,setvar=plr0_state 19
+:varequal=plr0_state 18,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_spawn_01.wav,setvar=plr0_state 19
+:varequal=plr0_state 18,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_close_05.wav,setvar=plr0_state 19
+
+:varequal=plr0_state 19,varequal=kills 28:setvar=plr0_state 20
+:varequal=plr0_state 20,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 21
+:varequal=plr0_state 20,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_04.wav,setvar=plr0_state 21
+:varequal=plr0_state 20,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_06.wav,setvar=plr0_state 21
+
+:varequal=plr0_state 21,varequal=kills 32:setvar=plr0_state 22
+:varequal=plr0_state 22,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_00.wav,setvar=plr0_state 23
+:varequal=plr0_state 22,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\crawler_kill_03.wav,setvar=plr0_state 23
+:varequal=plr0_state 22,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 23
+
+:varequal=plr0_state 23,varequal=kills 36:setvar=plr0_state 24
+:varequal=plr0_state 24,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 25
+:varequal=plr0_state 24,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_04.wav,setvar=plr0_state 25
+:varequal=plr0_state 24,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_06.wav,setvar=plr0_state 25
+
+:varequal=plr0_state 25,varequal=kills 40:setvar=plr0_state 26
+:varequal=plr0_state 26,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_01.wav,setvar=plr0_state 27
+:varequal=plr0_state 26,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_04.wav,setvar=plr0_state 27
+:varequal=plr0_state 26,random=10:plrsound=audiobank\Script Pack 5 - Zombie Mode\plr0\feedback_kill_headd_06.wav,setvar=plr0_state 27
+
+;End of Script

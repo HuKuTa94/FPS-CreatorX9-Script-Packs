@@ -1,0 +1,12 @@
+;\\\Начало скрипта\\\
+:state=0:floorlogic,lighton,lightintensity=500,lightred=255,lightgreen=255,lightblue=255,state=2
+
+;\\\Основной скрипт\\\
+;--Красный свет - череп--
+:state=1,activated=3:state=3,lightred=255,lightgreen=0,lightblue=0
+;--Желтый свет--
+:state=2,activated=1:state=1,lightred=255,lightgreen=255,lightblue=0
+;--Белый свет--
+:state=1,activated=0:state=2,lightred=255,lightgreen=255,lightblue=255
+:state=3,activated=0:state=2,lightred=255,lightgreen=255,lightblue=255
+

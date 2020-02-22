@@ -1,0 +1,175 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 11.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 2.0
+;Описание: Враг - защитник базы TF341 (пистолет)
+;          Защищает базу, занимает оборонительные позиции, не преследует врагов, использует медпункт, пополняет боеприпасы на складе
+;Параметры: Здоровье = 200; Скорость = 100; Оружие = M9A1 DX; Кол-во обойм = 4
+;________________________________________________________________1_________________________________________________________________
+;===Конец игры; 1 - победили союзники, 2 - победил враг===
+:varequal=endgame 2:state=999,aistop,airemove,runfpi=Script Pack 8 - DarkAI Pack 2\People_vs_People\PvsP_Won.fpi
+:varequal=endgame 1:state=999,aistop,airemove,runfpi=Script Pack 8 - DarkAI Pack 2\People_vs_People\PvsP_Lose.fpi
+;===Начало скрипта===
+:state=0:dimlocalvar=defend,setvar=defend 0,dimlocalvar=onbase,setvar=onbase 0,dimlocalvar=ammo,setvar=ammo 4
+:state=0:addaiteam=2,incalphafade=100,setaiactive=1,alwaysactive=1,aiatackwareness=0,aisetviewrange=2000,reloadweapon
+:state=0,varequal=start 1:state=1
+;________________________________________________________________2_________________________________________________________________
+;===Анимации движения===
+;---Стрельба в движении---
+:aicanshoot=1,ducking=0,strafingleft=1:animationnormal,animate=3
+:aicanshoot=1,ducking=0,strafingright=1:animationnormal,animate=4
+:aicanshoot=1,ducking=0,movingforwards=1:animationnormal,animate=2
+:aicanshoot=1,ducking=0,runningforwards=1:animationnormal,animate=5
+:aicanshoot=1,ducking=0,movingbackwards=1:animationreverse,animate=32
+:aicanshoot=1,ducking=0,idle=1:animationnormal,animate=1
+;----Стреляет сидя----
+:aicanshoot=1,ducking=1,strafingleft=1:animationnormal,animate=32
+:aicanshoot=1,ducking=1,strafingright=1:animationnormal,animate=32
+:aicanshoot=1,ducking=1,movingforwards=1:animationnormal,animate=32
+:aicanshoot=1,ducking=1,movingbackwards=1:animationreverse,animate=32
+:aicanshoot=1,ducking=1,idle=1:animationnormal,animate=31
+;----Анимация движения (не стреляет)----
+:aicanshoot=0,ducking=0,strafingleft=1:animationnormal,animate=34
+:aicanshoot=0,ducking=0,strafingright=1:animationnormal,animate=34
+:aicanshoot=0,ducking=0,movingforwards=1:animationnormal,animate=34
+:aicanshoot=0,ducking=0,runningforwards=1:animationnormal,animate=40
+:aicanshoot=0,ducking=0,movingbackwards=1:animationreverse,animate=34
+:aicanshoot=0,ducking=0,idle=1:animationnormal,animate=33
+;----Анимация движения сидя (не стреляет)----
+:aicanshoot=0,ducking=1,strafingleft=1:animationnormal,animate=34
+:aicanshoot=0,ducking=1,strafingright=1:animationnormal,animate=34
+:aicanshoot=0,ducking=1,movingforwards=1:animationnormal,animate=34
+:aicanshoot=0,ducking=1,movingbackwards=1:animationreverse,animate=34
+:aicanshoot=0,ducking=1,idle=1:animationnormal,animate=33             
+             
+;________________________________________________________________3_________________________________________________________________
+;\\\\Дополнительные условия\\\\
+;===Тяжело ранен, бежит в медпункт===
+;:state=1,healthless=81,aiatpoint=12 0:aigotopoint=12,aicleartarget
+;:state=1,healthless=81,aiatpoint=12 1:state=4
+;:state=3,healthless=81,aiatpoint=12 0:aigotopoint=12,aicleartarget
+;:state=3,healthless=81,aiatpoint=12 1:state=4
+;:state=6,healthless=81,aiatpoint=12 0:aigotopoint=12,aicleartarget,setvar=enemydened0 0,setvar=onbase 0
+;:state=6,healthless=81,aiatpoint=12 1:state=4
+;--Движется в медпункт, если видет врага, стреляет--
+:state=4:addhealth=2,setaiactive=0
+:state=4,healthgreater=219:setaiactive=1,state=1
+;===Нет боеприпасов===
+:state=21,varequal=ammo 0:state=5,addaiteam=12
+:state=22,varequal=ammo 0:state=5,addaiteam=12
+:state=23,varequal=ammo 0:state=5,addaiteam=12
+:state=24,varequal=ammo 0:state=5,addaiteam=12
+:state=25,varequal=ammo 0:state=5,addaiteam=12
+:state=26,varequal=ammo 0:state=5,addaiteam=12,setvar=onbase 1,setvar=enemydefend0 0
+:state=5,aiatpoint=13 0:aigotopoint=13
+:state=5,aiatpoint=13 1:aistop,setvar=ammo 4,setaiactive=0,aicleartarget,state=13,addaiteam=2,setframe=6
+;===Враг захватывает базу===
+:state=1,aicanshoot=0,varless=enemybase 2499,varequal=enemydefend0 0,random=30:setvar=enemydefend0 1,state=6,aicleartaget
+:state=3,aicanshoot=0,varless=enemybase 2499,varequal=enemydefend0 0,random=30:setvar=enemydefend0 1,state=6,aicleartaget
+:state=6,aihastarget=1,varequal=onbase 0,aitargetdistfurther=300:aimovetotarget
+:state=6,aihastarget=1,varequal=onbase 0,aitargetdistwithin=300,aicanshoot=0:aimovetotarget
+:state=6,aiaction=0,aiatpoint=1 0,aicanshoot=0,aihastarget=0,varequal=onbase 0:aigotopoint=1
+:state=6,aiaction=0,aiatpoint=1 1,aicanshoot=0,aihastarget=0,varequal=onbase 0:aistop,setvar=onbase 1
+:satte=6,varequal=onbase 1:aistop
+:state=6,varequal=onbase 1,varless=enemybase 2499:addvar=enemybase 2
+:state=6,varequal=onbase 1,vargreater=enemybase 2499:setvar=onbase 0,setvar=enemydefend0 0,state=1
+
+;________________________________________________________________4_________________________________________________________________
+;===Занимает оборонительные позиции, если не видит врагов===
+;-------------Произвольный выбор позиции---------------
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 0,varequal=enemydefend1 0,vargreater=enemybase 2499,random=50:setvar=defend 1,setvar=enemydefend1 1
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 0,varequal=enemydefend2 0,vargreater=enemybase 2499,random=50:setvar=defend 2,setvar=enemydefend2 1
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 0,varequal=enemydefend3 0,vargreater=enemybase 2499,random=50:setvar=defend 3,setvar=enemydefend3 1
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 0,varequal=enemydefend4 0,vargreater=enemybase 2499,random=50:setvar=defend 4,setvar=enemydefend4 1
+;-------------Оборонительная позиция № 1---------------
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 1,aiatpoint=14 0:aigotopoint=14
+:state=1,varequal=defend 1,aiatpoint=14 1:aistop,state=2
+;-------------Оборонительная позиция № 2---------------
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 2,aiatpoint=15 0:aigotopoint=15
+:state=1,varequal=defend 2,aiatpoint=15 1:aistop,state=2
+;-------------Оборонительная позиция № 3---------------
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 3,aiatpoint=16 0:aigotopoint=16
+:state=1,varequal=defend 3,aiatpoint=16 1:aistop,state=2
+;-------------Оборонительная позиция № 4---------------
+:state=1,aicanshoot=0,aihastarget=0,varequal=defend 4,aiatpoint=17 0:aigotopoint=17
+:state=1,varequal=defend 4,aiatpoint=17 1:aistop,state=2
+;-------------Время защиты позиции---------------------
+:state=2:etimerstart,state=3
+:state=3:aistop
+:state=3,aiatpoint=4 1,etimergreater=20000,varequal=enemydefend1 1:state=1,setvar=defend 0,setvar=enemydefend1 0
+:state=3,aiatpoint=5 1,etimergreater=20000,varequal=enemydefend2 1:state=1,setvar=defend 0,setvar=enemydefend2 0
+:state=3,aiatpoint=6 1,etimergreater=20000,varequal=enemydefend3 1:state=1,setvar=defend 0,setvar=enemydefend3 0
+
+;________________________________________________________________5_________________________________________________________________
+;====Определение цели====
+:state=1,aihastarget=1,aicanshoot=0:aicleartarget,aisettarget,airotatetotarget
+:state=3,aihastarget=1,aicanshoot=0:aicleartarget,aisettarget,airotatetotarget
+:state=6,aihastarget=1,aicanshoot=0:aicleartarget,aisettarget
+;------Встретил врага на пути к оборонительной позиции------
+:state=1,aihastarget=0:aisettarget
+:state=1,idle=1:airotatetotarget
+:state=1,idle=1,ducking=0,varnotequal=ammo 0,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistwithin=300:setaiactive=0,state=11,setframe=27,useweapon,rundecal=6,aiusefullaim=1
+:state=1,idle=1,ducking=1,varnotequal=ammo 0,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistwithin=300:setaiactive=0,state=12,setframe=38,useweapon,rundecal=6,aiusefullaim=1
+:state=1,idle=1,ducking=0,varnotequal=ammo 0,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistfurther=300:setaiactive=0,state=11,setframe=27,useweapon,rundecal=6,aiusefullaim=0
+:state=1,idle=1,ducking=1,varnotequal=ammo 0,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistfurther=300:setaiactive=0,state=12,setframe=38,useweapon,rundecal=6,aiusefullaim=0
+:state=1,ifweapon=1,aicanshoot=0,aitargetdistwithin=500:aimovetotarget
+:state=1,ifweapon=1,aicanshoot=0,aitargetdistfurther=500:aicleartarget
+:state=1,ifweapon=1,aicanshoot=1,aitargetdistfurther=500:aicleartarget
+:state=1,ifweapon=1,aicanshoot=1,aitargetdistwithin=300:aistop
+;------Видит врага с оборонительной позиции------
+:state=3,aihastarget=0:aisettarget
+:state=3,idle=1:airotatetotarget
+:state=3,idle=1,ducking=0,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistwithin=300:setaiactive=0,state=111,setframe=27,useweapon,rundecal=6,aiusefullaim=1
+:state=3,idle=1,ducking=1,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistwithin=300:setaiactive=0,state=121,setframe=38,useweapon,rundecal=6,aiusefullaim=1
+:state=3,idle=1,ducking=0,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistfurther=300:setaiactive=0,state=111,setframe=27,useweapon,rundecal=6,aiusefullaim=0
+:state=3,idle=1,ducking=1,aihastarget=1,ifweapon=1,aicanshoot=1,aitargetdistfurther=300:setaiactive=0,state=121,setframe=38,useweapon,rundecal=6,aiusefullaim=0
+:state=3,ifweapon=1,aicanshoot=1:aistop
+;------Атакует врага на базе союзников----
+:state=6,aihastarget=0:aisettarget
+:state=6:airotatetotarget
+:state=6,aihastarget=1,ifweapon=1,aicanshoot=1:setaiactive=0,state=112,setframe=27,useweapon,rundecal=6,aiusefullaim=1
+:state=6,aihastarget=1,ifweapon=1,aicanshoot=1:setaiactive=0,state=122,setframe=38,useweapon,rundecal=6,aiusefullaim=1
+:state=6,aicanshoot=1:aistop
+;=====Атака=====
+;----Стрельба стоя----
+:state=11:incframe=27
+:state=11,frameatend=27:state=1,setaiactive=1
+:state=111:incframe=27
+:state=111,frameatend=27:state=3,setaiactive=1
+:state=112:incframe=27
+:state=112,frameatend=27:state=6,setaiactive=1
+;----Стрельба сидя----
+:state=121:incframe=38
+:state=121,frameatend=38:state=3,setaiactive=1
+:state=122:incframe=38
+:state=122,frameatend=38:state=6,setaiactive=1
+;===Перезарядка===
+;----Стоя----
+:state=1,ifweapon=0:subvar=ammo 1,state=21
+:state=3,ifweapon=0:subvar=ammo 1,state=22
+:state=6,ifweapon=0:subvar=ammo 1,state=23
+:state=21,varnotequal=ammo 0:setframe=6,setaiactive=0,state=13,aicleartarget
+:state=22,varnotequal=ammo 0:setframe=6,setaiactive=0,state=131,aicleartarget
+:state=23,varnotequal=ammo 0:setframe=6,setaiactive=0,state=132,aicleartarget
+:state=13:incframe=6
+:state=13,frameatend=6:reloadweapon,state=1,setaiactive=1
+:state=131:incframe=6
+:state=131,frameatend=6:reloadweapon,state=3,setaiactive=1
+:state=132:incframe=6
+:state=132,frameatend=6:reloadweapon,state=6,setaiactive=1
+;----Сидя----
+:state=1,ifweapon=0:subvar=ammo 1,state=24
+:state=3,ifweapon=0:subvar=ammo 1,state=25
+:state=6,ifweapon=0:subvar=ammo 1,state=26
+:state=24,varnotequal=ammo 0:setframe=36,setaiactive=0,state=14,aicleartarget
+:state=25,varnotequal=ammo 0:setframe=36,setaiactive=0,state=141,aicleartarget
+:state=26,varnotequal=ammo 0:setframe=36,setaiactive=0,state=142,aicleartarget
+:state=14:incframe=36
+:state=14,frameatend=36:reloadweapon,state=1,setaiactive=1
+:state=141:incframe=36
+:state=141,frameatend=36:reloadweapon,state=3,setaiactive=1
+:state=142:incframe=36
+:state=142,frameatend=36:reloadweapon,state=6,setaiactive=1
+
+;Конец Скрипта

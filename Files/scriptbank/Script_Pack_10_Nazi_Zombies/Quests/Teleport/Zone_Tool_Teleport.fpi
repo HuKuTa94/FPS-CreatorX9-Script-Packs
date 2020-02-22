@@ -1,0 +1,42 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 29.10.2013
+;Требования: необходим патч 1.18 и выше
+;Версия скрипта: 1.0
+;Описание: собираемый предмет
+
+;\\\\Начало скрипта\\\\
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=470,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\NoParts.dds,hudname=noparts,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=530,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportBuild.dds,hudname=tbuild,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=70,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportBuilding1.dds,hudname=tbuilding1,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=70,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportBuilding2.dds,hudname=tbuilding2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=70,hudsizex=440,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportBuilding3.dds,hudname=tbuilding3,hudhide=1,hudmake=display
+:state=0:floorlogic,activate=0,state=1
+
+;\\\\Процесс сбора частей\\\\
+:state=1,activated=1:activate=0,state=2
+:state=2,activated=1:activate=0,state=3
+:state=3,activated=1:state=4
+
+;\\\\Взаимодействие с игроком\\\\
+;---Игрок близко, не хватает собранных частей---
+:plrwithinzone=1,activated=0:hudshow=noparts
+:plrwithinzone=0,activated=0:hudunshow=noparts
+;---Игрок близко, хватает собранных частей---
+:state=4,plrwithinzone=1:hudshow=tbuild
+:state=4,plrwithinzone=0:hudunshow=tbuild
+;---Игрок собирает предмет---
+:state=4,plrwithinzone=1,keypressed=33 1:state=5,hideplrweapon,hudunshow=tbuild,etimerstart,loopsound=scriptbank\Script Pack 9 - Quest Pack\Audio\Building.ogg
+:state=5:plrfreeze=10000
+:state=5,keypressed=33 0:state=4,showplrweapon,plrfreeze=0,hudunshow=tbuilding1,hudunshow=tbuilding2,hudunshow=tbuilding3,stopsound=scriptbank\Script Pack 9 - Quest Pack\Audio\Building.ogg
+:state=5,keypressed=33 1,etimergreater=2000:state=6,plrfreeze=0,hudunshow=tbuilding1,hudunshow=tbuilding2,hudunshow=tbuilding3,stopsound=scriptbank\Script Pack 9 - Quest Pack\Audio\Building.ogg
+;---Картинка процесса сборки---
+:state=5,etimergreater=0:hudshow=tbuilding1,hudunshow=tbuilding2,hudunshow=tbuilding3
+:state=5,etimergreater=665:hudshow=tbuilding2,hudunshow=tbuilding1,hudunshow=tbuilding3
+:state=5,etimergreater=1330:hudshow=tbuilding3,hudunshow=tbuilding2,hudunshow=tbuilding1
+
+;---Сборка предмета завершена---
+:state=6:settargetname=Teleport1,activatetarget=1,showplrweapon,state=7,etimerstart
+
+;\\\\Конец скрипта\\\\
+:state=7,etimergreater=100:destroy

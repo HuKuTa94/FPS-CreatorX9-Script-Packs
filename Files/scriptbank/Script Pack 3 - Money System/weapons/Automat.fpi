@@ -1,0 +1,23 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Automat (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $1.200,hudname=nomoneyautomat,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$1.200 Buy Automat?,hudname=automat,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к оружию===
+:state=10,plrdistwithin=50:hudshow=automat,hudfadeout=automat
+
+;===Игрок купил оружие===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 1200:subvar=moneysys 1200,playertake,hudfadeout=automat,plrsound=audiobank\items\pickupweapon.wav,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 1200:state=15,etimerstart,hudunshow=automat
+
+:state=15:hudshow=nomoneyautomat
+:state=15,etimergreater=1000:hudunshow=automat,hudunshow=nomoneyautomat,state=10
+
+;End of Script

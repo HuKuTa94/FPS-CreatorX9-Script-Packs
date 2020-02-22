@@ -1,0 +1,6 @@
+;Скрипт написал: Кошелев Никита.
+
+:state=0,activated=1:loopsound=$0,state=1
+:state=1,activated=2:stopsound=$0,state=2,destroy
+
+;End of Script

@@ -1,0 +1,14 @@
+desc          = Door 1 Shloose (By Никита) for Station 13
+
+:state=0,activated=1:state=1,setframe=0,loopsound=$0,settargetname=act5_light,activatetarget=1
+:state=1:incframe=0
+:state=1,frameatend=0:state=2,coloff,stopsound,sound=$1,,settargetname=act5_light,activatetarget=2
+:state=2,activated=2:state=3,loopsound=$0,colon,settargetname=act5_light,activatetarget=3
+:state=3:decframe=0
+:state=3,frameatstart=0:state=4,setframe=0,stopsound,sound=$1
+
+:state=4:activateifused=1,state=5
+:state=5:settargetname=decal_zone,activatetarget=1,state=6
+
+
+;End of Script

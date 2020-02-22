@@ -1,0 +1,14 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт "триггер-бокса" срабатывает и переходит в рабочее состояние, если кто-угодно близко, и отключается обратно, если кто-угодно далеко
+
+;Включить "Always Active"
+:state=0:alwaysactive=1,state=1
+
+;Игрок далеко
+:state=1,anywithin=50:activateifused=1,state=2
+
+;Игрок близко
+:state=2,anyfurther=50:activateifused=0,state=1

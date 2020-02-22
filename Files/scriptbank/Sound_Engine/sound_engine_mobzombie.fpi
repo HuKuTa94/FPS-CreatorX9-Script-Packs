@@ -1,0 +1,85 @@
+;Прототип зомби
+:state=0:animate=96
+:state=0,aihastarget=1:state=3
+;Бежит на напарника 
+:state=3,aihastarget=0:aisettarget
+;-(прямо)
+:state=3:airotatetotarget,aimovetotarget,animate=92
+;:state=3,random=10:etimerstart,state=4
+;:state=3,random=10:etimerstart,state=5
+;-Жертва рядом
+:state=3,aitargetdistwithin=50:aisetspeed=150,setaiactive=0,state=6
+
+;Атака
+;-Жертва отдалилась
+:stategreater=7,stateless=15,aitargetdistfurther=70:state=16
+
+;-Выбор атаки
+:state=6,random=4:setframe=98,activate=11,state=7
+:state=6,random=4:setframe=99,activate=12,state=10
+:state=6,random=4:setframe=101,activate=13,state=12
+:state=6,random=4:setframe=100,activate=14,state=14
+
+;-Атака 1 (левой правой)
+:state=7:incframe=98
+:state=7,framebeyond=98 40,aitargetdistwithin=70:aiusemelee=1,aisetmeleedamage=50,state=8
+:state=7,frameatend=98:state=16
+:state=8:incframe=98
+:state=8,framebeyond=98 60,aitargetdistwithin=70:aiusemelee=1,aisetmeleedamage=50,state=9
+:state=8,frameatend=98:state=16
+:state=9:incframe=98
+:state=9,frameatend=98:state=16
+
+;-Атака 2 (левой)
+:state=10,framebeyond=99 50,aitargetdistwithin=70:aiusemelee=1,aisetmeleedamage=50,state=11
+:state=10:incframe=99
+:state=10,frameatend=99:state=16
+:state=11:incframe=99
+:state=11,frameatend=99:state=16
+
+;-Атака 3 (двумя руками слева)
+:state=12:incframe=101
+:state=12,framebeyond=101 60,aitargetdistwithin=70:aiusemelee=1,aisetmeleedamage=50,state=13
+:state=12,frameatend=101:state=16
+:state=13:incframe=101
+:state=13,frameatend=101:state=16
+
+;-Атака 4 (двумя руками справа)
+:state=14:incframe=100
+:state=14,framebeyond=100 60,aitargetdistwithin=70:aiusemelee=1,aisetmeleedamage=50,state=15
+:state=14,frameatend=100:state=16
+:state=15:incframe=100
+:state=15,frameatend=100:state=16
+
+;-Конец атаки
+:state=16:setaiactive=1,aicleartarget,aisetspeed=200,state=3
+
+;-----------------------------------SOUND ENGINE------------------------------------
+;-Sound Engine (activated=11 - Атака 1)
+:activated=11,plrdistwithin=200:activate=0,sound=audiobank\Sound_Engine\zombie_attack1_room_cls_1.ogg
+:activated=11,plrdistwithin=300:activate=0,sound=audiobank\Sound_Engine\zombie_attack1_room_cls_2.ogg
+:activated=11,plrdistwithin=350:activate=0,sound=audiobank\Sound_Engine\zombie_attack1_room_mid_1.ogg
+:activated=11,plrdistwithin=450:activate=0,sound=audiobank\Sound_Engine\zombie_attack1_room_mid_2.ogg
+:activated=11,plrdistwithin=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack1_room_far_1.ogg
+:activated=11,plrdistfurther=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack1_room_far_2.ogg
+;-Sound Engine (activated=12 - Атака 2)
+:activated=12,plrdistwithin=200:activate=0,sound=audiobank\Sound_Engine\zombie_attack2_room_cls_1.ogg
+:activated=12,plrdistwithin=300:activate=0,sound=audiobank\Sound_Engine\zombie_attack2_room_cls_2.ogg
+:activated=12,plrdistwithin=350:activate=0,sound=audiobank\Sound_Engine\zombie_attack2_room_mid_1.ogg
+:activated=12,plrdistwithin=450:activate=0,sound=audiobank\Sound_Engine\zombie_attack2_room_mid_2.ogg
+:activated=12,plrdistwithin=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack2_room_far_1.ogg
+:activated=12,plrdistfurther=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack2_room_far_2.ogg
+;-Sound Engine (activated=13 - Атака 3)
+:activated=13,plrdistwithin=200:activate=0,sound=audiobank\Sound_Engine\zombie_attack3_room_cls_1.ogg
+:activated=13,plrdistwithin=300:activate=0,sound=audiobank\Sound_Engine\zombie_attack3_room_cls_2.ogg
+:activated=13,plrdistwithin=350:activate=0,sound=audiobank\Sound_Engine\zombie_attack3_room_mid_1.ogg
+:activated=13,plrdistwithin=450:activate=0,sound=audiobank\Sound_Engine\zombie_attack3_room_mid_2.ogg
+:activated=13,plrdistwithin=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack3_room_far_1.ogg
+:activated=13,plrdistfurther=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack3_room_far_2.ogg
+;-Sound Engine (activated=14 - Атака 4)
+:activated=14,plrdistwithin=200:activate=0,sound=audiobank\Sound_Engine\zombie_attack4_room_cls_1.ogg
+:activated=14,plrdistwithin=300:activate=0,sound=audiobank\Sound_Engine\zombie_attack4_room_cls_2.ogg
+:activated=14,plrdistwithin=350:activate=0,sound=audiobank\Sound_Engine\zombie_attack4_room_mid_1.ogg
+:activated=14,plrdistwithin=450:activate=0,sound=audiobank\Sound_Engine\zombie_attack4_room_mid_2.ogg
+:activated=14,plrdistwithin=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack4_room_far_1.ogg
+:activated=14,plrdistfurther=550:activate=0,sound=audiobank\Sound_Engine\zombie_attack4_room_far_2.ogg

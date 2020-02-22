@@ -1,0 +1,16 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Crisis Zone (By Никита) Зона кризиса =)
+
+:state=0:state=1
+
+;===Когда игрок в зоне===
+:state=1,plrwithinzone=1:etimerstart,state=2
+
+;===У игрока отнимаются деньги===
+:state=2,varless=moneysys 1:state=1
+:state=2,etimergreater=1000,plrwithinzone=1:state=1,subvar=moneysys 10
+
+;End of Script

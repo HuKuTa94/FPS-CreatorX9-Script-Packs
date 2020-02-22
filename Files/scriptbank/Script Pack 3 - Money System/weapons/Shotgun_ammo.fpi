@@ -1,0 +1,23 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Shotgun Ammo (By Никита)
+
+;===Установка худа===
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=You don't have $800,hudname=nomoneyshotgunammo,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=16,hudsizey=16,hudtext=$800 Buy Shotgun ammo?,hudname=shotgunammo,hudhide=1,hudmake=display,state=10
+
+;===Игрок близко к оружию===
+:state=10,plrdistwithin=50:hudshow=shotgunammo,hudfadeout=shotgunammo
+
+;===Игрок купил оружие===
+:state=10,plrdistwithin=50,plrusingaction=1,vargreater=moneysys 800:subvar=moneysys 800,playertake,hudfadeout=shotgunammo,plrsound=audiobank\items\pickup.wav,state=20
+
+;===У игрока не хватает денег===
+:state=10,plrdistwithin=50,plrusingaction=1,varless=moneysys 800:state=15,etimerstart,hudunshow=shotgunammo
+
+:state=15:hudshow=nomoneyshotgunammo
+:state=15,etimergreater=1000:hudunshow=shotgunammo,hudunshow=nomoneyshotgunammo,state=10
+
+;End of Script

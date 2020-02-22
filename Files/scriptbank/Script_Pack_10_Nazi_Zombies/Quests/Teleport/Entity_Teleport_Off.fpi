@@ -1,0 +1,39 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 14.11.2013
+;Требования: необходим патч 1.18 и выше
+;Версия скрипта: 1.3
+;Описание: скрипт включаемого телепорта
+
+;\\\Начало скрипта\\\
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=500,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportBroken.dds,hudname=teleportbroken,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=500,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportLoading.dds,hudname=teleportloading,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=500,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TeleportUse.dds,hudname=teleportuse,hudhide=1,hudmake=display
+:state=0:alttexture=1,floorlogic,coloff,state=1
+
+;________________________________ТЕЛЕПОРТ ТРЕБУЕТ РЕМОНТ__________________________________________
+;\\\Телепорт сломан\\\
+:state=1,plrdistwithin=50:hudshow=teleportbroken
+:state=1,plrdistfurther=50:hudunshow=teleportbroken
+;--Включение телепорта--
+:state=1,activated=1:state=2,alttexture=0,settargetname=Teleport1Light,activatetarget=1,activate=0
+
+;___________________________________ТЕЛЕПОРТ РАБОТАЕТ_____________________________________________
+;\\\Телепорт работает\\\
+;--Игрок близко--
+:state=2,plrhigher=10,plrdistwithin=50:hudshow=teleportuse
+:state=2,plrhigher=10,plrdistfurther=50:hudunshow=teleportuse
+;--Игрок использует телепорт--
+:state=2,plrhigher=10,plrdistwithin=50,keypressed=33 1:state=3,alttexture=1,settargetname=Teleport1Light,activatetarget=0,settargetname=Teleport2,activatetarget=1,settargetname=Teleport2Decal,activatetarget=1,plrmoveifused,hudunshow=teleportuse,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\teleport1.ogg
+:state=3,plrdistfurther=50:state=4
+;--Игрок телепортировался с другого телепорта (Из Телепорта 2 в Телепорт 1)
+:state=4,activated=1:state=51,activate=0,etimerstart
+
+;\\\Телепорт заряжается\\\
+:state=51,plrdistwithin=50:state=5
+:state=5,plrdistfurther=50:state=6
+;--Игрок близко--
+:state=6,plrhigher=10,plrdistwithin=50:hudshow=teleportloading
+:state=6,plrhigher=10,plrdistfurther=50:hudunshow=teleportloading
+;--Зарядка завершилась--
+:state=6,etimergreater=5000:hudunshow=teleportloading,settargetname=Teleport1Light,activatetarget=1,alttexture=0,state=2

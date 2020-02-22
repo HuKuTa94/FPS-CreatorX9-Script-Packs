@@ -1,0 +1,37 @@
+;Скрипт написал: Кошелев Никита (fpsc.forum24.ru).
+;Описание: скрипт таймера (циферблат). По умолчанию таймер настроен на 4 минуты.
+; :state=1:setvar=min  - задает количество минут.
+; :state=1:setvar=sec  - задает количество секунд (значение не должно быть больше 59).
+
+;===Добавление глобальных переменных===
+:state=0:dimvar=sec,setvar=sec 0
+:state=0:dimvar=min,setvar=min 0
+
+;===Активация таймера (игрок в зоне или зону активировали)===
+;:state=0,plrwithinzone=1:state=1
+;:state=0,activated=1:state=1
+:state=0:state=1
+
+;===Худы (циферблат)===
+:state=1:hudreset,hudx=95,hudy=91.5,hudtextsizex=40,hudtextsizey=40,hudtext=TIME,hudname=time,hudmake=display
+:state=1:hudreset,hudx=94.5,hudy=94,hudtextsizex=40,hudtextsizey=40,hudtext=:,hudname=point,hudmake=display
+:state=1:hudreset,hudx=96,hudy=95,hudsizex=16,hudsizey=16,hudimage=gamecore\huds\numeric1.dds,hudname=timer_sec,hudtype=6,huduservar=sec,hudmake=numeric
+:state=1:hudreset,hudx=92.5,hudy=95,hudsizex=16,hudsizey=16,hudimage=gamecore\huds\numeric1.dds,hudname=timer_min,hudtype=6,huduservar=min,hudmake=numeric
+
+;===Таймер===
+:state=1:setvar=min 0    ;кол-во минут
+:state=1:setvar=sec 5   ;кол-во секунд (рекомендуется ставить всегда 59)
+:state=1:state=2
+
+:state=2:etimerstart,state=3
+:state=3,etimergreater=1000,varnotequal=sec 0:subvar=sec 1,state=2
+:state=3,etimergreater=1000,varequal=sec 0:setvar=sec 59,subvar=min 1,state=2
+:state=3,varequal=min 0,varequal=sec 0:state=4
+
+;===Активация цели IfUsed===
+:state=4:activateifused=1,state=5,etimerstart,plrsound=$0
+
+;===Удаление циферблата с экрана===
+:state=5,etimergreater=1000:destroy,hudunshow=time,hudunshow=point,hudunshow=timer_sec,hudunshow=timer_min,state=6
+
+;End of Script

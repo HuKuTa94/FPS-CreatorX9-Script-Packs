@@ -1,0 +1,133 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 17.06.2012
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 2.0
+;Описание: скрипт для зомби "Dante" из Model Pack'a 22. Обычный AI
+
+;||||||||||| Large Room |||||||||||||||
+;===Рычание (большое помещение)===
+:state=1111,varequal=verb_large 1,plrdistfurther=1500:state=9,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_15.ogg
+:state=1111,varequal=verb_large 1,plrdistfurther=1000:state=9,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_10.ogg
+:state=1111,varequal=verb_large 1,plrdistfurther=300:state=9,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_7.ogg
+:state=1111,varequal=verb_large 1,plrdistwithin=300:state=9,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_3.ogg
+;===Ходьба (большое помещение)===
+:state=1112,varequal=verb_large 1,plrdistfurther=1000:state=111,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_15.ogg
+:state=1112,varequal=verb_large 1,plrdistfurther=700:state=111,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_10.ogg
+:state=1112,varequal=verb_large 1,plrdistfurther=500:state=111,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_7.ogg
+:state=1112,varequal=verb_large 1,plrdistwithin=500:state=111,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_3.ogg
+:state=11121,varequal=verb_large 1,plrdistfurther=1000:state=1110,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_15.ogg
+:state=11121,varequal=verb_large 1,plrdistfurther=700:state=1110,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_10.ogg
+:state=11121,varequal=verb_large 1,plrdistfurther=500:state=1110,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_7.ogg
+:state=11121,varequal=verb_large 1,plrdistwithin=500:state=1110,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_3.ogg
+;===Бег (большое помещение)===
+:state=1113,varequal=verb_large 1,plrdistfurther=1000:state=666,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_15.ogg
+:state=1113,varequal=verb_large 1,plrdistfurther=700:state=666,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_10.ogg
+:state=1113,varequal=verb_large 1,plrdistfurther=500:state=666,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_7.ogg
+:state=1113,varequal=verb_large 1,plrdistwithin=500:state=666,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_3.ogg
+:state=11131,varequal=verb_large 1,plrdistfurther=1000:state=6661,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_15.ogg
+:state=11131,varequal=verb_large 1,plrdistfurther=700:state=6661,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_10.ogg
+:state=11131,varequal=verb_large 1,plrdistfurther=500:state=6661,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_7.ogg
+:state=11131,varequal=verb_large 1,plrdistwithin=500:state=6661,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_3.ogg
+;===Атака 1 - Punch (большое помещение)===
+:state=1114,varequal=verb_large 1,plrdistfurther=1000:state=7,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_15.ogg
+:state=1114,varequal=verb_large 1,plrdistfurther=700:state=7,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_10.ogg
+:state=1114,varequal=verb_large 1,plrdistfurther=500:state=7,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_7.ogg
+:state=1114,varequal=verb_large 1,plrdistwithin=500:state=7,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_3.ogg
+;===Атака 2 - Smash (большое помещение)===
+:state=1115,varequal=verb_large 1,plrdistfurther=1000:state=2,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_15.ogg
+:state=1115,varequal=verb_large 1,plrdistfurther=700:state=2,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_10.ogg
+:state=1115,varequal=verb_large 1,plrdistfurther=500:state=2,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_7.ogg
+:state=1115,varequal=verb_large 1,plrdistwithin=500:state=2,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_3.ogg
+
+;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+;===Начало скрипта===
+;=Следует по вейпоинту=
+:waypointstate=0:animate=2,waypointstart
+:waypointstate=3:animate=2,waypointnext
+:waypointstate=4:animate=2,waypointrandom
+:waypointstate=5:animate=2,waypointreverse
+
+;=Стоит=
+:state=0:setframe=1,state=55
+:state=55:incframe=1
+:state=55,frameatend=1:state=0
+:state=55,plrdistwithin=300,plrcanbeseen:waypointstop,state=1111,rotatetoplr,setframe=22
+;:state=55,shotdamage=1:waypointstop,state=1111,rotatetoplr,setframe=22
+
+;=Засек игрока=
+:state=0,plrdistwithin=300,plrcanbeseen:waypointstop,state=1111,rotatetoplr,setframe=22
+:state=0,shotdamage=1:waypointstop,state=1111,rotatetoplr,setframe=22
+
+;=Вступительная анимация=
+:state=9:waypointstop,incframe=22
+:state=9,frameatend=22:state=6
+
+
+;=Рукопашная атака 1 - Punch=
+:state=1,plrdistfurther=110:waypointstop,rotatetoplr,setframe=2,state=11
+:state=1,plrdistwithin=110:waypointstop,rotatetoplr,setframe=23,state=1114
+:state=10,plrdistfurther=110:waypointstop,rotatetoplr,setframe=2,state=110
+:state=10,plrdistwithin=110:waypointstop,rotatetoplr,setframe=23,state=1114
+
+
+;------Цикл ходьбы 1-------------
+:state=11,plrdistfurther=110:rotatetoplr,incframe=2,movefore=20
+:state=11,plrdistfurther=110,framebeyond=2 5:state=1112
+:state=11,plrdistwithin=110:waypointstop,rotatetoplr,setframe=23,state=1114
+:state=111:incframe=2,movefore=20,rotatetoplr
+:state=111,frameatend=2:state=10
+:state=11,frameatend=2:state=10
+;------Конец цикла 1-------------
+
+;------Цикл ходьбы 2-------------
+:state=110,plrdistfurther=110:rotatetoplr,incframe=2,movefore=20
+:state=110,plrdistfurther=110,framebeyond=2 5:state=11121
+:state=110,plrdistwithin=110:waypointstop,rotatetoplr,setframe=23,state=1114
+:state=1110:incframe=2,movefore=20,rotatetoplr
+:state=1110,frameatend=2:state=1
+:state=110,frameatend=2:state=1
+;------Конец цикла 2-------------
+
+:state=7,framebeyond=23 50,plrdistwithin=140:plraddhealth=-10,sound=audiobank\misc\melee.wav,state=8
+:state=7,plrdistfurther=110,framewithin=23 50:runfore=10
+:state=7:incframe=23,rotatetoplr
+:state=7,frameatend=23:state=6
+:state=8:incframe=23
+:state=8,frameatend=23:state=6
+
+;///////////////////////////////////////////////////////////////////////////////////////////////////
+
+;=Рукопашная атака 2 - Smash=
+:state=6,plrdistfurther=110:waypointstop,rotatetoplr,setframe=5,state=66
+:state=6,plrdistwithin=110:waypointstop,rotatetoplr,state=1115
+:state=60,plrdistfurther=110:waypointstop,rotatetoplr,setframe=5,state=660
+:state=60,plrdistwithin=110:waypointstop,rotatetoplr,setframe=24,state=1115
+
+;-------Бег цикл 1-------------
+:state=66,plrdistfurther=110:rotatetoplr,incframe=5,runfore=90
+:state=66,plrdistfurther=110,framebeyond=5 5:state=1113
+:state=66,plrdistwithin=110:waypointstop,rotatetoplr,setframe=24,state=1115
+:state=666:incframe=5,runfore=90,rotatetoplr
+:state=666,frameatend=5:state=60
+:state=66,frameatend=5:state=60
+;-----Конец цикла 1-----------
+
+;-------Бег цикл 2-------------
+:state=660,plrdistfurther=110:rotatetoplr,incframe=5,runfore=90
+:state=660,plrdistfurther=110,framebeyond=5 5:state=11131
+:state=660,plrdistwithin=110:waypointstop,rotatetoplr,setframe=24,state=1115
+:state=6661:incframe=5,runfore=90,rotatetoplr
+:state=6661,frameatend=5:state=6
+:state=660,frameatend=5:state=6
+;-----Конец цикла 2-----------
+
+:state=2,framebeyond=24 60,plrdistwithin=110:plraddhealth=-10,sound=audiobank\misc\melee.wav,state=3
+:state=2,plrdistfurther=110,framewithin=24 60:runfore=10
+:state=2:incframe=24,rotatetoplr
+:state=2,frameatend=24:state=1
+:state=3:incframe=24,plrfreeze=1
+:state=3,frameatend=24:state=1,plrfreeze=0
+
+;===Конец скрипта===

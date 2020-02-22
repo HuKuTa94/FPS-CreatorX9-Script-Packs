@@ -1,0 +1,42 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 30.10.2013
+;Требования: необходим патч 1.18 и выше
+;Версия скрипта: 1.0
+;Описание: рубильник, который включает энергию для предметов.
+
+;\\\\Начало скрипта\\\\
+;---Квест включить электричество---
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=480,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\PowerOn.dds,hudname=poweron,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=90,hudsizex=520,hudsizey=60,hudimagefine=scriptbank\Script Pack 9 - Quest Pack\Huds\TurnOn.dds,hudname=turnon,hudhide=1,hudmake=display
+
+:state=0:floorlogic,state=1
+
+;\\\\Взаимодействие с игроком\\\\
+;---Игрок близко---
+:state=1,plrdistwithin=60,plrfacing=40:hudshow=turnon
+:state=1,plrdistfurther=60:hudunshow=turnon
+:state=1,plrnotfacing=40:hudunshow=turnon
+;---Игрок включает электричество---
+:state=1,plrdistwithin=60,plrfacing=40,keypressed=33 1:hudunshow=turnon,state=2
+
+;\\\\Включение электричества\\\\
+;---Анимация и звук---
+:state=2:setframe=0,state=3
+:state=3:incframe=0
+:state=3,frameatend=0:sound=audiobank\Script_Pack_10_Nazi_Zombies\energy_on.ogg,state=4
+;---Включение предметов---
+:state=4:activateifused=1,state=5
+;---Игрок близко---
+:state=5,plrdistwithin=60,plrfacing=40:hudshow=poweron
+:state=5,plrdistfurther=60:hudunshow=poweron
+:state=5,plrnotfacing=40:hudunshow=poweron
+
+;\\\Выключение электричества\\\
+:state=5,activated=0:state=6
+;---Анимация и звук---
+:state=6:setframe=0,state=7
+:state=7:decframe=0
+:state=7,frameatstart=0:sound=audiobank\Script_Pack_10_Nazi_Zombies\energy_off.ogg,state=8
+;---Выключение предметов---
+:state=8:activateifused=0,state=1

@@ -1,0 +1,19 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 05.01.2011
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 1.0
+
+;===Выключение звука===
+:state=0:state=1,stopsound=audiobank\bond1\dogmanloop.wav
+:state=1:setframe=24,state=2,sound=audiobank\bond1\dogmandie.wav,coloff
+
+;===Анимация смерти===
+:state=2:incframe=24,aisetspeed=190
+:state=2,frameatend=24:state=4
+
+;===Включение регдолла===
+:state=4:suspend,rafdoll
+
+;Конец Скрипта
+

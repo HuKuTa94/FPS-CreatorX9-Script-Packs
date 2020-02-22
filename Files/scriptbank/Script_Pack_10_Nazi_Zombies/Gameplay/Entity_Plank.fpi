@@ -1,0 +1,20 @@
+;Описание 
+;Activated=10 - Игрок восстановил доску
+;Activated=11 - Зомби сломал доску
+;Activated=12 - Бездействие
+
+;Доска
+:state=0:floorlogic,coloff,nobulletcol=1,activate=12,state=1
+;-Сломана
+:state=1,activated=11:activate=12,hide,state=2
+;-Восстановлена
+:state=3,activated=10:activate=12,show,addvar=cash 10,state=4
+
+;-Звук
+;Сломана
+:state=2,random=3:sound=audiobank\Script_Pack_10_Nazi_Zombies\plank_broke1.ogg,state=3
+:state=2,random=3:sound=audiobank\Script_Pack_10_Nazi_Zombies\plank_broke2.ogg,state=3
+:state=2,random=3:sound=audiobank\Script_Pack_10_Nazi_Zombies\plank_broke3.ogg,state=3
+;Восстановлена
+:state=4,random=3:sound=audiobank\Script_Pack_10_Nazi_Zombies\plank_repair1.ogg,state=1
+:state=4,random=3:sound=audiobank\Script_Pack_10_Nazi_Zombies\plank_repair2.ogg,state=1

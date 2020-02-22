@@ -1,0 +1,14 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 15.07.2013
+;Требования: необходим патч 1.20 и выше 
+;Версия скрипта: 1.0
+;Описание: дождь (игрок на улице)
+
+;---Игрок в зоне---
+:state=0,plrwithinzone=1:setposteffect=rain,loopsound=audiobank\Script Pack 8 - DarkAI Pack 2\Horror\rain_outside.ogg,state=1
+
+;---Игрок покидает зону---
+:state=1,plrwithinzone=0:setposteffect=none,stopsound=1,stopsound=0,state=0
+
+;Конец скрипта 

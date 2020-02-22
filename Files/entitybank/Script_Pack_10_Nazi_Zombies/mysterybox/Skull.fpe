@@ -1,0 +1,33 @@
+;header
+
+desc          = MB1
+
+;ai
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\MysteryBox\MysteryBoxMultiple\Entity_MBox_Skull.fpi
+aidestroy     = 
+aishoot       = 
+soundset      = 
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+model         = entitybank\ww2\characters\skull.x
+offx          = 0
+offy          = 50
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+scale         = 80
+
+;visualinfo
+textured      = entitybank\ww2\characters\skull_D2.tga
+effect        = effectbank\illuminationmap\illuminationmap.fx
+
+;Identity Details
+strength      = 0
+isimmobile    = 1

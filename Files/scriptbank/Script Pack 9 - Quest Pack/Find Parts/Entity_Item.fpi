@@ -1,0 +1,17 @@
+;AI Script
+;Author: Koshelev Nikita aka HuKuTa94
+;Date: 06.10.2019
+;Requriments: 1.18 path and above
+;Script version: 2.0
+;Description: Buildable item
+
+
+;\\\\ Script start \\\\
+:state=0,keypresed=33 0:state=1
+
+;\\\\ Interaction with player \\\\
+;--- Player is close ---
+:state=1,plrdistwithin=50:hudshow=pickitem
+:state=1,plrdistfurther=50:hudunshow=pickitem
+;--- Player picks up the item ---
+:state=1,plrdistwithin=50,keypressed=33 1:playertake,coloff,hudunshow=pickitem,plrsound=scriptbank\Script Pack 9 - Quest Pack\Audio\PickupItem.ogg,state=2

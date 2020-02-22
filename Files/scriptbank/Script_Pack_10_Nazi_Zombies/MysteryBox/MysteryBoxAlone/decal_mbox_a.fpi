@@ -1,0 +1,11 @@
+;Описание:
+;Activated=202 - выключен
+;Activated=203 - желтая деколь
+
+;-Старт скрипта
+:state=0:activate=202,floorlogic,state=1
+
+;-Желтая деколь
+:state=1,activated=203:rundecal=3,state=2
+;-Желтая деколь выключена
+:state=2,activated=202:rundecal=-1,state=1

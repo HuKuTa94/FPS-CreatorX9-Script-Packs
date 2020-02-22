@@ -1,0 +1,132 @@
+;-Деньги за попадание
+:shotdamage=1:addvar=cash 10
+
+;Старт скрипта (сброс настроек)
+:state=0:aisetspeed=100,setanimatespeed=140,setaiactive=0,animate=92,etimerstart,state=1
+
+;ПОИСК ПУТИ ДО ЦЕЛИ
+;-1)Бежит криволинейно на игрока
+;Игрок далеко (игрок смотрит на бота)
+:state=1:runfore=5
+:state=1,rateoffire,plrdistfurther=150:strafe=15
+:state=1,rateoffire,plrdistfurther=150:strafe=-15
+:state=1,rateoffire,plrdistfurther=150:rotatetoplr
+;Игрок не смотрит на бота
+:state=1,plrnotfacing=50:etimerstart,state=2
+:state=3,plrnotfacing=50:etimerstart,state=2
+:state=2:rotatetoplr,runfore=5
+:state=2,plrfacing=50:state=0
+;Игрок находится ближе (бежать прямолинейно) 
+:state=1,plrdistwithin=150:state=3
+:state=3,plrdistfurther=150:state=0
+:state=3:rotatetoplr,runfore=5
+;Игрок очень близко (переход к атаке)
+:state=3,plrdistwithin=50:state=15,setanimatespeed=120
+
+;-2)Обходит препятствия
+;Уперся в препятствие (переход к прыжку)
+:state=1,losetarget=1,etimergreater=300:state=4,addaiteam=1,setaiactive=1,aisetspeed=100,aiattackawareness=0,etimerstart
+:state=2,losetarget=1,etimergreater=300:state=4,addaiteam=1,setaiactive=1,aisetspeed=100,aiattackawareness=0,etimerstart
+:state=3,losetarget=1,etimergreater=300:state=4,addaiteam=1,setaiactive=1,aisetspeed=100,aiattackawareness=0,etimerstart
+;Высота комнаты более одного сегмента (совершить прыжок)
+:state=4,etimergreater=50:setaiactive=0,animate=41,coloff,state=5
+;Высота комнаты один сегмент (обойти препятствие)
+:state=4,raycastup=20 100:animate=92,etimerstart,state=10
+;Стоит перед сегментом (обойти препятствие)
+:state=4,raycast=20 50:animate=92,rotatey=180,etimerstart,state=12
+:state=14:runfore=5
+:state=14,etimergreater=500:setaiactive=1,state=13
+;Прыгает на препятствие
+:state=5:moveup=5
+:state=5,etimergreater=50:freeze,etimerstart,state=6
+;Преодолевает препятствие
+:state=6:runfore=10
+;-Преодолел препятствие
+:state=6,etimergreater=100:freeze,setframe=0,state=8
+;-Не смог преодолеть (изменить направление)
+:state=6,raycast=0 50:state=7
+:state=7:rotatey=180,airemove,colon,state=0
+;-Приземляется на препятствие
+:state=8:incframe=0
+:state=8,framebeyond=0 70:airemove,colon,state=0
+;Застрял в воздухе
+:state=6,losetarget=4:state=9
+:state=9,raycast=0 50:state=7
+:state=9:moveup=-10
+:state=9,raycastup=20 -30:airemove,colon,state=0
+;Обходит препятствие (включает на время DarkAI)
+:state=10,movingforwards=1:aisetspeed=200
+:state=10,runningforwards=1:aisetspeed=150
+:state=10:aifollowplr=1
+:state=10,etimergreater=5000:aifollowplr=0,aistop,aisetspeed=100,airemove,state=0
+:state=10,etimergreater=1000,plrdistwithin=100:aifollowplr=0,aistop,aisetspeed=100,airemove,state=0,plraddhealth=-1
+;Застрял DarkAI
+:state=10,losetarget=1:aifollowplr=0,aistop,aisetspeed=100,setaiactive=0,etimerstart,state=11
+;-Прыжок невозможен (развернуться)
+:state=11,raycastup=20 100:rotatey=180,etimerstart,state=12
+:state=12:runfore=5
+:state=12,etimergreater=100:airemove,state=0
+;-Прыжок возможен (совершить прыжок)
+:state=11,etimergreater=50:setaiactive=0,animate=41,coloff,state=5
+
+;-3) Игрок очень далеко (задействовать Dark AI)
+:state=1,plrdistfurther=500,etimergreater=100:addaiteam=1,setaiactive=1,aisetspeed=100,aiattackawareness=0,etimerstart,state=13
+:state=13,movingforwards=1:aisetspeed=200
+:state=13,runningforwards=1:aisetspeed=150
+:state=13:aifollowplr=1
+:state=13,plrdistwithin=300,plrcanbeseen:aifollowplr=0,aistop,aisetspeed=100,airemove,state=0
+:state=13,etimergreater=2000:aifollowplr=0,aistop,aisetspeed=100,airemove,state=0
+
+;АТАКА
+;-Выбор атаки
+:state=15,plrdistfurther=90:state=22
+:state=15,random=2:setframe=98,sound=audiobank\zombie_apocalypse\malemoan1.wav,state=16
+:state=15,random=2:setframe=99,sound=audiobank\zombie_apocalypse\malemoan2.wav,state=19
+:state=15,random=2:setframe=101,sound=audiobank\zombie_apocalypse\malemoan1.wav,state=21
+:state=15,random=2:setframe=100,sound=audiobank\zombie_apocalypse\malemoan2.wav,state=23
+;-Атака 1 (левой правой)
+:state=16:incframe=98,rotatetoplr
+:state=16,framebeyond=98 40,plrdistwithin=70:plraddhealth=-30,state=17
+:state=16,frameatend=98:state=25
+:state=17:incframe=98,rotatetoplr
+:state=17,framebeyond=98 60,plrdistwithin=70:plraddhealth=-30,state=18
+:state=17,frameatend=98:state=25
+:state=18:incframe=98,rotatetoplr
+:state=18,frameatend=98:state=25
+;-Атака 2 (левой)
+:state=19,framebeyond=99 50,plrdistwithin=70:plraddhealth=-40,state=20
+:state=19:incframe=99,rotatetoplr
+:state=19,frameatend=99,rotatetoplr:state=25
+:state=20:incframe=99
+:state=20,frameatend=99:state=25
+;-Атака 3 (двумя руками слева)
+:state=21:incframe=101,rotatetoplr
+:state=21,framebeyond=101 60,plrdistwithin=70:plraddhealth=-50,state=22
+:state=21,frameatend=101:state=25
+:state=22:incframe=101,rotatetoplr
+:state=22,frameatend=101:state=25
+;-Атака 4 (двумя руками справа)
+:state=23:incframe=100,rotatetoplr
+:state=23,framebeyond=100 60,plrdistwithin=70:plraddhealth=-50,state=24
+:state=23,frameatend=100:state=25
+:state=24:incframe=100,rotatetoplr
+:state=24,frameatend=100:state=25
+;-Игрок отдалился во время атаки
+:state=16,plrdistfurther=90:state=25
+:state=17,plrdistfurther=90:state=25
+:state=18,plrdistfurther=90:state=25
+:state=19,plrdistfurther=90:state=25
+:state=20,plrdistfurther=90:state=25
+:state=21,plrdistfurther=90:state=25
+:state=22,plrdistfurther=90:state=25
+:state=23,plrdistfurther=90:state=25
+:state=24,plrdistfurther=90:state=25
+;-Конец атаки
+:state=25:setframe=92,state=0
+
+;Игрок далеко, удалить бота из игры
+;:plrdistfurther=1000:aistop,airemove,subvar=ZombieInGame 1,addvar=ZombieInWave 1,state=100
+:state=100:destroy
+
+;-Конец игры-
+;:varequal=Wave 0:runfpi=Script_Pack_10_Nazi_Zombies\Zombies\MobZombie_GAMEOVER.fpi

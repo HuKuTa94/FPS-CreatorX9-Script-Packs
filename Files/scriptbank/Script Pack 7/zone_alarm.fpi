@@ -1,0 +1,18 @@
+;Скрипт написал: Кошелев Никита
+;Описание: срабатывает сигнализация если кто-нибудь заходит в зону
+;Зону необходимо помещать строго в центр комнаты (пример уровня SP7_Demo_alarm)
+;ВАЖНО! Скрипт работает нестабильно! По умолчанию расчитан на квадратную комнату размером 5х5 квадратов.
+;Чтобы изменить площадь срабатывания тревоги, изменяйте значение у ANYFURTHER и ANYWITHIN (100 = 1 квадрат).
+
+:ANYFURTHER=250:state=0,ambience=15,ambiencered=255,ambiencegreen=255,ambienceblue=255
+:state=0,ANYWITHIN=250=1:state=2
+
+;===Свет красный===
+:state=2:ambience=15,ambiencered=255,ambiencegreen=0,ambienceblue=0,plrsound=$0,state=3,etimerstart
+:state=3,etimergreater=1000:state=4
+
+;===Свет белый===
+:state=4:ambience=15,ambiencered=255,ambiencegreen=255,ambienceblue=255,plrsound=$0,state=5,etimerstart
+:state=5,etimergreater=1000:state=2
+
+;End of Script

@@ -1,0 +1,17 @@
+;Скрипт написал: Кошелев Никита
+;Описание: зона использования аптечек.
+;Что бы использовать аптечку нажмите Н (по умолчанию).
+
+:state=0:dimvar=med,setvar=med 0,state=1
+
+:state=1:hudreset,hudx=33,hudy=2,hudsizex=16,hudsizey=16,hudtext=MEDKIT,hudname=med,hudmake=display
+:state=1:hudreset,hudx=33,hudy=8,hudsizex=16,hudsizey=16,hudimage=gamecore\huds\numeric1.dds,hudname=cash,hudtype=6,huduservar=med,hudmake=numeric
+
+:state=1,plrhealthless=99,keypressed=35 1:plrsound=$0,subvar=med 1,plraddhealth=100,state=2,plrsound=audiobank\items\healthup.wav
+:state=1,plrhealthless=31,varnotequal=med 0:state=3,plrsound=$0,subvar=med 1,plraddhealth=100,plrsound=audiobank\items\healthup.wav
+:state=1,plrhealthless=1:state=3
+
+:state=2,keypressed=35 0:state=1
+:state=3:state=1
+
+;End of Script

@@ -1,0 +1,27 @@
+;Скрипт написал: Кошелев Никита.
+;Описание: плавно изменяет уровень освещения уровня и плавно добавляет оранжевый туман.
+
+
+::ambience=%l,ambiencered=%lr,ambiencegreen=%lg,ambienceblue=%lb
+::fogred=%fr,foggreen=%fg,fogblue=%fb
+
+
+:state=0:dimlocalvar=fr,setvar=fr 0,dimlocalvar=fg,setvar fg 0,dimlocalvar=fb,setvar=fb 0
+:state=0:dimlocalvar=lr,setvar=lr 200,dimlocalvar=lg,setvar=lg 200,dimlocalvar=lb,setvar=lb 200
+:state=0:dimlocalvar=l,setvar=l 5,dimlocalvar=state,setvar=state 0
+:state=0:state=1
+
+:state=1,activated=1:state=2,setvar=state 1,
+
+;===Посветвление===
+:varequal=state 1:addvar=l 0.2
+:varequal=state 1,vargreater=l 34:setvar=l 35
+
+;===Появление тумана оранжевого цвета===
+:varequal=state 1:fog=1,addvar=fr 1,addvar=fg 0.5,addvar=fb 0.1
+:varequal=state 1,vargreater=fr 60:setvar=fr 61
+:varequal=state 1,vargreater=fg 36:setvar=fg 37
+:varequal=state 1,vargreater=fb 2:setvar=fb 3
+
+
+;End of Script

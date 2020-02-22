@@ -1,0 +1,68 @@
+;Старт скрипта
+:state=0:addaiteam=2,aiaddenemy=2 1,setaiactive=1,animate=92,aiattackwareness=0,aiautofactionoff=1,reloadweapon,aisetviewrange=5000,alwaysactive=1,state=1
+
+;Определение цели
+:-Ищет цели
+:state=1,movingforwards=1:aisetspeed=350
+:state=1,runningforwards=1:aisetspeed=300
+:state=1,aiatpoint=1 0:aigotopoint=1,setanimatespeed=150
+:state=1,aiatpoint=1 1:aistop,state=2
+:state=1,aicanshoot=1:aistop,state=2
+
+;-Обновление целей
+:state=2:aicleartarget
+:state=2,aicanshoot=1:aisettarget
+
+;Передвижение бота
+;-Бежит к цели
+:state=2:aimovetotarget,setanimatespeed=150,animate=92
+:state=2,movingforwards=1:aisetspeed=350
+:state=2,runningforwards=1:aisetspeed=300
+:state=2,aitargetdistwithin=50:aistop,aisetspeed=150,airotatetotarget,setaiactive=0,state=15
+
+;АТАКА
+;-Выбор атаки
+:state=15,aitargetdistfurther=70:state=25
+:state=15,random=2:setframe=98,sound=audiobank\zombie_apocalypse\malemoan1.wav,state=16
+:state=15,random=2:setframe=99,sound=audiobank\zombie_apocalypse\malemoan2.wav,state=19
+:state=15,random=2:setframe=101,sound=audiobank\zombie_apocalypse\malemoan1.wav,state=21
+:state=15,random=2:setframe=100,sound=audiobank\zombie_apocalypse\malemoan2.wav,state=23
+;-Атака 1 (левой правой)
+:state=16:incframe=98
+:state=16,framebeyond=98 40,aitargetdistwithin=70:aisetmeleedamage=30,aiusemelee=1,state=17
+:state=16,frameatend=98:state=25
+:state=17:incframe=98
+:state=17,framebeyond=98 60,aitargetdistwithin=70:aisetmeleedamage=30,aiusemelee=1,state=18
+:state=17,frameatend=98:state=25
+:state=18:incframe=98
+:state=18,frameatend=98:state=25
+;-Атака 2 (левой)
+:state=19,framebeyond=99 50,aitargetdistwithin=70:aisetmeleedamage=40,aiusemelee=1,state=20
+:state=19:incframe=99
+:state=19,frameatend=99:state=25
+:state=20:incframe=99
+:state=20,frameatend=99:state=25
+;-Атака 3 (двумя руками слева)
+:state=21:incframe=101
+:state=21,framebeyond=101 60,aitargetdistwithin=70:aisetmeleedamage=50,aiusemelee=1,state=22
+:state=21,frameatend=101:state=25
+:state=22:incframe=101
+:state=22,frameatend=101:state=25
+;-Атака 4 (двумя руками справа)
+:state=23:incframe=100
+:state=23,framebeyond=100 60,aitargetdistwithin=70:aisetmeleedamage=50,aiusemelee=1,state=24
+:state=23,frameatend=100:state=25
+:state=24:incframe=100
+:state=24,frameatend=100:state=25
+;-Игрок отдалился во время атаки
+:state=16,aitargetdistfurther=90:state=25
+:state=17,aitargetdistfurther=90:state=25
+:state=18,aitargetdistfurther=90:state=25
+:state=19,aitargetdistfurther=90:state=25
+:state=20,aitargetdistfurther=90:state=25
+:state=21,aitargetdistfurther=90:state=25
+:state=22,aitargetdistfurther=90:state=25
+:state=23,aitargetdistfurther=90:state=25
+:state=24,aitargetdistfurther=90:state=25
+;-Конец атаки
+:state=25:setframe=92,setaiactive=1,aisetspeed=300,state=2

@@ -1,0 +1,23 @@
+;Скрипт написал: Кошелев Никита (fpsc.forum24.ru)
+;Включает возможность ограниченного воздуха под водой.
+
+:state=0:dimvar=air,setvar=air 100
+:state=0:state=1
+
+:state=1:hudreset,hudx=40,hudy=2,hudsizex=16,hudsizey=16,hudtext=AIR,hudname=air,hudmake=display
+:state=1:hudreset,hudx=40,hudy=8,hudsizex=16,hudsizey=16,hudimage=gamecore\huds\numeric1.dds,hudname=ar,hudtype=6,huduservar=air,hudmake=numeric
+:state=1:state=2
+
+:state=2,plrunderwater=1,rateoffire:subvar=air 2
+:state=2,plrunderwater=0:state=3
+:state=2,varless=air 1:plraddhealth=-999999,setvar=air 0,state=4
+
+:state=4:plrdisable=1
+:state=4,plrunderwater=0:setvar=air 100,state=2
+
+:state=3,rateoffire:addvar=air 9
+:state=3,vargreater=air 98:setvar=air 100,state=2
+:state=3,plrunderwater=1:state=2
+
+
+;End of Script

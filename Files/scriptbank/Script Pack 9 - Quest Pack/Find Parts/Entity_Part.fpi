@@ -1,0 +1,27 @@
+;AI Script
+;Author: Koshelev Nikita aka HuKuTa94
+;Date: 06.10.2019
+;Requriments: 1.18 path and above
+;Script version: 2.0
+;Description: Collectable part of the item. It uses IfUesed field. Type here the name of zone item tool.
+
+;\\\\ Script start \\\\
+:state=0:coloff,alwaysactive=1,state=1
+
+;\\\\ Respawning in game \\\\
+;--- Appear ---
+:state=1,activated=1:alwaysactive=0,activateifused=99,state=2
+;--- Not appear ---
+:state=1,activated=2:state=4
+
+;\\\\ Interaction with player \\\\
+;--- Player is close ---
+:state=2,plrdistwithin=50:hudshow=pickpart
+:state=2,plrdistfurther=50:hudunshow=pickpart
+;--- Player picks up the part ---
+:state=2,plrdistwithin=50,keypressed=33 1:alwaysactive=1,hudunshow=pickpart,plrsound=scriptbank\Script Pack 9 - Quest Pack\Audio\PickupPart.ogg,state=3
+;--- Activate zone item tool ( ifUsed field ) ---
+:state=3:activateifused=1,setalphafade=0,etimerstart,alwaysactive=0,state=4
+
+;\\\\ End of script \\\\
+:state=4,etimergreater=100:destroy

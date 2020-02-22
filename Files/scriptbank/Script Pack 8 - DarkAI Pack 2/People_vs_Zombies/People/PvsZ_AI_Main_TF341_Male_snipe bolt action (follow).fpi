@@ -1,0 +1,136 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 12.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: Автономный союзник TF341 (снайперская винтовка со скользящим затвором)
+;          Может быть оживлен в течении некоторого времени, после тяжелого ранения 
+
+;===Начало скрипта===
+:state=0:dimlocalvar=clip,setvar=clip 4,dimlocalvar=aim,setvar=aim 0,setaiactive=1,aisetviewrange=2000,aiatackwareness=0,reloadweapon,state=1
+;---Открывает двери---
+:nearactivatable=0:settarget,activatetarget=2
+;______________________________________________________________Animation_________________________________________________________________
+;===Анимации движения===
+;---Стрельба в движении---
+:aicanshoot=1,ducking=0,strafingleft=1:animationnormal,animate=3,aisetspeed=100
+:aicanshoot=1,ducking=0,strafingright=1:animationnormal,animate=4,aisetspeed=100
+:aicanshoot=1,ducking=0,movingforwards=1:animationnormal,animate=2,aisetspeed=100
+:aicanshoot=1,ducking=0,runningforwards=1:animationnormal,animate=5,aisetspeed=100
+:aicanshoot=1,ducking=0,movingbackwards=1:animationreverse,animate=32,aisetspeed=100
+:aicanshoot=1,ducking=0,idle=1:animationnormal,animate=1
+;----Стреляет сидя----
+:aicanshoot=1,ducking=1,strafingleft=1:animationnormal,animate=32,aisetspeed=100
+:aicanshoot=1,ducking=1,strafingright=1:animationnormal,animate=32,aisetspeed=100
+:aicanshoot=1,ducking=1,movingforwards=1:animationnormal,animate=32,aisetspeed=100
+:aicanshoot=1,ducking=1,movingbackwards=1:animationreverse,animate=32,aisetspeed=100
+:aicanshoot=1,ducking=1,idle=1:animationnormal,animate=31
+;----Анимация движения стоя (не стреляет)----
+:aicanshoot=0,ducking=0,strafingleft=1:animationnormal,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=0,strafingright=1:animationnormal,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=0,movingforwards=1:animationnormal,animate=40,aisetspeed=280
+:aicanshoot=0,ducking=0,runningforwards=1:animationnormal,animate=40,aisetspeed=180
+:aicanshoot=0,ducking=0,movingbackwards=1:animationreverse,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=0,idle=1:animationnormal,animate=33
+;----Анимация движения сидя (не стреляет)----
+:aicanshoot=0,ducking=1,strafingleft=1:animationnormal,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=1,strafingright=1:animationnormal,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=1,movingforwards=1:animationnormal,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=1,movingbackwards=1:animationreverse,animate=34,aisetspeed=120
+:aicanshoot=0,ducking=1,idle=1:animationnormal,animate=33             
+;______________________________________________________________Targeting_________________________________________________________________
+;///===В бою====\\\
+;--Определение цели--
+:state=1,aihastarget=1:aicleartarget,aisettarget
+:state=1,aihastarget=0:aisettarget
+:state=1,aicanshoot=0:aicleartarget,aisettarget
+:state=1:airotatetotarget
+;--Следует за игроком--
+:state=1,aihastarget=0:aifollowplr=1
+;--Атакует стоя прицеливаясь--
+:state=1,aihastarget=1,aicanshoot=1:addvar=aim 1
+:state=1,ducking=0,vargreater=aim 50,varnotequal=clip 0,aihastarget=1,aicanshoot=1,aitargetdistwithin=300:useweapon,rundecal=6,aiusefullaim=1,state=2
+:state=1,ducking=0,vargreater=aim 90,varnotequal=clip 0,aihastarget=1,aicanshoot=1,aitargetdistwithin=600:useweapon,rundecal=6,aiusefullaim=1,state=2
+:state=1,ducking=0,vargreater=aim 110,varnotequal=clip 0,aihastarget=1,aicanshoot=1,aitargetdistfurther:useweapon,rundecal=6,aiusefullaim=1,state=2
+:state=2:aistop,aisetspeed=70,aisetmeleedamage=100,aiusemelee=1,setaiactive=0,setframe=27,setvar=SE 1,setvar=aim 0,state=11
+;--Атакует сидя прицеливаясь--
+:state=1,ducking=0,vargreater=aim 50,varnotequal=clip 0,aihastarget=1,aicanshoot=1,aitargetdistwithin=300:useweapon,rundecal=6,aiusefullaim=1,state=3
+:state=1,ducking=1,vargreater=aim 90,aisetmeleedamage=100,aiusemelee=1,varnotequal=clip 0,aihastarget=1,aicanshoot=1:useweapon,rundecal=6,aiusefullaim=1,state=3
+:state=3:aistop,aisetspeed=70,setaiactive=0,setframe=38,setvar=SE 1,setvar=aim 0,state=13
+;--Нет патронов в обойме--
+:state=1,ducking=0,varequal=clip 0:aistop,setaiactive=0,setframe=6,state=20
+:state=1,ducking=1,varequal=clip 0:aistop,setaiactive=0,setframe=36,state=22
+;--Перезаряжается, если никого не видит, а обойма не полна---
+:state=1,ducking=0,aihastarget=0,varless=clip 2:aistop,setaiactive=0,setframe=6,state=20
+:state=1,ducking=1,aihastarget=0,varless=clip 2:aistop,setaiactive=0,setframe=36,state=22
+;--Передвижение--
+:state=1,aihastarget=1,aitargetdistfurther=1000:aicleartarget,aisettarget
+
+;///===Анимации атаки===\\\
+;--Стреляет стоя--
+:state=11:incframe=27
+:state=11,frameatend=27:setaiactive=1,subvar=clip 1,setvar=SE 2,state=1
+
+;--Стреляет сидя--
+:state=13:incframe=38
+:state=13,frameatend=38:setaiactive=1,subvar=clip 1,setvar=SE 2,state=1
+
+;///===Анимации перезарядки===\\\
+;--Перезаряжает стоя---
+:state=20:incframe=6,aisetspeed=92
+:state=20,frameatend=6:setaiactive=1,addvar=clip 1,state=21
+:state=21,varnotequal=clip 4,aihastarget=1,aicanshoot=1,aitargetdistwithin=200,random=2:reloadweapon,state=1
+:state=21,varnotequal=clip 4,aihastarget=1,aitargetfurther=200,random=5:setaiactive=0,setframe=6,state=20
+:state=21,varnotequal=clip 4,aihastarget=0:setaiactive=0,setframe=6,state=20
+:state=21,varequal=clip 4:setvar=SE 2,state=1
+;--Перезаряжает сидя---
+:state=22:incframe=6,aisetspeed=92
+:state=22,frameatend=6:setaiactive=1,addvar=clip 1,state=23
+:state=23,varnotequal=clip 4,aihastarget=1,aicanshoot=1,aitargetdistwithin=250,random=2:reloadweapon,state=1
+:state=23,varnotequal=clip 4,aihastarget=1,aitargetfurther=200,random=5:setaiactive=0,setframe=6,state=22
+:state=23,varnotequal=clip 4,aihastarget=0:setaiactive=0,setframe=6,state=22
+:state=23,varequal=clip 4:setvar=SE 2,state=1
+;________________________________________________________________Die___________________________________________________________________
+;///===Нет здоровья ( Health < 100)===\\\
+:healthless=200,varequal=live 1:aifollowplr=0,addaiteam=4,aisetspeed=100,setaiactive=0,coloff,setvar=live 0,state=999
+;--Лежит истекает кровью--
+:varequal=live 0:subvar=blood 1,addhealth=500
+:varequal=live 0,varless=blood 0:runfpidefault=2
+;--Падает--
+:state=999,random=25:setvar=SE 3,state=1000
+:state=999,random=25:setvar=SE 4,state=1000
+:state=1000:setframe=11,state=1001
+:state=1001:incframe=11,bloodsplash=50,bloodspurt=3
+:state=1001,frameatend=11:state=1002
+;--Встает--
+:state=1004:setframe=13,setvar=SE 5,state=1005
+:state=1005:incframe=13
+:state=1005,frameatend=13:setaiactive=1,addaiteam=1,colon,setvar=live 1,state=1
+;--Оживление игроком---
+:state=1002,varequal=botrevive 0,keupressed=33 0,plrdistwithin=50:hudshow=revbutton
+:state=1002,varequal=botrevive 0,keypressed=33 0,plrdistfurther=50:hudunshow=revbutton
+:state=1002,varequal=botrevive 0,keypressed=33 0:hudunshow=revbar,revbutton
+:state=1002,keypressed=33 1,plrdistwithin=50:hudunshow=revbutton,etimerstart,hideplrweapon,state=1003
+:state=1003,keypressed=33 1,vargreater=revive 190:plrfreeze=0,showplrweapon,state=1004,hudunshow=revbar,setvar=blood 1500,setvar=revive 0,lockslot=1 0,lockslot=2 0,lockslot=3 0,lockslot=4 0,lockslot=5 0,lockslot=6 0,lockslot=7 0,lockslot=8 0,lockslot=9 0
+:state=1003,keypressed=33 1:lockslot=1 1,lockslot=2 1,lockslot=3 1,lockslot=4 1,lockslot=5 1,lockslot=6 1,lockslot=7 1,lockslot=8 1,lockslot=9 1
+:state=1003,keypressed=33 1:addvar=blood 1,addvar=revive 1,hudshow=revbar,plrfreeze=10000,
+:state=1003,keypressed=33 0:plrfreeze=0,showplrweapon,setvar=revive 0,state=1002,lockslot=1 0,lockslot=2 0,lockslot=3 0,lockslot=4 0,lockslot=5 0,lockslot=6 0,lockslot=7 0,lockslot=8 0,lockslot=9 0   
+;______________________________________________________________Sound Engine___________________________________________________________________
+;///===Sound Engine===\\\
+; "Var=SE X" ( 1 - weapon fire; 2 - weapon reload; 3 - die sound1; 4 - die sound2; 5 - revived)
+:varequal=SE 1,plrdistfurther=1,plrdistwithin=400:setvar=WeaponFire 7,setvar=SE 0,setvar=reverb 1
+:varequal=SE 1,plrdistfurther=400,plrdistwithin=600:setvar=WeaponFire 7,setvar=SE 0,setvar=reverb 2
+:varequal=SE 1,plrdistfurther=600:setvar=WeaponFire 7,setvar=SE 0,setvar=reverb 3
+:varequal=SE 2,plrdistfurther=1,plrdistwithin=400:setvar=WeaponFire 8,setvar=SE 0,setvar=reverb 1
+:varequal=SE 2,plrdistfurther=400,plrdistwithin=600:setvar=WeaponFire 8,setvar=SE 0,setvar=reverb 2
+:varequal=SE 2,plrdistfurther=600:setvar=WeaponFire 8,setvar=SE 0,setvar=reverb 3
+:varequal=SE 3,plrdistfurther=1,plrdistwithin=400:setvar=Die 1,setvar=SE 0,setvar=reverb 1
+:varequal=SE 3,plrdistfurther=400,plrdistwithin=600:setvar=Die 1,setvar=SE 0,setvar=reverb 2
+:varequal=SE 3,plrdistfurther=600:setvar=Die 1,setvar=SE 0,setvar=reverb 3
+:varequal=SE 4,plrdistfurther=1,plrdistwithin=400:setvar=Die 2,setvar=SE 0,setvar=reverb 1
+:varequal=SE 4,plrdistfurther=400,plrdistwithin=600:setvar=Die 2,setvar=SE 0,setvar=reverb 2
+:varequal=SE 4,plrdistfurther=600:setvar=Die 2,setvar=SE 0,setvar=reverb 3
+:varequal=SE 5,plrdistfurther=1,plrdistwithin=400:setvar=Die -1,setvar=SE 0,setvar=reverb 1
+:varequal=SE 5,plrdistfurther=400,plrdistwithin=600:setvar=Die -1,setvar=SE 0,setvar=reverb 2
+:varequal=SE 5,plrdistfurther=600:setvar=Die -1,setvar=SE 0,setvar=reverb 3
+;Конец Скрипта

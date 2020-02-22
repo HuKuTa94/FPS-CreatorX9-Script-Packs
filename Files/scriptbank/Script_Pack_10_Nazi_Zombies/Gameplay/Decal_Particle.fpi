@@ -1,0 +1,18 @@
+;Описание:
+; 0-once face player
+; 1-once keep angle
+; 2-loop face player
+; 3-loop keep angle
+; 4-once face up
+; 5-loop face up
+; 6-character-spot-decal (at end of entity characters gun if available)
+; 7-particle based decal
+; Activated=21 - Частицы включены
+; Activated=20 - Частицы выключены
+
+;-Начало
+:state=0:activate=20,state=1
+;-Частицы
+:state=1,activated=21:rundecal=7,etimerstart,state=2
+:state=2:rundecal=7
+:state=2,etimergreater=800:activate=20,state=1

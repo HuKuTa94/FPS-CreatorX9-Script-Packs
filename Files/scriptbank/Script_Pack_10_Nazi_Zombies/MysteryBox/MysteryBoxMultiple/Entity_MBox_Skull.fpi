@@ -1,0 +1,6 @@
+
+:state=0:state=1,coloff,nobulletcol=1,floorlogic,alwaysactive=1,hide
+
+:state=1,activated=0:hide,alwaysactive=1,state=2
+:state=2,activated=3:show,alwaysactive=0,state=1
+

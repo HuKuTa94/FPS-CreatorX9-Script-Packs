@@ -1,0 +1,125 @@
+;COMMANDO weapon spec
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 1
+muzzlesize     = 220
+brass          = 2
+smoke          = 1
+second         = 0
+damage         = 14
+damagetype     = 1
+scorchtype     = 0
+reloadqty      = 24
+iterate        = 0
+accuracy       = 6
+range          = 17000
+
+;GUN Visuals
+textured      = 
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+zoomscope     = none
+weapontype    = 3
+
+;GUN Sounds
+
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         = 
+sound5         = reload_separate.wav
+fireloop       = 2000
+
+;HUD muzzleflash position
+
+
+forward        = -8
+alignx         = 22
+aligny         = -6
+alignz         = 120
+zoomalignx     = 22
+zoomaligny	   = -6
+zoomalignz	   = 100
+
+;HUD animation frames list
+
+keyframe ratio = 1
+
+select         = 0,17
+Idle           = 18,51
+Move           = 54,70
+Start fire     = 72,72
+automatic fire = 78,80
+end fire       = 83,86
+reload         = 88,137
+;reload		= 139,198
+useempty = 1
+empty reload = 139,198
+run		= 586,604
+putaway	       = 1026,1040
+forcezoomout	= 1
+
+;Airmod conditions graciously added by Shadowtroid
+
+firerate = 4
+
+melee start 	= 714,719
+melee end	= 720,733
+
+nofullreload = 1
+chamberedround	= 1
+
+runy = -7
+runaccuracy = 60
+recoily = 12
+recoilyreturn = 90
+recoilx = 4
+recoilxreturn = 80
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3
+
+horiz       = -4
+vert        = 7
+rotx		= 1.5
+roty		= 3
+rotz		= 0
+simplezoomx	= -22
+simplezoomy	= -5.5
+
+zoomrecoily	= 15
+zoomrecoilyreturn	= 92
+zoomrecoilx	= 4
+zoomrecoilxreturn	= 83
+
+zoomgunlagspeed	= 5
+zoomgunlagxmax	= 2
+zoomgunlagymax	= 0.3
+zoomwalkspeed	= 0.5
+zoomturnspeed	= 0.4
+gunlagspeed	= 10
+gunlagxmax	= 3
+gunlagymax	= 3
+simplezoom	= 1
+simplezoommod	= 3
+simplezoomacc	= 0.7
+simplezoomspeed	= 4
+simplezoomanim	= 0
+simplezoomflash	= 1
+runy		= -1
+
+;HUD sound frames list
+
+soundframes    = 4
+sframe0        = 76,1
+sframe1        = 139,2
+sframe2 	=88,5
+;sframe3        = 110,5
+;sframe4        = 95,5

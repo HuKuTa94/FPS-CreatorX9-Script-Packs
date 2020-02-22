@@ -1,0 +1,120 @@
+;bazooka weapon spec
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 4
+muzzlesize     = 200
+brass          = 0
+smoke          = 1
+flak           = ww2\bazooka
+damage         = 90
+damagetype     = 0
+scorchtype     = 4
+reloadqty      = 1
+iterate        = 0
+accuracy       = 0
+zoommode       = 0
+
+;GUN Visuals
+
+textured      = 
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+weapontype    = 5
+
+;GUN Sounds
+
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         =
+sound5         =
+fireloop       = 0
+
+;HUD muzzleflash position
+
+horiz          = 0
+vert           = 2
+forward        = -2
+alignx         = 18
+aligny         = -6
+alignz         = 140
+
+
+;HUD animation frames list
+
+keyframe ratio = 1
+select         = 0,17
+Idle           = 18,51
+Move           = 55,70
+Start fire     = 72,76
+end fire       = 77,86
+reload         = 88,137
+;reload		= 139,199
+
+putaway	       = 1025,1040
+
+nofullreload = 1
+
+run		= 586,604
+
+
+;HUD sound frames list
+
+soundframes    = 4
+sframe0        = 77,1
+;sframe1        = 139,2
+sframe1	= 95,2
+;sframe2        = 
+
+;Airmod conditions graciously added by Shadowtroid
+
+zoomto =207,212
+zoom idle =213,233
+zoom move =236,259
+zoom start fire =261,264
+zoom end fire = 272,276
+zoomfrom =279,284
+
+simplezoom = 1
+simplezoomanim = 1
+simplezoomy = -3
+simplezoommod = 7
+
+simplezoomflash = 1
+
+zoomalignx         = 6
+zoomaligny         = -2
+zoomalignz         = 140
+
+melee start 	= 714,719
+melee end	= 720,733
+
+simplezoomspeed=6
+runy = -7
+forcezoomout =1
+recoily = 60
+recoilyreturn = 80
+recoilx = 10
+recoilxreturn = 80
+
+zoomrecoily = 50
+zoomrecoilyreturn = 90
+zoomrecoilx = 1.5
+zoomrecoilxreturn = 95
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3
+zoomgunlagspeed = 6
+zoomgunlagxmax = 4
+zoomgunlagymax = 6
+
+zoomwalkspeed = 0.2
+zoomturnspeed = 0.3
+

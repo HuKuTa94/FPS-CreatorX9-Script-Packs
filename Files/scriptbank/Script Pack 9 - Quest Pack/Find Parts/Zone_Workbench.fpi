@@ -1,0 +1,37 @@
+;AI Script
+;Author: Koshelev Nikita aka HuKuTa94
+;Date: 06.10.2019
+;Requriments: 1.18 path and above
+;Script version: 2.0
+;Description: Workbench for item building
+
+;\\\\ Script start \\\\
+:state=0:localvar=0,state=1
+
+;\\\\ Init numbers of parts ( 1-3 ) for item building and count of activations  \\\\
+:state=1,activated=99:incvar=1,activate=0
+
+;\\\\ Need X activations by IfUsed of collectable part \\\\
+:state=1,activated=1:incvar=-1,state=2
+:state=2,varnotequal=0:activate=0,state=1
+:state=2,varequal=0:state=4
+
+;\\\\ Interaction with player \\\\
+;--- Player is close, not enough of parts ---
+:state=1,plrwithinzone=1:hudshow=noparts
+:state=1,plrwithinzone=0:hudunshow=noparts
+;--- Player is close, all parts collected ---
+:state=4,plrwithinzone=1:hudshow=build
+:state=4,plrwithinzone=0:hudunshow=build
+;--- Player builds the item ---
+:state=4,plrwithinzone=1,keypressed=33 1:state=5,hideplrweapon,hudunshow=build,etimerstart,loopsound=scriptbank\Script Pack 9 - Quest Pack\Audio\Building.ogg
+:state=5:plrfreeze=10000
+:state=5,keypressed=33 0:state=4,showplrweapon,plrfreeze=0,hudunshow=building1,hudunshow=building2,hudunshow=building3,stopsound=scriptbank\Script Pack 9 - Quest Pack\Audio\Building.ogg
+:state=5,keypressed=33 1,etimergreater=2000:state=6,plrfreeze=0,hudunshow=building1,hudunshow=building2,hudunshow=building3,stopsound=scriptbank\Script Pack 9 - Quest Pack\Audio\Building.ogg
+;--- Hud building process ---
+:state=5,etimergreater=0:hudshow=building1,hudunshow=building2,hudunshow=building3
+:state=5,etimergreater=665:hudshow=building2,hudunshow=building1,hudunshow=building3
+:state=5,etimergreater=1330:hudshow=building3,hudunshow=building2,hudunshow=building1
+
+;--- Build process is finished ---
+:state=6:activateifused=1,showplrweapon,destroy

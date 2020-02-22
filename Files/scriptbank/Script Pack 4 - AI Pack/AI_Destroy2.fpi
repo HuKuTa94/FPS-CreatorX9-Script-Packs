@@ -1,0 +1,12 @@
+desc          = После смерти активирует компонент (By Никита) 
+
+;===Активирует компонент===
+:state=0:settargetname=activate2
+:state=0:activatetarget=1,state=1
+
+;===Плавно исчезает===
+:state=1,alphafadeequal=100:decalphafade=0
+:state=1,alphafadeequal=0:state=2,destroy
+
+;End of Script
+

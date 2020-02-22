@@ -1,0 +1,5 @@
+;-Init
+:state=0:dimlocalvar=healthmax,dimlocalvar=healthmin,setvar=healthmax 5000,setvar=healthmin 4000,etimerstart,state=1
+
+;-Wait for generator event script init and start
+:state=1,etimergreater=100:floorlogic,norotate=1,sethealth=%healthmax,addvar=generatorCount 1,addvar=generatorAlive 1,runfpidefault=1

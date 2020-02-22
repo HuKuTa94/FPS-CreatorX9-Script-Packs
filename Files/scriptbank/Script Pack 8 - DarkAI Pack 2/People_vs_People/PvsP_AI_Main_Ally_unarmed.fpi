@@ -1,0 +1,56 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 02.07.2013
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 2.0
+
+;Описание: Управляемый союзник (невооружен)
+;Управление: F - следует за игроком, повторное нажатие - прекращает следовать за игроком.
+;            H - дает приказ найти ближайшее укрытие, повторное нажатие - отменяет приказ.
+;            Так же можно отменить приказ нажав клавишу F. 
+
+;===Анимации движенияs===
+:idle=1,keypressed=46 0:animate=1                                                                 ; - Стоит
+:movingforwards=1,keypressed=46 0:animate=5,animationnormal,aisetspeed=200,setanimatespeed=100    ; - Идет вперед стоя
+:movingbackwards=1,keypressed=46 0:animate=2,animationreverse,aisetspeed=85                       ; - Идет назад стоя
+:runningforwards=1,keypressed=46 0:animate=5,animationnormal,aisetspeed=350,setanimatespeed=150   ; - Бежит вперед
+:strafingleft=1:animate=3                                                                         ; - Уклоняется влево
+:strafingright=1:animate4                                                                         ; - Уклоняется вправо
+
+:idle=1,keypressed=46 1:animate=31                                            ; - Сидит
+:movingforwards=1,keypressed=46 1:animate=32,animationnormal,aisetspeed=60    ; - Идет вперед сидя
+:movingbackwards=1,keypressed=46 1:animate=32,animationreverse,aisetspeed=60  ; - Идет назад сидя
+:runningforwards=1,keypressed=46 1:animate=32,animationnormal,aisetspeed=60   ; - Идет вперед сидя
+;______________________________________________________________________________________________________________________
+
+;===Начало скрипта===
+:state=0:addaiteam=1,incalphafade=100,setaiactive=1,alwaysactive=1,aiatackwareness=0,state=1  
+
+;===Смотрит на игрока, если он близко===
+:state=1:aistop,freeze                  ; - Стоит неподвижно
+:state=1,plrdistwithin=250:rotatetoplr  ; - Если игрок приблизился на 250, то смотрит на него
+
+;===Клавиши управления===
+:state=1,keypressed=35 1:state=5          ; - Нажата клавиша Н. Перс ищет укрытие
+:state=5,keypressed=35 0:state=6
+:state=6,keypressed=35 1:state=7,aistop   ; - Повторно нажата клавиша Н. Перс прекращает искать укрытие
+:state=7,keypressed=35 0:state=1
+:state=6,keypressed=33 1:state=8          ; - Нажата клавиша F во время исполнения приказа H
+:state=8,keypressed=33 0:state=3,aistop
+:state=3,keypressed=35 1:state=9          ; - Нажата клавиша Н во время исполнения приказа F
+:state=9,keypressed=35 0:state=6,aistop
+:state=1,keypressed=33 1:state=2          ; - Нажата клавиша F. Перс cледует за игроком
+:state=2,keypressed=33 0:state=3
+:state=3,keypressed=33 1:state=4,aistop   ; - Повторно нажата клавиша F. Перс перестает следовать за игроком
+:state=4,keypressed=33 0:state=1
+
+;===Следует за игроком===
+:state=3,plrcannotbeseen:aifollowplr=1    ; - Следует за игроком, если его не видит
+:state=3,plrdistfurther=60:aifollowplr=1  ; - Cледует за игроком, если он отдалился
+:state=3,plrdistwithin=60:aistop          ; - Останавливается, если игрок слишком близко
+
+;===Ищет укрытие==
+:state=6:aimovetocover=1                  ; - Движется в ближайшее укрытие
+:state=6,aiatcover=1:state=1              ; - Перс нашел укрытие
+ 
+;Конец Скрипта

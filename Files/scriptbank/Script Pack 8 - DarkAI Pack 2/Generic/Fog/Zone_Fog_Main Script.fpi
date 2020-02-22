@@ -1,0 +1,51 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 22.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: главный скрипт тумана
+
+;===Глобальные переменные===
+;  "VAR=X"
+;       fb - Fog blue
+;       fg - Fog green
+;       fr - Fog red
+;       fs - Fog start
+;       fe - For end
+;       a  - Ambience
+;       ab - Ambience blue
+;       ag - Ambience green
+;       ar - Ambience red
+:state=0:dimvar=fb,setvar=fb 100
+:state=0:dimvar=fg,setvar=fg 100
+:state=0:dimvar=fr,setvar=fr 100
+:state=0:dimvar=fs,setvar=fs 400
+:state=0:dimvar=fe,setvar=fe 1000
+:state=0:dimvar=a,setvar=a 20
+:state=0:dimvar=ab,setvar=ab 100
+:state=0:dimvar=ag,setvar=ag 100
+:state=0:dimvar=ar,setvar=ar 100
+:state=0:state=1
+
+;===Основной скрипт===
+:state=1:fog=1,fogblue=%fb,foggreen=%fg,fogred=%fr,fogstart=%fs,fogend=%fe,ambience=%a,ambienceblue=%ab,ambiencegreen=%ag,ambiencered=%ar
+
+;===Max & Min===
+;--Max--
+:vargreater=fb 255:setvar=fb 255
+:vargreater=fg 255:setvar=fg 255
+:vargreater=fr 255:setvar=fr 255
+:vargreater=ab 255:setvar=ab 255
+:vargreater=ag 255:setvar=ag 255
+:vargreater=ar 255:setvar=ar 255
+;--Min--
+:varless=fb 0:setvar=fb 0
+:varless=fg 0:setvar=fg 0
+:varless=fr 0:setvar=fr 0
+:varless=ab 0:setvar=ab 0
+:varless=ag 0:setvar=ag 0
+:varless=ar 0:setvar=ar 0
+:varless=fs 0:setvar=fs 0
+:varless=fe 0:setvar=fe 0
+
+;End of Script

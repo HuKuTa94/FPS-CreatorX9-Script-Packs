@@ -1,0 +1,47 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 05.01.2011
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 2.0
+;Описание: скрипт для зомби "Lobotomy" (медленный!) из Model Pack'a 22. 
+
+
+;===Анимации движения===
+:idle=1:animate=1                                            ; - Стоит
+:movingforwards=1,:animate=94,animationnormal,aisetspeed=85  ; - Идет вперед
+:movingbackwards=1:animate=94,animationreverse,aisetspeed=85 ; - Идет назад
+:runningforwards=1:animate=94,animationnormal,aisetspeed=85  ; - Бежит вперед
+
+;===Начало скрипта===
+:state=0:setaiactive=1,alwaysactive=1,aiatackwareness=1,aisetviewrange=10000,state=1
+
+;===Определение цели===
+:state=1,aihastarget=0:aisettarget
+:state=1,aihastarget=1:state=2
+:state=1,aiheardsound=5000:aimovetosound
+
+:state=2,aitargetdistfurther=60:airotatetotarget,setaiactive=1,aimovetotarget
+:state=2,aitargetdistwithin=60:aistop,airotatetotarget,aisetspeed=115,setaiactive=0,state=10
+:state=2,aihastarget=0:state=1
+
+;////////////////////////////////////////////////////////////////////////////////////////////
+;//// Атака ////
+;===Выбор атаки==
+:state=10,random=1:state=2,setframe=93,setaiactive=0,aistop,sound=audiobank\bond1\lobotomyvomit.wav
+:state=10,random=1:state=6,setframe=95,setaiactive=0,aistop,sound=audiobank\bond1\lobotomyvomit2.wav
+
+;===Атака 1===
+:state=2:incframe=93,airotatetotarget,aisettarget,aisetspeed=120
+:state=2,framebeyond=93 80,aitargetdistwithin=60:state=3,aisetmeleedamage=50,aiusemelee=1,aicleartarget,aiattackawareness=1,sound=audiobank\misc\melee.wav
+:state=2,frameatend=93:state=4
+:state=3,frameatend=93:state=4
+:state=4:setaiactive=1,setframe=1,state=1
+
+;===Атака 2===
+:state=6:incframe=95,airotatetotarget,aisettarget,aisetspeed=120
+:state=6,framebeyond=95 60,aitargetdistwithin=60:state=7,aisetmeleedamage=50,aiusemelee=1,aicleartarget,aiattackawareness=1,sound=audiobank\misc\melee.wav
+:state=6,frameatend=95:state=8
+:state=7,frameatend=95:state=8
+:state=8:setaiactive=1,setframe=1,state=1
+
+;Конец Скрипта

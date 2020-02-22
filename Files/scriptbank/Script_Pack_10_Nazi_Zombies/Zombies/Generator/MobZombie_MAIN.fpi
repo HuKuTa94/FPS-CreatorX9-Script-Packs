@@ -1,0 +1,18 @@
+;-DarkAI init
+:state=0:etimerstart,state=1
+
+;-PATH FINDING
+;-Use waypoint to reach primary targets - generators
+:state=1:animate=92,aisetspeed=200
+:state=1,waypointstate=0:waypointstart
+:state=1,waypointstate=99:waypointstart
+:state=1,waypointstate=3:waypointnext
+:state=1,waypointstate=4:waypointrandom
+:state=1,waypointstate=5:waypointreverse
+;-Turn on DarkAI for targeting
+:state=1:setaiactive=1,etimerstart,state=2
+:state=2,etimergreater=120:setaiactive=0,state=1
+:state=2,aicanshoot=1:waypointstop,runfpidefault=3
+
+;-Remove when player is so far
+:plrdistfurther=1000:aistop,airemove,destroy

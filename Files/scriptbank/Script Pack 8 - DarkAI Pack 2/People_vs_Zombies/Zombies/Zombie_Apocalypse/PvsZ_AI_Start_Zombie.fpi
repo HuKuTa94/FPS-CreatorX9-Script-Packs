@@ -1,0 +1,46 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 13.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: параметры зомби
+; Teams: 
+; 1 - player' team
+; 2 - enemy team
+; 3 - zombie team
+; 4 - ally die team (need revive)
+
+;===Начало скрипта===
+;--скрыть тень--
+:state=0:hideshaddow=1
+
+;--Sound Engine Var--
+:state=0:dimlocalvar=SE,setvar=SE 0
+
+;--показать все лимбы--
+:state=0:showlimb=1,showlimb=2,showlimb=3,showlimb=4,showlimb=5,showlimb=6,showlimb=7,showlimb=8,showlimb=9,showlimb=10,showlimb=11,showlimb=12,showlimb=13,showlimb=14,showlimb=15,showlimb=16,showlimb=17
+
+;--прозрачность--
+:state=0:setalphafade=100
+
+;--Параметры Dark AI--
+:state=0:sethealth=100,alwaysactive=1
+
+;--добавить DarkAI в команду зомби (Team 3)--
+:state=0:addaiteam=3,aiaddenemy=3 1|2,aiaddneutral=3 4
+
+;--произвольный выбор анимации--
+:state=0:dimlocalvar=walk,setvar=walk 0
+:state=0:state=1
+:state=1,random=100:setvar=walk 1,state=2
+:state=1,random=100:setvar=walk 2,state=2
+:state=1,random=100:setvar=walk 3,state=2
+:state=1,random=100:setvar=walk 4,state=2
+
+;--местные переменные--
+:state=0:dimlocalvar=live,setvar=live 1
+
+;--загрузить Main скрипт--
+:state=2:state=3,runfpidefault=1
+
+;Конец Скрипта

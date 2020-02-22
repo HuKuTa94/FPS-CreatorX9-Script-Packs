@@ -1,0 +1,28 @@
+desc          = Light Door 1 Shloose (By Никита) for Station 13
+
+;===Свет cиний.===
+:state=0:lightintensity=500,lightblue=196,lightgreen=182,lightred=100,state=1
+
+
+:state=1,activated=1:state=2,etimerstart
+:state=2,activated=2:state=4
+:state=3,activated=2:state=4
+:state=4,activated=3:state=5,etimerstart
+:state=5,activated=4:state=10
+:state=6,activated=4:state=10
+
+
+;===Мигание света===
+:state=2,etimergreater=1000:lightblue=0,lightgreen=0,lightred=355,etimerstart,state=3,sound=audiobank\station13\amb\alarms\alarm1.wav
+:state=3,etimergreater=1000:lightblue=196,lightgreen=182,lightred=100,etimerstart,state=2,sound=audiobank\station13\amb\alarms\alarm1.wav
+
+:state=4:lightblue=196,lightgreen=182,lightred=100
+
+;===Мигание света===
+:state=5,etimergreater=1000:lightblue=0,lightgreen=0,lightred=255,etimerstart,state=6,sound=audiobank\station13\amb\alarms\alarm1.wav
+:state=6,etimergreater=1000:lightblue=196,lightgreen=182,lightred=100,etimerstart,state=5,sound=audiobank\station13\amb\alarms\alarm1.wav
+
+:state=10:lightblue=196,lightgreen=182,lightred=100
+;:state=10:destroy
+
+;End of Script

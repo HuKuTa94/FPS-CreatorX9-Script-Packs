@@ -1,0 +1,49 @@
+;Entity Spec
+
+;Header
+
+desc          = mas36
+
+;AI
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\Weapons\Entity_Weapon_500.fpi
+aidestroy     = disappear1.fpi
+
+;Spawn
+spawnmax      = 1
+spawndelay    = 0
+spawnqty      = 0
+
+;Itemproperties
+defaultstatic = 0
+materialindex = 3
+collisionmode = 0
+debrisshape   = 0
+explodable    = 0
+
+;Orientation
+model         = entitybank\ww2\items\mas36.X
+scale         = 100
+rotz          = 90
+texturepath   = gamecore\guns\ww2\mas36\
+textured      = gun_D2.tga
+reducetexture = -1
+transparency  = 1
+isimmobile    = 1
+
+;Identity Details
+isweapon      = ww2\mas36
+quantity      = 7
+speed         = 100
+
+;Decals
+decalmax      = 1
+decal0        = glowzone
+
+;Animation
+
+totalframes   = 60
+appear	      = 0
+disappear     = 0
+activate      = 0
+deactivate    = 0

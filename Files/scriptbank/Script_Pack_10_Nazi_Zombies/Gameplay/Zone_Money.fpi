@@ -1,0 +1,8 @@
+;-Ввод переменных
+:state=0:floorlogic,dimvar=cash,setvar=cash 500
+;-Деньги
+:state=0:hudreset,hudx=94.5,hudy=93,hudsizex=440,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\score.dds,hudname=cash,hudmake=display
+:state=0:hudreset,hudx=92.5,hudy=96.5,hudsizex=23,hudsizey=23,hudimage=gamecore\huds\Script_Pack_10_Nazi_Zombies\numeric3.dds,hudname=money_numeric,hudtype=6,huduservar=cash,hudmake=numeric
+:state=0:state=1
+;-Конец игры
+:state=1,varequal=Wave 0:hudunshow=cash,hudunshow=money_numeric,destroy,state=2

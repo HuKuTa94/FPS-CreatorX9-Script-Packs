@@ -1,0 +1,19 @@
+desc          = Killer Door C (By Никита) Verssion 2 Открывается после истечении 2 секунды
+
+;===Ждать 2 секунды до открытия===
+:state=0:state=1,timerstart
+:state=1,timergreater=2000:state=2
+
+;===Открытие двери===
+:state=2:state=3,setframe=0,colon,sound=$0
+:state=3:incframe=0
+:state=3,framebeyond=0 25:coloff 
+
+;===Закрытие двери===
+:state=3,frameatend=0:state=4,decframe=0,sound=$1,coloff
+
+;===Игрок проходит через дверь в момент закрытия===
+:state=4,framewithin=0 20,plrdistwithin=30:plraddhealth=-100
+:state=4,frameatstart=0:state=2
+
+;End of Script

@@ -1,0 +1,11 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт "триггер-зоны" срабатывает и переходит в рабочее состояние, если игрок близко, и отключается обратно, если игрок далеко
+
+;Игрок далеко
+:state=0,plrwithinzone=1:activateifused=1,state=1
+
+;Игрок близко
+:state=1,plrwithinzone=0:activateifused=0,state=0

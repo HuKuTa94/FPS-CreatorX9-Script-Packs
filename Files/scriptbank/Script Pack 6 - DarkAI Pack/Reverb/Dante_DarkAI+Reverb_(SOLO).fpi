@@ -1,0 +1,95 @@
+;Скрипт Искусственного Интелекта
+;Автор: Никита (www.fpsc.forum24.ru)
+;Дата: 18.06.2012
+;Требования: необходим патч 1.17 и выше. 
+;Версия скрипта: 2.0
+;Описание: скрипт для зомби "Dante" (медленный) из Model Pack'a 22. 
+
+
+;||||||||||| Large Room |||||||||||||||
+;===Рычание (большое помещение)===
+:varequal=reverb 1,varequal=verb_large 1,plrdistfurther=1500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_15.ogg
+:varequal=reverb 1,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_10.ogg
+:varequal=reverb 1,varequal=verb_large 1,plrdistfurther=300:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_7.ogg
+:varequal=reverb 1,varequal=verb_large 1,plrdistwithin=300:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danteroar_large_dist_3.ogg
+;===Ходьба (большое помещение)===
+:varequal=reverb 2,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_15.ogg
+:varequal=reverb 2,varequal=verb_large 1,plrdistfurther=700:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_10.ogg
+:varequal=reverb 2,varequal=verb_large 1,plrdistfurther=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_7.ogg
+:varequal=reverb 2,varequal=verb_large 1,plrdistwithin=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_3.ogg
+:varequal=reverb 21,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_15.ogg
+:varequal=reverb 21,varequal=verb_large 1,plrdistfurther=700:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_10.ogg
+:varequal=reverb 21,varequal=verb_large 1,plrdistfurther=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_7.ogg
+:varequal=reverb 21,varequal=verb_large 1,plrdistwithin=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantewalk_large_dist_3.ogg
+;===Бег (большое помещение)===
+:varequal=reverb 3,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_15.ogg
+:varequal=reverb 3,varequal=verb_large 1,plrdistfurther=700:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_10.ogg
+:varequal=reverb 3,varequal=verb_large 1,plrdistfurther=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_7.ogg
+:varequal=reverb 3,varequal=verb_large 1,plrdistwithin=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_3.ogg
+:varequal=reverb 31,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_15.ogg
+:varequal=reverb 31,varequal=verb_large 1,plrdistfurther=700:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_10.ogg
+:varequal=reverb 31,varequal=verb_large 1,plrdistfurther=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_7.ogg
+:varequal=reverb 31,varequal=verb_large 1,plrdistwithin=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Danterun_large_dist_3.ogg
+;===Атака 1 - Punch (большое помещение)===
+:varequal=reverb 4,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_15.ogg
+:varequal=reverb 4,varequal=verb_large 1,plrdistfurther=700:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_10.ogg
+:varequal=reverb 4,varequal=verb_large 1,plrdistfurther=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_7.ogg
+:varequal=reverb 4,varequal=verb_large 1,plrdistwithin=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantepunch_large_dist_3.ogg
+;===Атака 2 - Smash (большое помещение)===
+:varequal=reverb 5,varequal=verb_large 1,plrdistfurther=1000:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_15.ogg
+:varequal=reverb 5,varequal=verb_large 1,plrdistfurther=700:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_10.ogg
+:varequal=reverb 5,varequal=verb_large 1,plrdistfurther=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_7.ogg
+:varequal=reverb 5,varequal=verb_large 1,plrdistwithin=500:setvar=reverb 0,sound=audiobank\station13\zombies\Dante_reverb\Dantesmash_large_dist_3.ogg
+
+;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+;===Ходьба===
+:movingforwards=1,varequal=timer 0:setvar=timer 1
+:runningforwards=1,varequal=timer 0:setvar=timer 1
+:varequal=timer 1:etimerstart,setvar=reverb 2,setvar=timer 2
+:varequal=timer 2,etimergreater=1070:setvar=timer 3
+
+:movingforwards=1,varequal=timer 3:setvar=timer 4
+:runningforwards=1,varequal=timer 3:setvar=timer 4
+:varequal=timer 4:etimerstart,setvar=reverb 21,setvar=timer 5
+:varequal=timer 5,etimergreater=1070:setvar=timer 0
+
+:varequal=timer 999:setvar=timer 9999
+
+;===Анимации движения===
+:idle=1:animate=1,setvar=timer 0
+:movingforwards=1:animate=2,animationnormal,setanimatespeed=210,aisetspeed=160
+:movingbackwards=1:animate=2,animationreverse,setanimatespeed=210,aisetspeed=160
+:runningforwards=1:animate=2,animationnormal,setanimatespeed=210,aisetspeed=100
+
+;===Начало скрипта===
+:state=0:dimlocalvar=timer,setvar=timer 0,dimlocalvar=reverb,setvar=reverb 0
+:state=0:alwaysactive=1,aisetviewrange=50000,setaiactive=1,aiatackwareness=0,incalphafade=100,state=1
+
+;===Определение цели===
+:state=1,aihastarget=1:aimovetotarget
+:state=1,aihastarget=0,aiheardsound=500000:aicallteam=500000,aisettarget
+:state=1,aihastarget=0,aicalled=1:airespondtocall,aisettarget
+:state=1,aitargetdistwithin=100:state=10
+
+;////////////////////////////////////////////////////////////////////////////////////////////
+;//// Атака ////
+;===Выбор атаки==
+:state=10,random=4:setvar=timer 999,state=2,setframe=23,setaiactive=0,setvar=reverb 4
+:state=10,random=4:setvar=timer 999,state=6,setframe=24,setaiactive=0,setvar=reverb 5
+
+;===Атака 1 - Punch===
+:state=2:incframe=23,airotatetotarget,aisettarget,aisetspeed=120
+:state=2,framebeyond=23 50,aitargetdistwithin=140:state=3,aisetmeleedamage=80,aiusemelee=1,aicleartarget,aiattackawareness=1
+:state=2,frameatend=23:state=4
+:state=3,frameatend=23:state=4
+:state=4:setaiactive=1,setframe=1,state=1,setvar=timer 0
+
+;===Атака 2 - Smash===
+:state=6:incframe=24,airotatetotarget,aisettarget,aisetspeed=120
+:state=6,framebeyond=24 60,aitargetdistwithin=140:state=7,aisetmeleedamage=80,aiusemelee=1,aicleartarget,aiattackawareness=1
+:state=6,frameatend=24:state=8
+:state=7,frameatend=24:state=8
+:state=8:setaiactive=1,setframe=1,state=1,setvar=timer 0
+
+;Конец Скрипта

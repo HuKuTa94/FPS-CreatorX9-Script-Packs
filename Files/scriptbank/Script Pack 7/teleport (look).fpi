@@ -1,0 +1,14 @@
+;Скрипт написал: Кошелев Никита
+;Описание: телепортирует игрока в телепорт, на который он смотрит (клавиша F)
+;В поле IfUsed пропишите имя телепорта.
+
+
+:state=0:hudreset,hudx=50,hudy=50,hudsizex=32,hudsizey=32,hudtext=Use teleport? Press [F],hudname=F,hudhide=1,hudmake=display
+:state=0:state=1
+
+:state=1,inview=1,plrfacing=3:hudshow=F
+:state=1,inview=0,plrnotfacing=3:hudunshow=F
+
+:state=1,inview=1,plrfacing=3,keypressed=33 1:state=2
+:state=2,inview=1,plrfacing=3,keypressed=33 0:state=1,hudunshow=F,plrmoveifused,plrsound=audiobank\misc\checkpoint.wav
+:state=2,plrnotfacing=3:state=1

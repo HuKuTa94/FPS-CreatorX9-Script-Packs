@@ -1,0 +1,12 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Remote Controlled Door (Open and Close)
+
+
+:state=0,activated=1:state=1,setframe=0,sound=$0,settargetname=ambience,activatetarget=1
+:state=1:incframe=0
+:state=1,frameatend=0:state=2,coloff,settargetname=act5_light,activatetarget=4
+
+;End of Script

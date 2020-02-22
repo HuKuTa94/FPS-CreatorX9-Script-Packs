@@ -1,0 +1,14 @@
+;Описание: MB1W, MB1 - Mystery Box № 1, W - Weapon № X
+
+;\\\Начало скрипта\\\
+:state=0:floorlogic,hide,coloff,nobulletcol=1,activate=100,state=1
+
+;--Появление и исчезновение--
+:state=11,activated=100:state=1
+:state=2,activated=100:state=1,hide
+:state=1,activated=100:hudunshow=weapontake
+:state=1,activated=104:show,state=2
+
+;\\\Взаимодействие с игроком\\\
+;--Игрок близко--
+:state=2,activated=199:hide,activate=100,playertake,state=1

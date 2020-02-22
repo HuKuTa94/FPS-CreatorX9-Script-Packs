@@ -1,0 +1,83 @@
+;---Описание---
+;dimlocalvar=sound - счетчик воспроизведения звуков, чтобы исключить обрывы
+;activated=0   - бездействие звукового движка
+;activated=11  - начать воспроизводить звук ходьбы
+;activated=11Х - воспроизведение звука ходьбы
+;activated=12  - начать воспроизводить звук бега
+;activated=12Х - воспроизведение звука бега
+;activated=13  - начать воспроизводить звук атаки (punch)
+;activated=13Х - воспроизведение звука атаки (punch)
+;activated=14  - начать воспроизводить звук атаки (smash)
+;activated=14Х - воспроизведение звука атаки (smash)
+;activated=15  - начать воспроизводить звук (roar)
+;activated=15Х - воспроизведение звука (roar)
+
+;---Начало скрипта---
+:state=0:dimlocalvar=sound,setvar=sound 1
+;-Скрыть все полигoны
+:state=0:hide,setbulletcoloff=1,activate=0,alwaysactive=0,state=1
+;-Cпавн
+;-Игрок в зоне
+:state=1,vargreater=BossWave 0,activated=1,vargreater=ZombieInWave 0:state=2
+
+;-Игрок не в зоне или количество непоявившихся зомби в раунде равно 0
+:stategreater=1,activated=0:state=1
+:state=2,varless=ZombieInWave 0:state=1
+:state=2,varnotequal=Area 0:state=1
+
+;-Спавн и Уровень здоровья
+:state=2,random=50,vargreater=ZombieInWave 0,varequal=BossWave 1,varless=ZombieInGame 0:sethealth=%BossHealth,addvar=ZombieInGame 1,subvar=ZombieInWave 1,state=3
+
+;---Появление---
+:state=3:show,setbulletcoloff=0,state=4
+;-Деколь\частицы спавна
+:state=4,nearactivatable=20:settarget,activatetarget=5
+;-Анимация Roar
+:state=4:setframe=22,state=5
+:state=5:incframe=22
+:state=5,framebwithin=22 5:activate=15,state=6
+:state=6:incframe=22
+:state=6,frameatend=22:state=7
+
+;---Запуск скрипта
+:state=7:activate=0,runfpidefault=1
+
+;---SOUND ENGINE HD---
+;---roar - дистанция 9---
+:activated=15,plrdistfurther=850:activate=159
+:activated=159,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance9.ogg
+:activated=159,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance9.ogg
+;---roar - дистанция 8---
+:activated=15,plrdistfurther=750:activate=158
+:activated=158,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance8.ogg
+:activated=158,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance8.ogg
+;---roar - дистанция 7---
+:activated=15,plrdistfurther=650:activate=157
+:activated=157,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance7.ogg
+:activated=157,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance7.ogg
+;---roar - дистанция 6---
+:activated=15,plrdistfurther=550:activate=156
+:activated=156,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance6.ogg
+:activated=156,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance6.ogg
+;---roar - дистанция 5---
+:activated=15,plrdistfurther=450:activate=155
+:activated=155,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance5.ogg
+:activated=155,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance5.ogg
+;---roar - дистанция 4---
+:activated=15,plrdistfurther=350:activate=154
+:activated=154,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance4.ogg
+:activated=154,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance4.ogg
+;---roar - дистанция 3---
+:activated=15,plrdistfurther=250:activate=153
+:activated=153,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance3.ogg
+:activated=153,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance3.ogg
+;---roar - дистанция 2---
+:activated=15,plrdistfurther=150:activate=152
+:activated=152,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance2.ogg
+:activated=152,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance2.ogg
+;---roar - дистанция 1---
+:activated=15,plrdistwithin=150:activate=151
+:activated=151,varequal=sound 1:activate=0,setvar=sound 2,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance1.ogg
+:activated=151,varequal=sound 2:activate=0,setvar=sound 1,sound=audiobank\Sound_Engine_HD\zombies\dante\roar_distance1.ogg
+
+

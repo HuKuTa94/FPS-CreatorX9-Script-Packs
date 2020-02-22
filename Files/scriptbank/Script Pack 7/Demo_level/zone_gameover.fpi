@@ -1,0 +1,26 @@
+;===Конец игры, кончилось время===
+:state=0,activated=1:state=1,resetplrweapons,water=0
+:activated=1:plrdisable=1,plrfreeze=10000,camfov=0
+
+:state=1:settargetname=ambience,activatetarget=1
+:state=1:settargetname=game_over,activatetarget=1
+:state=1:activateifused=1
+:state=1:state=2,plrmoveto=cam1
+
+:state=2:state=3,etimerstart,plrmoveto=cam2
+:state=3,etimergreater=1000:state=4,etimerstart,settargetname=gm1,activatetarget=1,settargetname=gm1_l,activatetarget=1,settargetname=gm1_e,activatetarget=1
+:state=4,etimergreater=1200:state=5,plrmoveto=cam3
+:state=5:plrmoveto=cam4,etimerstart,state=6
+:state=6,etimergreater=800:state=7,etimerstart,settargetname=gm2_,activatetarget=1,settargetname=gm2_l_,activatetarget=1,settargetname=gm2_e,activatetarget=1
+:state=7,etimergreater=1200:state=8,plrmoveto=cam5,etimerstart
+:state=8,etimergreater=1500:state=9,etimerstart,settargetname=gm3,activatetarget=1,settargetname=gm3_,activatetarget=1,settargetname=gm3_l,activatetarget=1,settargetname=gm3_e,activatetarget=1
+:state=9,etimergreater=1000:state=10,plrmoveto=cam5,etimerstart
+
+;:state=10,etimergreater=1000:state=11,etimerstart
+;:state=11,etimergreater=100:settargetname=gm4_1,activatetarget=1,settargetname=gm4_e1,activatetarget=1
+;:state=11,etimergreater=200:settargetname=gm4_2,activatetarget=1
+;:state=11,etimergreater=300:settargetname=gm4_3,activatetarget=1
+;:state=11,etimergreater=400:settargetname=gm4_4,activatetarget=1
+;:state=11,etimergreater=500:settargetname=gm4_5,activatetarget=1
+;:state=11,etimergreater=600:settargetname=gm4_6,activatetarget=1,settargetname=gm4_e2,activatetarget=1
+;:state=11,etimergreater=700:settargetname=gm4_7,activatetarget=1

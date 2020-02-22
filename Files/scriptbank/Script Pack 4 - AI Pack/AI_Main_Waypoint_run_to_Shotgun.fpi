@@ -1,0 +1,15 @@
+desc          = Спокойно идет по ВП до конца, затем включается скрипт shotgun.fpi (By Никита) 
+
+:always,shotdamage=1:setvar=hitbody 1
+
+;===Бежит по вейпоинту===
+:state=0:animate=5,runfore=5
+:state=0,waypointstate=0:waypointstart
+:state=0,waypointstate=3:waypointnext
+:state=0,waypointstate=5:waypointreverse,state=1
+
+;===Запус скрипта assault===
+:state=1:runfpi=Script Pack 4 - AI Pack\AI_Main_shotgun.fpi
+
+;End of Script
+

@@ -1,0 +1,43 @@
+;Entity Spec
+
+;Header
+
+desc          = bazooka
+
+;AI
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\Weapons\Entity_Weapon_Start.fpi
+aidestroy     = disappear1.fpi
+
+;Spawn
+spawnmax      = 1
+spawndelay    = 0
+spawnqty      = 0
+
+;Itemproperties
+defaultstatic = 0
+materialindex = 3
+collisionmode = 0
+debrisshape   = 0
+explodable    = 0
+
+;Orientation
+
+model         = entitybank\ww2\items\bazooka.x
+scale         = 100
+rotz          = 90
+texturepath   = gamecore\guns\ww2\bazooka\
+textured      = gun_D2.tga
+reducetexture = -1
+transparency  = 1
+isimmobile    = 1
+
+;Identity Details
+isweapon      = ww2\bazooka
+isflak        = 1
+quantity      = 3
+speed         = 100
+
+;Decals
+decalmax      = 1
+decal0        = glowred

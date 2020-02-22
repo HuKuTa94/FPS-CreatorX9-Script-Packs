@@ -1,0 +1,177 @@
+;Camera Entity Tool - Редактор камеры компонента
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 20.06.2012
+;Требования: необходим патч 1.19 и выше. 
+;Версия скрипта: 1.0
+;Описание: скрипт-инструмент написан специально для того, чтобы облегчить вам работу по настройке координат для камеры компонента.
+
+;Управление (по умолчанию):
+; Q,W   - двигать камеру по координате Х относительно компонента (setcamoffsetx)         
+; A,S   - двигать камеру по координате Y относительно компонента (setcamoffsety) 
+; Z,X   - двигать камеру по координате Z относительно компонента (setcamoffsetz) 
+; R     - сбросить на ноль координату Х (setcamoffsetx)   
+; F     - сбросить на ноль координату Y (setcamoffsety)   
+; V     - сбросить на ноль координату Z (setcamoffsetz)   
+; [,]   - повернуть камеру по координате X (setcamrotx)  [ and ]
+; ;,'   - повернуть камеру по координате Y (setcamroty)  ; and '
+; <,>   - повернуть камеру по координате Z (setcamrotz)  < and >
+; \     - сбросить на ноль координату Х (setcamrotx)  \
+; ENTER - сбросить на ноль координату Y (setcamroty)
+; SHIFT - сбросить на ноль координату Х (setcamrotz)
+; BACKSPACE - сбросить на ноль все координаты
+; 1 - включить\выключить ENTITY CAM EDIT TOOL 
+; 2 - включить\выключить "camerarotationon" (включаются пользовательски настройки поворота камеры)\(включается камера компонента)
+; 3 - включить\выключить следование персонажа по линии WayPoint
+
+:state=0:dimlocalvar=rx,dimlocalvar=ry,dimlocalvar=rz,setvar=rx 0,setvar=ry 0,setvar=rz 0     ; SETOFFSET(x)(y)(z)
+:state=0:dimlocalvar=ox,dimlocalvar=oy,dimlocalvar=oz,setvar=ox 0,setvar=0y 0,setvar=oz 0     ; SETCAMROT(x)(y)(z)
+:state=0:dimlocalvar=wp,setvar=wp 0,dimlocalvar=wpstate,setvar=wpstate 0                      ; WAYPOINT state
+:state=0:dimlocalvar=cam,setvar=cam 0,dimlocalvar=camstate,setvar=camstate 0                  ; CAMERAROTATIONON state
+:state=0:dimlocalvar=camedit,setvar=camedit 0,dimlocalvar=cameditstate,setvar=cameditstate 0  ; ENTITYCAM state
+:state=0:state=1
+
+;||||||||||||||||||||||||||||||||||||||||| CAMERA ENTITY EDIT TOOL ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+;= "1" - вкл\выкл настройку камеры
+:varequal=cameditstate 0,varequal=camedit 0,keypressed=2 1:setvar=camedit 1,setvar=cameditstate 1
+:varequal=cameditstate 1,keypressed=2 0:setvar=cameditstate 2
+:varequal=cameditstate 2,varequal=camedit 1,keypressed=2 1:setvar=camedit 0,setvar=cameditstate 3
+:varequal=cameditstate 3,keypressed=2 0:setvar=cameditstate 0
+
+;= "2" - выкл\вкл камеру вращения компонента (если включено, камера вращается вместе с компонентом)=
+:varequal=camedit 1,varequal=camstate 0,varequal=cam 0,keypressed=3 1:setvar=cam 1,setvar=camstate 1
+:varequal=camstate 1,keypressed=3 0:setvar=camstate 2
+:varequal=camedit 1,varequal=camstate 2,varequal=cam 1,keypressed=3 1:setvar=cam 0,setvar=camstate 3
+:varequal=camstate 3,keypressed=3 0:setvar=camstate 0
+
+;= "3" - начать\прекратить следовать по вейпоинту=
+:varequal=wpstate 0,varequal=wp 0,keypressed=4 1:setvar=wp 1,setvar=wpstate 1
+:varequal=wpstate 1,keypressed=4 0:setvar=wpstate 2
+:varequal=wpstate 2,varequal=wp 1,keypressed=4 1:setvar=wp 0,setvar=wpstate 3
+:varequal=wpstate 3,keypressed=4 0:setvar=wpstate 0
+
+
+;=setcamoffsetx=
+:state=1:hudreset,hudx=30,hudy=88,hudtext=SETCAMOFFSETX =,hudname=textox,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=35.5,hudy=86,hudsizex=15,hudsizey=15,hudtext= - ,hudname=ox,hudmake=display
+:state=1:hudreset,hudx=37.5,hudy=88.76,hudsizex=10,hudsizey=10,hudhide=1,hudimage=gamecore\huds\numeric1.dds,hudname=oxcount,hudtype=6,huduservar=ox,hudmake=numeric
+;=setcamoffsety=
+:state=1:hudreset,hudx=30,hudy=91,hudtext=SETCAMOFFSETY =,hudname=textoy,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=35.5,hudy=89,hudsizex=15,hudsizey=15,hudtext= - ,hudname=oy,hudmake=display
+:state=1:hudreset,hudx=37.5,hudy=91.76,hudsizex=10,hudsizey=10,hudhide=1,hudimage=gamecore\huds\numeric1.dds,hudname=oycount,hudtype=6,huduservar=oy,hudmake=numeric
+;=setcamoffsetz=
+:state=1:hudreset,hudx=30,hudy=94,hudtext=SETCAMOFFSETZ =,hudname=textoz,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=35.5,hudy=92,hudsizex=15,hudsizey=15,hudtext= - ,hudname=oz,hudmake=display
+:state=1:hudreset,hudx=37.5,hudy=94.76,hudsizex=10,hudsizey=10,hudhide=1,hudimage=gamecore\huds\numeric1.dds,hudname=ozcount,hudtype=6,huduservar=oz,hudmake=numeric
+
+;=setcamrotx=
+:state=1:hudreset,hudx=51,hudy=88,hudtext=SETCAMROTX =,hudname=textrx,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=56.5,hudy=86,hudsizex=15,hudsizey=15,hudtext= - ,hudname=rx,hudmake=display
+:state=1:hudreset,hudx=58.5,hudy=88.76,hudsizex=10,hudsizey=10,hudhide=1,hudimage=gamecore\huds\numeric1.dds,hudname=rxcount,hudtype=6,huduservar=rx,hudmake=numeric
+;=setcamroty=
+:state=1:hudreset,hudx=51,hudy=91,hudtext=SETCAMROTY =,hudname=textry,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=56.5,hudy=89,hudsizex=15,hudsizey=15,hudtext= - ,hudname=ry,hudmake=display
+:state=1:hudreset,hudx=58.5,hudy=91.76,hudsizex=10,hudsizey=10,hudhide=1,hudimage=gamecore\huds\numeric1.dds,hudname=rycount,hudtype=6,huduservar=ry,hudmake=numeric
+;=setcamrotz=
+:state=1:hudreset,hudx=51,hudy=94,hudtext=SETCAMROTZ =,hudname=textrz,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=56.5,hudy=92,hudsizex=15,hudsizey=15,hudtext= - ,hudname=rz,hudmake=display
+:state=1:hudreset,hudx=58.5,hudy=94.76,hudsizex=10,hudsizey=10,hudhide=1,hudimage=gamecore\huds\numeric1.dds,hudname=rzcount,hudtype=6,huduservar=rz,hudmake=numeric
+
+;=Управление=
+;= [1] - Entity cam=
+:state=1:hudreset,hudx=72.3,hudy=88,hudtext=[1] Edit Mode  ,hudname=edit,hudmake=display
+:state=1:hudreset,hudx=80,hudy=88,hudtext=OFF,hudname=1off,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=80,hudy=88,hudtext=ON,hudname=1on,hudhide=1,hudmake=display
+:varequal=camedit 0:hudshow=1off,hudunshow=1on
+:varequal=camedit 1:hudshow=1on,hudunshow=1off
+
+;= [2] - Entity rotation cam=
+:state=1:hudreset,hudx=73,hudy=91,hudtext=[2] CamRotation  ,hudname=camrot,hudmake=display
+:state=1:hudreset,hudx=80,hudy=91,hudtext=OFF,hudname=2off,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=80,hudy=91,hudtext=ON,hudname=2on,hudhide=1,hudmake=display
+:varequal=cam 0:hudshow=2off,hudunshow=2on
+:varequal=cam 1:hudshow=2on,hudunshow=2off
+
+;= [3] - WayPoint=
+:state=1:hudreset,hudx=73.7,hudy=94,hudtext=[3] Follow WayPoint  ,hudname=followwp,hudmake=display
+:state=1:hudreset,hudx=80,hudy=94,hudtext=OFF,hudname=3off,hudhide=1,hudmake=display
+:state=1:hudreset,hudx=80,hudy=94,hudtext=ON,hudname=3on,hudhide=1,hudmake=display
+:varequal=wp 0:hudshow=3off,hudunshow=3on
+:varequal=wp 1:hudshow=3on,hudunshow=3off
+
+
+;=Минус, когда значение меньше нуля=
+:varequal=camedit 1,varless=ox 0:hudshow=ox
+:vargreater=ox 0:hudunshow=ox
+:varequal=camedit 1,varless=oy 0:hudshow=oy
+:vargreater=oy 0:hudunshow=oy
+:varequal=camedit 1,varless=oz 0:hudshow=oz
+:vargreater=oz 0:hudunshow=oz
+:varequal=camedit 1,varless=rx 0:hudshow=rx
+:vargreater=rx 0:hudunshow=rx
+:varequal=camedit 1,varless=ry 0:hudshow=ry
+:vargreater=ry 0:hudunshow=ry
+:varequal=camedit 1,varless=rz 0:hudshow=rz
+:vargreater=rz 0:hudunshow=rz
+
+;=Сброс всех координат на ноль=
+:varequal=camedit 1,keypressed=14 1:setvar=ox 0,setvar=oy 0,setvar=oz 0,setvar=rx 0,setvar=ry 0,setvar=rz 0
+
+;=Перемещение камеры=
+::setcamoffsetx=%ox
+::setcamoffsety=%oy
+::setcamoffsetz=%oz
+
+:varequal=camedit 1,keypressed=17 1:addvar=ox 0.25
+:varequal=camedit 1,keypressed=16 1:subvar=ox 0.25
+:varequal=camedit 1,keypressed=19 1:setvar=ox 0
+
+:varequal=camedit 1,keypressed=31 1:addvar=oy 0.25
+:varequal=camedit 1,keypressed=30 1:subvar=oy 0.25
+:varequal=camedit 1,keypressed=33 1:setvar=oy 0
+
+:varequal=camedit 1,keypressed=45 1:addvar=oz 0.25
+:varequal=camedit 1,keypressed=44 1:subvar=oz 0.25
+:varequal=camedit 1,keypressed=47 1:setvar=oz 0
+
+
+;=Вращение камеры=
+::setcamrotx=%rx
+::setcamroty=%ry
+::setcamrotz=%rz
+
+:varequal=camedit 1,keypressed=27 1:addvar=rx 0.25
+:varequal=camedit 1,keypressed=26 1:subvar=rx 0.25
+:varequal=camedit 1,keypressed=43 1:setvar=rx 0
+:vargreater=rx 180:setvar=rx -179
+:varless=rx -180:setvar=rx 180
+
+:varequal=camedit 1,keypressed=40 1:addvar=ry 0.25
+:varequal=camedit 1,keypressed=39 1:subvar=ry 0.25
+:varequal=camedit 1,keypressed=28 1:setvar=ry 0
+:vargreater=ry 180:setvar=ry -179
+:varless=ry -180:setvar=ry 180
+
+:varequal=camedit 1,keypressed=52 1:addvar=rz 0.25
+:varequal=camedit 1,keypressed=51 1:subvar=rz 0.25
+:varequal=camedit 1,keypressed=54 1:setvar=rz 0
+:vargreater=rz 180:setvar=rz -179
+:varless=rz -180:setvar=rz 180
+
+
+;||||||||||||||||||||||||||||||||||||||||| ENTITY SRIPT |||||||||||||||||||||||||||||||||||||||||
+
+;=CAMERA EDIT=
+:varequal=camedit 1:entitycam,plrdisable=1000,plrfreeze=1000,hudshow=textox,hudshow=textoy,hudshow=textoz,hudshow=textrx,hudshow=textry,hudshow=textrz,hudshow=oxcount,hudshow=oycount,,hudshow=ozcount,hudshow=rxcount,hudshow=rycount,hudshow=rzcount
+:varequal=camedit 0:plrcam,plrdisable=0,plrfreeze=0,hudunshow=textox,hudunshow=textoy,hudunshow=textoz,hudunshow=textrx,hudunshow=textry,hudunshow=textrz,hudunshow=oxcount,hudunshow=oycount,,hudunshow=ozcount,hudunshow=rxcount,hudunshow=rycount,hudunshow=rzcount,hudunshow=ox,hudunshow=oy,hudunshow=oz,hudunshow=rx,hudunshow=ry,hudunshow=rz
+
+;=Вращение камеры вкл\выкл=
+:state=1:camrotationon=%cam
+
+;=Вейпоинт=
+:state=1,waypointstate=0,varnotequal=wp 0:animate=2,waypointstart
+:state=1,waypointstate=3,varnotequal=wp 0:animate=2,waypointnext
+:state=1,waypointstate=4,varnotequal=wp 0:animate=2,waypointrandom
+:state=1,waypointstate=5,varnotequal=wp 0:animate=2,waypointreverse
+
+;End of Script

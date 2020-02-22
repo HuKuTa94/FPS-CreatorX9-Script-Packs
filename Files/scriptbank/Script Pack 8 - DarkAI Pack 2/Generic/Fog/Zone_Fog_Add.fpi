@@ -1,0 +1,98 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 24.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: прибавляет туман (более густой)
+
+;===Глобальные переменные===
+;  "VAR=X"
+;       fb - Fog blue
+;       fg - Fog green
+;       fr - Fog red
+;       fs - Fog start
+;       fe - For end
+;       a  - Ambience
+;       ab - Ambience blue
+;       ag - Ambience green
+;       ar - Ambience red
+
+;____________________ИГРОК В ЗОНЕ____________________________
+;===Игрок в зоне - прибавить туман===
+;--Управление туманом Min & Max--
+:plrwithinzone=1,varless=fs 100:addvar=fs 2
+:plrwithinzone=1,varless=fe 500:addvar=fe 2
+:plrwithinzone=1,vargreater=fs 100:subvar=fs 2
+:plrwithinzone=1,vargreater=fe 500:subvar=fe 2
+
+;--Управление цветом освещенностьи уровня Min & Max--
+:plrwithinzone=1,varless=fb 120:addvar=fb 1
+:plrwithinzone=1,varless=fg 120:addvar=fg 1
+:plrwithinzone=1,varless=fr 120:addvar=fr 1
+:plrwithinzone=1,vargreater=fb 120:subvar=fb 1
+:plrwithinzone=1,vargreater=fg 120:subvar=fg 1
+:plrwithinzone=1,vargreater=fr 120:subvar=fr 1
+
+;--Управление освещенностью уровня Min & Max--
+:plrwithinzone=1,varless=a 35:addvar=a 0.1
+:plrwithinzone=1,vargreater=a 35:subvar=a 0.1
+:plrwithinzone=1,varless=ab 120:addvar=ab 1
+:plrwithinzone=1,varless=ag 120:addvar=ag 1
+:plrwithinzone=1,varless=ar 120:addvar=ar 1
+:plrwithinzone=1,vargreater=ab 120:subvar=ab 1
+:plrwithinzone=1,vargreater=ag 120:subvar=ag 1
+:plrwithinzone=1,vargreater=ar 120:subvar=ar 1
+
+;________________ИГРОК НЕ В ЗОНЕ / ИГРОК БЛИЗКО___________________
+;===Игрок не в зоне - убавить туман===
+;--Управление туманом Min & Max--
+:plrwithinzone=0,plrdistwithin=1000,varless=fs 400:addvar=fs 2
+:plrwithinzone=0,plrdistwithin=1000,varless=fe 800:addvar=fe 2
+:plrwithinzone=0,plrdistwithin=1000,vargreater=fs 400:subvar=fs 2
+:plrwithinzone=0,plrdistwithin=1000,vargreater=fe 800:subvar=fe 2
+
+;--Управление цветом освещенностьи уровня Min & Max--
+:plrwithinzone=0,plrdistwithin=1000,varless=fb 80:addvar=fb 1
+:plrwithinzone=0,plrdistwithin=1000,varless=fg 80:addvar=fg 1
+:plrwithinzone=0,plrdistwithin=1000,varless=fr 80:addvar=fr 1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=fb 80:subvar=fb 1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=fg 80:subvar=fg 1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=fr 80:subvar=fr 1
+
+;--Управление освещенностью уровня Min & Max--
+:plrwithinzone=0,plrdistwithin=1000,varless=a 22:addvar=a 0.1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=a 22:subvar=a 0.1
+:plrwithinzone=0,plrdistwithin=1000,varless=ab 100:addvar=ab 0.1
+:plrwithinzone=0,plrdistwithin=1000,varless=ag 100:addvar=ag 0.1
+:plrwithinzone=0,plrdistwithin=1000,varless=ar 100:addvar=ar 0.1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=ab 100:subvar=ab 0.1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=ag 100:subvar=ag 0.1
+:plrwithinzone=0,plrdistwithin=1000,vargreater=ar 100:subvar=ar 0.1
+
+;_____________________ИГРОК ДАЛЕКО________________________________
+;===Игрок далеко - прибавить туман===
+;--Управление туманом Min & Max--
+:plrwithinzone=0,plrdistfurther=1000,varless=fs 200:addvar=fs 1
+:plrwithinzone=0,plrdistfurther=1000,varless=fe 400:addvar=fe 1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=fs 200:subvar=fs 1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=fe 400:subvar=fe 1
+
+;--Управление цветом освещенностьи уровня Min & Max--
+:plrwithinzone=0,plrdistfurther=1000,varless=fb 50:addvar=fb 0.1
+:plrwithinzone=0,plrdistfurther=1000,varless=fg 50:addvar=fg 0.1
+:plrwithinzone=0,plrdistfurther=1000,varless=fr 50:addvar=fr 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=fb 50:subvar=fb 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=fg 50:subvar=fg 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=fr 50:subvar=fr 0.1
+
+;--Управление освещенностью уровня Min & Max--
+:plrwithinzone=0,plrdistfurther=1000,varless=a 15:addvar=a 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=a 15:subvar=a 0.1
+:plrwithinzone=0,plrdistfurther=1000,varless=ab 90:addvar=ab 0.1
+:plrwithinzone=0,plrdistfurther=1000,varless=ag 90:addvar=ag 0.1
+:plrwithinzone=0,plrdistfurther=1000,varless=ar 90:addvar=ar 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=ab 90:subvar=ab 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=ag 90:subvar=ag 0.1
+:plrwithinzone=0,plrdistfurther=1000,vargreater=ar 90:subvar=ar 0.1
+
+;End of Script

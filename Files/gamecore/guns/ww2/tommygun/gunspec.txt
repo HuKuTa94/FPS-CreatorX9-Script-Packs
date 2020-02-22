@@ -1,0 +1,128 @@
+;Tommygun weapon spec
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 1
+muzzlesize     = 220
+brass          = 2
+smoke          = 1
+second         = 0
+damage         = 9
+damagetype     = 1
+scorchtype     = 1
+reloadqty      = 24
+iterate        = 0
+accuracy       = 5
+;zoommode       = 1
+range          = 5000
+
+;GUN Visuals
+textured      = gun_D2.tga
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+weapontype    = 3
+
+;GUN Sounds
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         = zoom.wav
+sound5         = cock.wav
+fireloop       = 2000
+
+
+;HUD muzzleflash position
+
+horiz          = 0
+vert           = 2
+forward        = -2
+alignx         = 25
+aligny         = -9
+alignz         = 140
+
+
+;HUD animation frames list
+
+keyframe ratio = 1
+select         = 0,17
+Idle           = 18,51
+Move           = 52,70
+Start fire     = 72,73
+automatic fire = 77,79
+end fire       = 83,85
+reload         = 88,138
+;reload		= 139,199
+
+useempty = 1
+empty reload = 139,198
+
+putaway	       = 1025,1040
+
+run		= 586,604
+
+;HUD sound frames list
+
+soundframes    = 4
+sframe0        = 72,1
+sframe1        = 139,2
+sframe3		= 88,2
+sframe2        = 170,5
+
+;Airmod conditions graciously added by Shadowtroid
+
+firerate = 4
+
+zoomto =207,212
+zoom idle =213,233
+zoom move =236,259
+zoom start fire =261,262
+zoom automatic fire =266,268
+zoom end fire = 272,273
+zoomfrom =279,284
+
+simplezoom = 1
+simplezoomacc = 2
+simplezoomy = 4
+simplezoomx = -0.7
+simplezoomanim = 1
+simplezoomflash = 1
+roty = 1
+
+zoomalignx         = 0
+zoomaligny         = -8
+zoomalignz         = 140
+
+melee start 	= 714,719
+melee end	= 720,733
+
+nofullreload = 1
+chamberedround	= 1
+
+simplezoomspeed=6
+runy = -7
+runaccuracy = 60
+forcezoomout =1
+recoily = 10
+recoilyreturn = 86
+recoilx = 3
+recoilxreturn = 94
+
+zoomrecoily = 11
+zoomrecoilyreturn = 90
+zoomrecoilx = 5
+zoomrecoilxreturn = 95
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3
+zoomgunlagspeed = 6
+zoomgunlagxmax = 4
+zoomgunlagymax = 6
+
+zoomwalkspeed = 0.7
+zoomturnspeed = 0.15

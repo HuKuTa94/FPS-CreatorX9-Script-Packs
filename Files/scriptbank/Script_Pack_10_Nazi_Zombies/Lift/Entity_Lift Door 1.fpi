@@ -1,0 +1,15 @@
+;Описание: дверь лифта на этаже № 1
+
+;--Начало скрипта--
+:state=0,activated=1:state=1,setframe=0,coloff,sound=audiobank\Script_Pack_10_Nazi_Zombies\lift_door_open.ogg,sound=audiobank\Script_Pack_10_Nazi_Zombies\box_done.ogg
+:state=2,activated=0:state=3,colon
+
+;\\\Управление дверью\\\
+;--Открытие--
+:state=1:incframe=0
+:state=1,frameatend=0:settargetname=ZoneLift,activatetarget=301,state=2
+
+;--Закрытие--
+:state=3:decframe=0
+:state=3,frameatstart=0:settargetname=ZoneLift,activatetarget=201,sound=audiobank\Script_Pack_10_Nazi_Zombies\lift_door_close.ogg,state=0
+

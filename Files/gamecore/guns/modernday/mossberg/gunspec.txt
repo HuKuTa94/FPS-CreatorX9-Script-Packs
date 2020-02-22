@@ -1,0 +1,117 @@
+;mossberg weapon spec
+
+Weapon rerigged and animated by Joakim Olsson
+Hands edited by Joakim after Sebastian Kim's basemesh
+
+;GUN Model File Requirements
+
+;GUN Settings
+
+muzzleflash    = 4
+muzzlesize     = 200
+brass          = 3
+smoke          = 1
+damage         = 58
+damagetype     = 2
+scorchtype     = 3
+reloadqty      = 6
+iterate        = 0
+accuracy       = 3
+shotgun        = 1
+range          = 24000
+
+;GUN Visuals
+
+textured      = gun_D2.tga
+effect        = effectbank\phong_bump_specular\phong_bump_specular.fx
+transparency  = 2
+weapontype    = 2
+
+;GUN Sounds
+
+sound1	       = fire.wav
+sound2	       = reload.wav
+sound3         = dryfire.wav
+sound4         =
+sound5         =
+fireloop       = 0
+
+;HUD muzzleflash position
+
+horiz          = 0
+vert           = 2
+forward        = -2
+alignx         = 25
+aligny         = -10
+alignz         = 140
+
+;HUD animation frames list
+
+keyframe ratio = 1
+select         = 0,17
+Idle           = 18,52
+Move           = 54,70
+fire           = 72,81
+start reload   = 83,91
+reload loop    = 92,103
+end reload     = 105,125
+;reload		= 133,160
+putaway	       = 1026,1040
+
+run		= 586,604
+
+;AIRMOD conditions graciously added by Shadowtroid
+
+zoomto =207,212
+zoom idle =213,233
+zoom move =236,259
+zoom start fire =261,261
+zoom end fire = 265,276
+zoomfrom =279,284
+
+simplezoom = 1
+simplezoomanim = 1
+simplezoomy = -2.4
+simplezoommode = -5
+simplezoomacc = 0.1
+simplezoomflash = 1
+
+zoomalignx         = 0
+zoomaligny         = -10
+zoomalignz         = 140
+
+
+melee start 	= 714,719
+melee end	= 720,733
+
+simplezoomspeed=6
+runy = -7
+forcezoomout =1
+recoily = 60
+recoilyreturn = 93
+recoilx = 10
+recoilxreturn = 90
+
+zoomrecoily = 50
+zoomrecoilyreturn = 95
+zoomrecoilx = 6
+zoomrecoilxreturn = 95
+
+gunlagspeed = 9
+gunlagxmax =3
+gunlagymax = 3
+zoomgunlagspeed = 6
+zoomgunlagxmax = 4
+zoomgunlagymax = 6
+
+zoomwalkspeed = 0.2
+zoomturnspeed = 0.3
+rotz = 0.1
+
+
+;HUD sound frames list
+
+soundframes    = 3
+sframe0        = 72,1
+;sframe1        = 72,3
+sframe2        = 92,2

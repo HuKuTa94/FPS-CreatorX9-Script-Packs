@@ -1,0 +1,31 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 03.09.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Зона включения точек навигации в локации №1
+
+;Игрок в зоне - включить pathnode этой локации
+:state=0,plrwithinzone=1:settargetname=pathnode1,activatetarget=1,state=1
+
+;Проверка наличия бота в этой зоне
+:state=1,entityinzone=ai1 1:state=3,plraddhealth=-1
+:state=1,entityinzone=ai1 0:state=2
+
+;Передача местоположения игрока всем ботам
+:state=2:settargetname=ai1,activatetarget=1
+:state=2:settargetname=ai2,activatetarget=1
+:state=2:settargetname=ai3,activatetarget=1
+:state=2:settargetname=ai4,activatetarget=1
+:state=2:settargetname=ai5,activatetarget=1
+:state=2:state=3
+
+;Игрок покинул зону - выключить pathnode этой локации
+:state=3,plrwithinzone=0:settargetname=pathnode1,activatetarget=0,state=4
+
+;Сообщить всем ботам, что игрок покинул эту локацию
+:state=4:settargetname=ai1,activatetarget=0
+:state=4:settargetname=ai2,activatetarget=0
+:state=4:settargetname=ai3,activatetarget=0
+:state=4:settargetname=ai4,activatetarget=0
+:state=4:settargetname=ai5,activatetarget=0
+:state=4:state=0

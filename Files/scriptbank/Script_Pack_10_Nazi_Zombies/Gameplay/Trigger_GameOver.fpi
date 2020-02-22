@@ -1,0 +1,6 @@
+;-Конец игры (камера)
+:state=0:floorlogic,coloff,nobulletcol,hide,alwaysactive=1,state=1
+:state=1,varequal=Wave 0:plrmoveto=gameover,resetplrweapons,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\game_over.wav,etimerstart,state=2
+:state=2:entitycam,camrotationon=0,setcamoffsetx=0,setcamoffsety=58,setcamoffsetz=0
+:state=2:plrdisable=10000,plrfreeze=10000
+:state=2,etimergreater=21000:quitgame

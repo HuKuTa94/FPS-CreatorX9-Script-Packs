@@ -1,0 +1,15 @@
+;Artificial Intelligence Script
+
+;Header
+
+desc          = Rich Zone (By Никита) Зона богатства =)
+
+:state=0:state=1
+
+;===Когда игрок в зоне===
+:state=1,plrwithinzone=1:etimerstart,state=2
+
+;===Игроку начисляются деньги===
+:state=2,etimergreater=1000,plrwithinzone=1:state=1,addvar=moneysys 10
+
+;End of Script

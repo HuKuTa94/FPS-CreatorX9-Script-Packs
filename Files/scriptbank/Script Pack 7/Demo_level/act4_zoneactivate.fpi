@@ -1,0 +1,5 @@
+:state=0,plrwithinzone=1:etimerstart,state=1,settargetname=act4_door,activatetarget=2,state=1
+:state=1,etimergreater=1600:activateifused=2,state=2,etimerstart
+
+:state=2,etimergreater=50:settargetname=decal_X,activatetarget=1:state=3
+:state=3,activated=1:settargetname=decal_X,activatetarget=5:state=4

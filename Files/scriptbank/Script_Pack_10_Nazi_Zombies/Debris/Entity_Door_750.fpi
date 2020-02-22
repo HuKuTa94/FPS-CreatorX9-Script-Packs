@@ -1,0 +1,32 @@
+;ХУД
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\debris750.dds,hudname=debris750,hudhide=1,hudmake=display
+
+;Начало скрипта
+:state=0:state=1
+
+;Взаимодействие с игроком
+;-Игрок близко
+:state=1,plrdistwithin=50,plrfacing=50:hudshow=debris750,state=2
+;--Игрок далеко
+:state=2,plrnotfacing=50:hudunshow=debris750,state=1
+:state=2,plrdistfurther=50:hudunshow=debris750,state=1
+
+;-Игрок убирает припятствие
+:state=1,activated=1:state=5
+:state=2,plrdistwithin=50,keypressed=33 1,vargreater=cash 749:state=3
+:state=3,plrdistfurther=50:state=2
+:state=3,plrnotfacing=50:state=2
+:state=3,plrdistwithin=50,keypressed=33 0:state=5,hudunshow=debris750,subvar=cash 750,activateifused=1
+
+;Недостаточно денег
+:state=2,plrdistwithin=50,keypressed=33 1,varless=cash 749:state=4
+:state=4,plrdistfurther=50:state=2
+:state=4,plrdistwithin=50,keypressed=33 0:state=2,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\buy_no_money.wav
+
+;-Анимация и звук
+:state=5:setframe=0,sound=$0,coloff,state=6
+:state=6:incframe=0
+:state=6,frameatend=0:state=7
+
+;---Звук кончился---
+:state=7,soundfinished=1:destroy

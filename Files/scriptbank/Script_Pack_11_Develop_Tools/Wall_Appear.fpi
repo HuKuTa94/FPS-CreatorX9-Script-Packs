@@ -1,0 +1,7 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 30.06.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Cкрипт невидимого блока
+
+:state=0:floorlogic,nobulletcol=1,hide,runfpidefault=1

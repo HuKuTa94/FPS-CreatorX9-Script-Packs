@@ -1,0 +1,20 @@
+:state=0:state=1
+;===Атака===
+:state=1:rotatetoplr,movefore=5,animate=93
+:state=1,plrdistwithin=50:state=2
+
+;===Произвольный звук атаки===
+:state=2,random=2:state=20,setframe=98,sound=audiobank\station13\zombies\zombie1_attack1.wav
+:state=2,random=2:state=20,setframe=98,sound=audiobank\station13\zombies\zombie1_attack2.wav
+
+:state=20:incframe=98,rotatetoplr
+:state=20,framebeyond=98 40,plrdistwithin=55:plraddhealth=-20,state=21,sound=audiobank\station13\zombies\zombie_hit2.wav
+:state=20,framebeyond=98 40,plrdistfurther=55:state=0
+:state=21:incframe=98,rotatetoplr
+:state=21,framebeyond=98 60,plrdistwithin=55:plraddhealth=-20,state=22,sound=audiobank\station13\zombies\zombie_hit1.wav
+:state=21,framebeyond=98 60,plrdistfurther=55:state=0
+:state=22:incframe=98,rotatetoplr
+:state=22,frameatend=98:state=1,setframe=2
+
+
+;End of Script

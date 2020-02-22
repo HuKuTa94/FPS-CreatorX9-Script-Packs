@@ -1,0 +1,7 @@
+;Скрипт написал: Кошелев Никита
+;Описание: после подбора предмета игрок сможет высоко прыгать
+
+:state=0,plrdistwithin=40:state=1,playertake,coloff,plrsound=audiobank\items\pickup.wav
+:state=1:newjumpheight=125
+
+;End of Script

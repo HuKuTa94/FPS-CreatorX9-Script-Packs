@@ -1,0 +1,19 @@
+;Скрипт написал: Кошелев Никита (fpsc.forum24.ru)
+;Описание: скрипт для триггер-зоны. При входе в зону или активации камера начинает трястись от взрыва. 
+;Скрипт проигрывает звук (указанный в триггер-зоне) и активирует IfUsed.
+
+
+:state=0:dimlocalvar=camera,setvar=camera 0,camshake=%camera
+:state=0:state=1
+
+:state=1,activated=1:state=2,plrsound=$0,activateifused=1
+
+:always:camshake=%camera
+
+:state=2:addvar=camera 10
+:state=2,vargreater=camera 60:state=3
+:state=3:subvar=camera 7
+:state=3,varless=camera 1:state=4,setvar=camera 0
+
+
+;End of Script

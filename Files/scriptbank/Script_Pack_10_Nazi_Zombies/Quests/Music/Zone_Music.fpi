@@ -1,0 +1,30 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 14.11.2013
+;Требования: необходим патч 1.18 и выше
+;Версия скрипта: 1.0
+;Описание: квест музыки
+
+;\\\\Начало скрипта\\\\
+:state=0:activate=0,activateifused=0,state=1
+
+;\\\\Процесс включения\\\\
+:state=1,activated=1:activate=0,state=2
+:state=2,activated=1:activate=0,state=3
+:state=3,activated=1:activate=0,state=4
+
+;\\\\Включение случайной музыки\\\\
+:state=4,random=110:state=5,etimerstart,sound=audiobank\station13\Survival\Music\115.ogg
+:state=4,random=107:state=6,etimerstart,sound=audiobank\station13\Survival\Music\Coming Home.ogg
+:state=4,random=109:state=7,etimerstart,sound=audiobank\station13\Survival\Music\Lullaby of a Dead Man.ogg
+:state=4,random=108:state=8,etimerstart,sound=audiobank\station13\Survival\Music\The One.ogg
+
+;\\\\Музыка\\\\
+;-- Трек 115  (219 сек) --
+:state=5,etimergreater=219000:activateifused=1,state=0
+;-- Трек Coming Home (195 сек) --
+:state=6,etimergreater=195000:activateifused=1,state=0
+;-- Трек Lullaby of a Dead Man (235 сек) --
+:state=7,etimergreater=235000:activateifused=1,state=0
+;-- Трек The One (285 сек) --
+:state=8,etimergreater=285000:activateifused=1,state=0

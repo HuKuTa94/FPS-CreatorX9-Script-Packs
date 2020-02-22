@@ -1,0 +1,45 @@
+desc          = Shotgun (By Никита) 
+
+:always,shotdamage=1:setvar=hitbody 1
+
+;===Оружие сразу заряжено===
+:state=0:state=1,reloadweapon
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;===Стоит на месте===
+:state=1,plrwithin=50:state=2
+:state=1,plrdistwithin=251:state=2,rotatetoplr
+:state=1:animate=1
+:state=1,shotdamage=1:state=2,resethead,strafe=135
+:state=1,plrcanbeseen:state=2,resethead
+
+;///////////////////////////////////////////////////////////////////////////////////////
+
+;===Cтреляет в игрока===
+:state=2,plrcannotbeseen,state=4
+:state=2,plrcanbeseen:rotatetoplr
+:state=2,plrdistfurther=251:state=4
+:state=2,ifweapon=1,plrdistwithin=250,plrcanbeseen:settarget,rundecal=6,useweapon
+:state=2,ifweapon=0:setframe=6,state=3
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;===Перезарежается стоя===
+:state=3:incframe=6,rotatetoplr
+:state=3,frameatend=6:reloadweapon,state=2
+
+;///////////////////////////////////////////////////////////////////////////////////////
+
+;===Ищит игрока===
+:state=4:followplr,animate=5,runfore=5
+:state=4,shotdamage=1:settarget,rotatetotarget
+:state=4,plrcanbeseen:state=2,resethead
+:state=4,plrdistwithin=250:state=2
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+;End of Script
+
+;ИИ с дробовиком. Эффективен на близких дистанциях. Старается не упускать цель и держаться рядом к ней. 
+

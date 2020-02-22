@@ -1,0 +1,13 @@
+;Автор\Author: Кошелев Никита (aka Hukuta)
+;Дата\Date: 03.09.2015
+;Версия FPSC\FPSC version: любая версия\any version
+;Описание\Description: 
+;Точка навигации для обычного ИИ
+
+:state=0:coloff,hide,floorlogic,state=1
+
+:state=1,activated=1:activate=11,state=2
+:state=2,activated=0:activate=10,state=1
+
+;:state=2,activated=10:alwaysactive=1,state=3,etimerstart
+;:state=3,etimergreater=500:etimerstop,alwaysactive=0,activate=11,state=2

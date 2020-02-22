@@ -1,0 +1,40 @@
+;Описание: Зона, меняющая положение мистического ящика
+; var MBAttempt - кол-во попыток до появления черепа
+
+:state=0:dimvar=MBAttempt,setvar=MBAttempt 3
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\weapontake.dds,hudname=weapontake,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\weapon950.dds,hudname=weapon950,hudhide=1,hudmake=display
+
+;--Случайный респ первого ящика--
+:state=0,random=10:settargetname=MysteryBox1,activatetarget=1,state=1
+:state=0,random=10:settargetname=MysteryBox2,activatetarget=1,state=2
+:state=0,random=10:settargetname=MysteryBox3,activatetarget=1,state=3
+:state=0,random=10:settargetname=MysteryBox4,activatetarget=1,state=4
+:state=0,random=10:settargetname=MysteryBox5,activatetarget=1,state=5
+
+;--Респ ящика кроме № 1--
+:state=1,activated=1,random=10:settargetname=MysteryBox1,activatetarget=0,settargetname=MysteryBox2,activatetarget=1,activate=0,state=2
+:state=1,activated=1,random=10:settargetname=MysteryBox1,activatetarget=0,settargetname=MysteryBox3,activatetarget=1,activate=0,state=3
+:state=1,activated=1,random=10:settargetname=MysteryBox1,activatetarget=0,settargetname=MysteryBox4,activatetarget=1,activate=0,state=4
+:state=1,activated=1,random=10:settargetname=MysteryBox1,activatetarget=0,settargetname=MysteryBox5,activatetarget=1,activate=0,state=5
+;--Респ ящика кроме № 2--
+:state=2,activated=1,random=10:settargetname=MysteryBox2,activatetarget=0,settargetname=MysteryBox1,activatetarget=1,activate=0,state=1
+:state=2,activated=1,random=10:settargetname=MysteryBox2,activatetarget=0,settargetname=MysteryBox3,activatetarget=1,activate=0,state=3
+:state=2,activated=1,random=10:settargetname=MysteryBox2,activatetarget=0,settargetname=MysteryBox4,activatetarget=1,activate=0,state=4
+:state=2,activated=1,random=10:settargetname=MysteryBox2,activatetarget=0,settargetname=MysteryBox5,activatetarget=1,activate=0,state=5
+;--Респ ящика кроме № 3--
+:state=3,activated=1,random=10:settargetname=MysteryBox3,activatetarget=0,settargetname=MysteryBox1,activatetarget=1,activate=0,state=1
+:state=3,activated=1,random=10:settargetname=MysteryBox3,activatetarget=0,settargetname=MysteryBox2,activatetarget=1,activate=0,state=2
+:state=3,activated=1,random=10:settargetname=MysteryBox3,activatetarget=0,settargetname=MysteryBox4,activatetarget=1,activate=0,state=4
+:state=3,activated=1,random=10:settargetname=MysteryBox3,activatetarget=0,settargetname=MysteryBox5,activatetarget=1,activate=0,state=5
+;--Респ ящика кроме № 4--
+:state=4,activated=1,random=10:settargetname=MysteryBox4,activatetarget=0,settargetname=MysteryBox1,activatetarget=1,activate=0,state=1
+:state=4,activated=1,random=10:settargetname=MysteryBox4,activatetarget=0,settargetname=MysteryBox2,activatetarget=1,activate=0,state=2
+:state=4,activated=1,random=10:settargetname=MysteryBox4,activatetarget=0,settargetname=MysteryBox3,activatetarget=1,activate=0,state=3
+:state=4,activated=1,random=10:settargetname=MysteryBox4,activatetarget=0,settargetname=MysteryBox5,activatetarget=1,activate=0,state=5
+;--Респ ящика кроме № 5--
+:state=5,activated=1,random=10:settargetname=MysteryBox5,activatetarget=0,settargetname=MysteryBox1,activatetarget=1,activate=0,state=1
+:state=5,activated=1,random=10:settargetname=MysteryBox5,activatetarget=0,settargetname=MysteryBox2,activatetarget=1,activate=0,state=2
+:state=5,activated=1,random=10:settargetname=MysteryBox5,activatetarget=0,settargetname=MysteryBox3,activatetarget=1,activate=0,state=3
+:state=5,activated=1,random=10:settargetname=MysteryBox5,activatetarget=0,settargetname=MysteryBox4,activatetarget=1,activate=0,state=4
+

@@ -1,0 +1,12 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 08.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: Сбрасывает все переменные     
+
+:state=0,varequal=attack 4,varequal=enemyattack0 1:setvar=enemyattack0 0,setvar=attack 0
+:state=0:setvar=health 0,setvar=onbase 0
+:state=0:state=1,airemove,destroy
+
+;Конец Скрипта

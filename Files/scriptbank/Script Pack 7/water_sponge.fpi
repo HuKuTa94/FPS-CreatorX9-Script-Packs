@@ -1,0 +1,9 @@
+;Скрипт написал: Кошелев Никита (fpsc.forum24.ru)
+;Описание: губка. При попадании в воду начинает впитывать влагу.
+;Как все правильно сделать? Выбираете этот скрипт компоненту в графу AI\Main в поле IfUsed впишите имя зоны, 
+;которая использует скрипт воды "water_reduction.fpi".
+
+:state=0,underwater=1:activateifused=1,state=1
+:state=1,underwater=0:activateifused=0,state=0
+
+;End of Script

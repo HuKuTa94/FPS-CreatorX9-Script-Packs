@@ -1,0 +1,11 @@
+:state=0:etimerstart,state=1
+:state=1:animate=92,aisetspeed=200
+:state=1,waypointstate=0:waypointstart
+:state=1,waypointstate=99:waypointstart
+:state=1,waypointstate=3:waypointnext
+:state=1,waypointstate=4:waypointrandom
+:state=1,waypointstate=5:waypointreverse
+:state=1,etimergreater=100:setaiactive=1
+:state=1,etimergreater=150:setaiactive=0,etimerstart
+:state=1,aicanshoot=1:waypointstop,runfpidefault=3
+:plrdistfurther=1000:aistop,airemove,destroy

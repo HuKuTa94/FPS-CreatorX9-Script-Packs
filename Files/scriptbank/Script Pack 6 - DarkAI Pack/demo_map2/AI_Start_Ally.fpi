@@ -1,0 +1,11 @@
+;Artificial Intelligence Script
+;Header
+desc          = 
+
+:state=0:addaiteam=1,state=1
+:state=1:aiaddenemy=1 2|3|4|5|6,state=2
+
+:state=2,alphafadeequal=0:incalphafade=100
+:state=2,alphafadeequal=100:state=3,runfpidefault=1
+
+;End of Script

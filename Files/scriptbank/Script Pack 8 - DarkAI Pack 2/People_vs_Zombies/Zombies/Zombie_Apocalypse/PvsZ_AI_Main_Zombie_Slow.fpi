@@ -1,0 +1,54 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 17.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+;Описание: скрипт для зомби апокалипсис 2
+
+;===Начало скрипта===
+:state=0:aisetviewrange=15000,aiatackwareness=0,setaiactive=1,state=2
+;---Открывает двери---
+:nearactivatable=0:settarget,activatetarget=2
+;______________________________________________________________Animation_________________________________________________________________
+;===Анимации движения===
+;---Стоит на месте---
+:idle=1:animationnormal,animate=102
+;---Анимация 1,2,3,4---
+:varequal=walk 1,movingforwards=1:animationnormal,animate=1,setanimatespeed=100,aisetspeed=90
+:varequal=walk 1,runningforwards=1:animationnormal,animate=1,setanimatespeed=100,aisetspeed=70
+:varequal=walk 2,movingforwards=1:animationnormal,animate=2,setanimatespeed=100,aisetspeed=90
+:varequal=walk 2,runningforwards=1:animationnormal,animate=2,setanimatespeed=100,aisetspeed=70
+:varequal=walk 3,movingforwards=1:animationnormal,animate=3,setanimatespeed=100,aisetspeed=90
+:varequal=walk 3,runningforwards=1:animationnormal,animate=3,setanimatespeed=100,aisetspeed=70
+:varequal=walk 4,movingforwards=1:animationnormal,animate=4,setanimatespeed=100,aisetspeed=90
+:varequal=walk 4,runningforwards=1:animationnormal,animate=4,setanimatespeed=100,aisetspeed=70
+;______________________________________________________________Targeting_________________________________________________________________
+:state=1,aicanshoot=1,aicalled=0:aicallteam=500000,state=2
+:state=1,aicanshoot=0,aicalled=1:airespondtocall
+:state=1,aihastarget=0,aiheardsound=500000:aimovetosound
+;--Определение цели--
+:state=2,aihastarget=1:aicleartarget,aisettarget,airotatetotarget
+:state=2,aihastarget=0:aisettarget
+:state=2:aimovetotarget
+;--Атака--
+:state=2,aitargetdistwithin=70,random=30:aistop,setaiactive=0,setframe=100,state=11
+:state=2,aitargetdistwithin=70,random=30:aistop,setaiactive=0,setframe=101,state=13
+;___________________________________________________________Attack animation_______________________________________________________________
+;--Animation 100 - overhead slash left--
+:state=11,framebeyond=100 50,aitargetdistwithin=100:aiusemelee=1,aisetmeleedamage=80,state=12
+:state=11:incframe=100,airotatetotarget,aisetspeed=120
+:state=11,frameatend=100:setaiactive=1,aisetspeed=90,state=2
+:state=12:incframe=100,airotatetotarget,aisetspeed=120
+:state=12,frameatend=100:setaiactive=1,aisetspeed=90,state=2
+
+;--Animation 101 - overhead slash right--
+:state=13,framebeyond=101 50,aitargetdistwithin=100:aiusemelee=1,aisetmeleedamage=80,state=14
+:state=13:incframe=101,airotatetotarget,aisetspeed=120
+:state=13,frameatend=101:setaiactive=1,aisetspeed=90,state=2
+:state=14:incframe=101,airotatetotarget,aisetspeed=120
+:state=14,frameatend=101:setaiactive=1,aisetspeed=90,state=2
+;_____________________________________________________________Hit detection________________________________________________________________
+;///===Урон от различного оружия и последствия===\\\
+;:shotdamagetype=1:runfpi=Script Pack 8 - DarkAI Pack 2\People_vs_Zombies\Zombies\Zombie_Apocalypse\PvsZ_Damage_Headshot.fpi
+
+;Конец Скрипта

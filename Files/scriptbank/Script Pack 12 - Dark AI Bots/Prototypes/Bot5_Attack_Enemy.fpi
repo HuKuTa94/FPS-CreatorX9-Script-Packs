@@ -1,0 +1,26 @@
+;-Предустановки бота
+:state=0:alwaysactive=1,reloadweapon,aiattackawareness=1,state=1
+;-Анимация движения
+:idle=1:animationnormal,animate=1
+:idle=0,strafingleft=1:animationnormal,animate=3
+:idle=0,strafingright=1:animationnormal,animate=4
+:idle=0,movingforwards=1:animationnormal,animate=2
+:idle=0,runningforwards=1:animationnormal,animate=5
+;-Нет цели
+:state=1,shotdamage=1:aisettarget,airotatetotarget
+:state=1,aiheardsound=5000:aisettarget,aimovetosound
+:state=1,aicalled=5000:aisettarget,airespondtocall
+:state=1,aicanshoot=1:aicallteam=5000,state=2
+;-Определение цели
+:state=2,aihastarget=0:aisettarget
+:state=2:airotatetotarget,aimovetotarget
+:aiaction=0:aiusefullaim=0
+:aiaction=3:aiusefullaim=1
+;-Атака
+:state=2,aicanshoot=1,ifweapon=1:useweapon,rundecal=6
+;-Перезарядка
+:state=2,ifweapon=0:aistop,setaiactive=0,setframe=6,state=3
+:state=3:incframe=6
+:state=3,frameatend=6:reloadweapon,setaiactive=1,state=1
+;-Взаимодействие с дверями
+:nearactivatable=0:settarget,activatetarget=2

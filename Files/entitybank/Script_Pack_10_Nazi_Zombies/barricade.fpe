@@ -1,0 +1,45 @@
+;Entity Spec
+
+;Header
+desc          = Barricade
+
+;AI
+aiinit	      = appear1.fpi
+aimain	      = Script_Pack_10_Nazi_Zombies\Gameplay\Entity_Barricade.fpi
+aidestroy     = disappear1.fpi
+
+;Spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;Orientation
+model         = barricade.x
+offx          = 0
+offy          = 50
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+materialindex = 4
+scale         = 83
+soundset      = 
+soundset1     = 
+
+;Visualinfo
+textured      = barricade.jpg
+effect        = 
+
+;Identity Details
+strength      = 0
+isimmobile    = 1
+
+;Animationinfo
+animmax       = 7
+anim0         = 0,0
+anim1         = 0,12
+anim2         = 14,26
+anim3         = 28,48
+anim4         = 50,60
+anim5         = 62,80
+anim6         = 80,80

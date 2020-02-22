@@ -1,0 +1,42 @@
+
+
+;header
+
+desc          = AI Point 6
+
+;ai
+aiinit	      = appear1.fpi
+aimain	      = Script Pack 8 - DarkAI Pack 2\AIPoints\AIPoint6.fpi
+aidestroy     = disappear1.fpi
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+
+model         = AI_Point.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+defaultstatic = 0
+materialindex = 0
+
+;statistics
+
+strength      = 0
+isimmobile    = 1
+PhysicsOn     = 0
+explodable    = 0
+debrisshape   = 0
+
+;visualinfo
+
+textured      = AI_Point6_D2.dds
+effect        = 
+castshadow    = 0
+

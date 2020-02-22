@@ -1,0 +1,173 @@
+;Скрипт Искусственного Интелекта
+;Автор: Кошелев Никита (www.fpsc.forum24.ru)
+;Дата: 05.07.2013
+;Требования: необходим патч 1.20
+;Версия скрипта: 1.0
+
+;Описание: глобальный скрипт режима игры "People vs People"
+;__________________________________________________________________________________________________________________________________
+;\\\\Глобальные переменные\\\\
+;----Начало игры----
+:state=0:dimvar=start,setvar=start 0
+;----Оборонительные позиции союзников и врагов----
+:state=0:dimvar=allydefend1,setvar=allydefend1 0,dimvar=allydefend2,setvar=allydefend2 0,dimvar=allydefend3,setvar=allydefend3 0,dimvar=allydefend4,setvar=allydefend4 0
+:state=0:dimvar=enemydefend1,setvar=enemydefend1 0,dimvar=enemydefend2,setvar=enemydefend2 0,dimvar=enemydefend3,setvar=enemydefend3 0,dimvar=enemydefend4,setvar=enemydefend4 0
+;----Позиция восстановления очков базы союзников и врагов---
+:state=0:dimvar=allydefend0,setvar=allydefend0 0,dimvar=enemydefend0,setvar=enemydefend0 0
+;----Наступательные позиции союзников и врагов----
+:state=0:dimvar=allyattack0,setvar=allyattack0 0,dimvar=allyattack1,setvar=allyattack1 0,dimvar=allyattack2,setvar=allyattack2 0,dimvar=allyattack3,setvar=allyattack3 0
+:state=0:dimvar=enemyattack0,setvar=enemyattack0 0,dimvar=enemyattack1,setvar=enemyattack1 0,dimvar=enemyattack2,setvar=enemyattack2 0,dimvar=enemyattack3,setvar=enemyattack3 0
+;----Очки базы союзников и врагов----
+:state=0:dimvar=allybase,setvar=allybase 2500,dimvar=enemybase,setvar=enemybase 2500
+:vargreater=allybase 2500:setvar=allybase 2500
+:vargreater=enemybase 2500:setvar=enemybase 2500
+;----Команды----
+:state=0:aiaddenemy=1 2|12,aiaddenemy=2 1|11
+;----Победа/Поражение (конец игры)---
+:state=0:dimvar=endgame,setvar=endgame 0
+:state=1,varless=enemybase -1:setvar=endgame 1,state=2,music=audiobank\Script Pack 8 - DarkAI Pack 2\Win.wav
+:state=1,varless=allybase -1:setvar=endgame 2,state=2,music=audiobank\Script Pack 8 - DarkAI Pack 2\Lose.wav
+:state=2:etimerstart,disablefirebutton=1,musicvolume=100
+:state=2:setvar=allydefend0 0,setvar=allydefend1 0,setvar=allydefend2 0,setvar=allydefend3 0,setvar=enemydefend4 0,setvar=enemydefend1 0,setvar=enemydefend2 0,setvar=enemydefend3 0,setvar=enemydefend4 0
+:state=3:setvar=allyattack0 0,setvar=allyattack1 0,setvar=allyattack2 0,setvar=allyattack3 0,setvar=enemyattack0 0,setvar=enemyattack1 0,setvar=enemyattack2 0,setvar=enemyattack3 0
+:state=2:state=3
+:state=3,etimergreater=15000:win
+;__________________________________________________________________________________________________________________________________
+;\\\\HUDs\\\\
+;----Индикаторы захвата базы союзников----
+:state=0:hudreset,hudx=40,hudy=3,  hudsize=19,hudfont=arial,hudtext=Friendly Base,hudname=friend,,hudhide=0,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.7 hudsize=18,hudfont=arial,hudtext=DEFEAT,hudname=fdefeat,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=11,hudsize=30,hudfont=arial,hudtext=Defense Base,hudname=CaptureFF,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||||||||,hudname=fb25,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||||||||,hudname=fb24,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||||||,hudname=fb23,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||||||,hudname=fb22,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||||,hudname=fb21,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||||,hudname=fb20,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||,hudname=fb19,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||,hudname=fb18,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||,hudname=fb17,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||,hudname=fb16,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||,hudname=fb15,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||,hudname=fb14,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||,hudname=fb13,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||,hudname=fb12,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||,hudname=fb11,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||,hudname=fb10,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||,hudname=fb9,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||,hudname=fb8,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||,hudname=fb7,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||,hudname=fb6,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||,hudname=fb5,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||,hudname=fb4,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||,hudname=fb3,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||,hudname=fb2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=40,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|,hudname=fb1,hudhide=1,hudmake=display
+:state=1,varless=allybase 2500,vargreater=allybase 2400:hudshow=fb25,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 2400,vargreater=allybase 2300:hudshow=fb24,hudunshow=fb25,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 2300,vargreater=allybase 2200:hudshow=fb23,hudunshow=fb24,hudunshow=fb25,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 2200,vargreater=allybase 2100:hudshow=fb22,hudunshow=fb24,hudunshow=fb23,hudunshow=fb25,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 2100,vargreater=allybase 2000:hudshow=fb21,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb25,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 2000,vargreater=allybase 1900:hudshow=fb20,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb25,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1900,vargreater=allybase 1800:hudshow=fb19,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb25,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1800,vargreater=allybase 1700:hudshow=fb18,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb25,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1700,vargreater=allybase 1600:hudshow=fb17,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb25,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1600,vargreater=allybase 1500:hudshow=fb16,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb25,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1500,vargreater=allybase 1400:hudshow=fb15,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb25,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1400,vargreater=allybase 1300:hudshow=fb14,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb25,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1300,vargreater=allybase 1200:hudshow=fb13,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb25,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1200,vargreater=allybase 1100:hudshow=fb12,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb25,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1100,vargreater=allybase 1000:hudshow=fb11,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb25,hudunshow=fb10,hudunshow=fb9, hudunshow=fb8, hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 1000,vargreater=allybase 900:hudshow=fb10,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb25,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 900,vargreater=allybase 800:hudshow=fb9,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb25,hudunshow=fb8,hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 800,vargreater=allybase 700:hudshow=fb8,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb25,hudunshow=fb7, hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 700,vargreater=allybase 600:hudshow=fb7,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb25,hudunshow=fb6, hudunshow=fb5, hudunshow=fb4, hudunshow=fb3, hudunshow=fb2, hudunshow=fb1
+:state=1,varless=allybase 600,vargreater=allybase 500:hudshow=fb6,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7,hudunshow=fb25,hudunshow=fb5,hudunshow=fb4,hudunshow=fb3,hudunshow=fb2,hudunshow=fb1
+:state=1,varless=allybase 500,vargreater=allybase 400:hudshow=fb5,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7,hudunshow=fb6,hudunshow=fb25,hudunshow=fb4,hudunshow=fb3,hudunshow=fb2,hudunshow=fb1
+:state=1,varless=allybase 400,vargreater=allybase 300:hudshow=fb4,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7,hudunshow=fb6,hudunshow=fb5,hudunshow=fb25,hudunshow=fb3,hudunshow=fb2,hudunshow=fb1
+:state=1,varless=allybase 300,vargreater=allybase 200:hudshow=fb3,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7,hudunshow=fb6,hudunshow=fb5,hudunshow=fb4,hudunshow=fb25,hudunshow=fb2,hudunshow=fb1
+:state=1,varless=allybase 200,vargreater=allybase 100:hudshow=fb2,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7,hudunshow=fb6,hudunshow=fb5,hudunshow=fb4,hudunshow=fb3,hudunshow=fb25,hudunshow=fb1
+:state=1,varless=allybase 100,vargreater=allybase 1:hudshow=fb1,hudunshow=fb24,hudunshow=fb23,hudunshow=fb22,hudunshow=fb21,hudunshow=fb20,hudunshow=fb19,hudunshow=fb18,hudunshow=fb17,hudunshow=fb16,hudunshow=fb15,hudunshow=fb14,hudunshow=fb13,hudunshow=fb12,hudunshow=fb11,hudunshow=fb10,hudunshow=fb9,hudunshow=fb8,hudunshow=fb7,hudunshow=fb6,hudunshow=fb5,hudunshow=fb4,hudunshow=fb3,hudunshow=fb2,hudunshow=fb25
+:state=1,varless=allybase 1:hudshow=fdefeat,hudunshow=fb1
+
+;----Индикаторы захвата базы врага----
+:state=0:hudreset,hudx=60,hudy=3,  hudsize=19,hudfont=arial,hudtext=Enemy Base,hudname=enemy,hudhide=0,hudmake=display
+:state=0:hudreset,hudx=50,hudy=11,hudsize=30,hudfont=arial,hudtext=Capture the Base,hudname=CaptureEF,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.7,hudsize=18,hudfont=arial,hudtext=DEFEAT,hudname=edefeat,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||||||||,hudname=eb25,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||||||||,hudname=eb24,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||||||,hudname=eb23,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||||||,hudname=eb22,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||||,hudname=eb21,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||||,hudname=eb20,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||||,hudname=eb19,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||||,hudname=eb18,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||||,hudname=eb17,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||||,hudname=eb16,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||||,hudname=eb15,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||||,hudname=eb14,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||||,hudname=eb13,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||||,hudname=eb12,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||||,hudname=eb11,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||||,hudname=eb10,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||||,hudname=eb9,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||||,hudname=eb8,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||||,hudname=eb7,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||||,hudname=eb6,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||||,hudname=eb5,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||||,hudname=eb4,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|||,hudname=eb3,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=||,hudname=eb2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=60,hudy=5.5,hudsize=18,hudfont=arial,hudtext=|,hudname=eb1,hudhide=1,hudmake=display
+:state=1,varless=enemybase 2500,vargreater=enemybase 2400:hudshow=eb25,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 2400,vargreater=enemybase 2300:hudshow=eb24,hudunshow=eb25,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 2300,vargreater=enemybase 2200:hudshow=eb23,hudunshow=eb24,hudunshow=eb25,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 2200,vargreater=enemybase 2100:hudshow=eb22,hudunshow=eb24,hudunshow=eb23,hudunshow=eb25,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 2100,vargreater=enemybase 2000:hudshow=eb21,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb25,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 2000,vargreater=enemybase 1900:hudshow=eb20,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb25,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1900,vargreater=enemybase 1800:hudshow=eb19,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb25,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1800,vargreater=enemybase 1700:hudshow=eb18,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb25,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1700,vargreater=enemybase 1600:hudshow=eb17,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb25,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1600,vargreater=enemybase 1500:hudshow=eb16,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb25,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1500,vargreater=enemybase 1400:hudshow=eb15,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb25,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1400,vargreater=enemybase 1300:hudshow=eb14,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb25,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1300,vargreater=enemybase 1200:hudshow=eb13,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb25,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1200,vargreater=enemybase 1100:hudshow=eb12,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb25,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1100,vargreater=enemybase 1000:hudshow=eb11,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb25,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 1000,vargreater=enemybase 900:hudshow=eb10,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb25,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 900,vargreater=enemybase 800:hudshow=eb9,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb25,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 800,vargreater=enemybase 700:hudshow=eb8,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb25,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 700,vargreater=enemybase 600:hudshow=eb7,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb25,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 600,vargreater=enemybase 500:hudshow=eb6,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb25,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 500,vargreater=enemybase 400:hudshow=eb5,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb25,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 400,vargreater=enemybase 300:hudshow=eb4,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb25,hudunshow=eb3,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 300,vargreater=enemybase 200:hudshow=eb3,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb25,hudunshow=eb2,hudunshow=eb1
+:state=1,varless=enemybase 200,vargreater=enemybase 100:hudshow=eb2,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb25,hudunshow=eb1
+:state=1,varless=enemybase 100,vargreater=enemybase 1:hudshow=eb1,hudunshow=eb24,hudunshow=eb23,hudunshow=eb22,hudunshow=eb21,hudunshow=eb20,hudunshow=eb19,hudunshow=eb18,hudunshow=eb17,hudunshow=eb16,hudunshow=eb15,hudunshow=eb14,hudunshow=eb13,hudunshow=eb12,hudunshow=eb11,hudunshow=eb10,hudunshow=eb9,hudunshow=eb8,hudunshow=eb7,hudunshow=eb6,hudunshow=eb5,hudunshow=eb4,hudunshow=eb3,hudunshow=eb2,hudunshow=eb25
+:state=1,varless=enemybase 1:hudshow=edefeat,hudunshow=eb1
+;__________________________________________________________________________________________________________________________________
+;===Предначало игры===
+:state=0:hudreset,hudx=50,hudy=90,hudsize=19,hudfont=arial,hudtext=Press ENTER to begin,hudname=start,hudhide=0,hudmake=display
+:state=0:hudreset,hudx=50,hudy=25,hudsize=32,hudfont=arial,hudtext=Begin in:,hudname=begin,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=30,hudsize=32,hudfont=arial,hudtext=5,hudname=begin5,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=29.8,hudsize=40,hudfont=arial,hudtext=4,hudname=begin4,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=29.6,hudsize=50,hudfont=arial,hudtext=3,hudname=begin3,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=29.4,hudsize=70,hudfont=arial,hudtext=2,hudname=begin2,hudhide=1,hudmake=display
+:state=0:hudreset,hudx=50,hudy=29.1,hudsize=100,hudfont=arial,hudtext=1,hudname=begin1,hudhide=1,hudmake=display
+:state=10:hudunshow=friend,hudunshow=enemy,hudunshow=fb25,hudunshow=eb25,plrdisable=10000000,plrmoveto=start 0
+:state=10:lockslot=1 1,lockslot=2 1,lockslot=3 1,lockslot=4 1,lockslot=5 1,lockslot=6 1,lockslot=7 1,lockslot=8 1,lockslot=9 1
+:state=10:state=11,hideplrweapon
+:state=11,keypressed=28 1:state=12,etimerstart,hudshow=begin,hudshow=begin5,hudunshow=start
+:state=12,etimergreater=1000:hudshow=begin4,hudunshow=begin5
+:state=12,etimergreater=2000:hudshow=begin3,hudunshow=begin4
+:state=12,etimergreater=3000:hudshow=begin2,hudunshow=begin3
+:state=12,etimergreater=4000:hudshow=begin1,hudunshow=begin2
+:state=12,etimergreater=5000:hudunshow=begin1,hudunshow=begin,hudshow=friend,hudshow=enemy,hudshow=fb25,hudshow=eb25,state=13
+:state=13:plrdisable=0,setvar=start 1,plrmoveto=respawn 0
+:state=13:lockslot=1 0,lockslot=2 0,lockslot=3 0,lockslot=4 0,lockslot=5 0,lockslot=6 0,lockslot=7 0,lockslot=8 0,lockslot=9 0
+:state=13:state=1
+
+;===Начало скрипта===
+:state=0:state=10
+
+;Конец скрипта

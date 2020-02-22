@@ -1,0 +1,38 @@
+;Activated=98  - сделать все пушки возле этого €щика неактивными после прокрутки веро€тности
+;Activated=99 - сделать все пушки возле этого €щика активными на момент прокрутки веро€тности
+;Activated=0  - спр€тать оружие
+;Activated=1  - показать оружие
+
+:state=0:hudreset,hudx=50,hudy=93,hudsizex=530,hudsizey=60,hudimagefine=gamecore\huds\Script_Pack_10_Nazi_Zombies\weapontake.dds,hudname=weapontake,hudhide=1,hudmake=display
+:state=0:activate=0,floorlogc,coloff,nobulletcol=1,hide,state=1
+
+;¬заимодействие с €щиком
+;-—делать всегда активным на момент прокрутки веро€тности оружи€ в €щике
+:state=1,activated=99:alwaysactive=1,state=2
+;-ѕо€вилс€ в €щике
+:state=2,activated=1:show,state=3
+;-Ќе по€вилс€ в €щике, сделать оружие неактивным
+:state=2,activated=98:state=7
+
+;¬заимодействие с игроком
+;-»грок близко
+:state=3,plrdistwithin=50,plrfacing=50:hudshow=weapontake,state=4
+;--»грок далеко
+:state=4,plrnotfacing=50:hudunshow=weapontake,state=3
+:state=4,plrdistfurther=50:hudunshow=weapontake,state=3
+;-»грок берет оружие
+:state=4,plrdistwithin=50,keypressed=33 1:state=5
+:state=5,plrdistfurther=50:state=4
+:state=5,plrnotfacing=50:state=4
+:state=5,plrdistwithin=50,keypressed=33 0:state=6,removecurrentweapon,hide,etimerstart,settargetname=mbox1,activatetarget=100,hudunshow=weapontake,plrsound=audiobank\Script_Pack_10_Nazi_Zombies\box_take.ogg
+
+;--«амена текущего оружи€
+:state=6,etimergreater=930:playertake,state=7
+
+;-ќружие исчезло из €щика
+:state=3,activated=0:state=7
+:state=4,activated=0:state=7
+:state=5,activated=0:state=7
+
+;-—делать оружие не всегда активным
+:state=7:alwaysactive=0,hide,hudunshow=weapontake,state=1

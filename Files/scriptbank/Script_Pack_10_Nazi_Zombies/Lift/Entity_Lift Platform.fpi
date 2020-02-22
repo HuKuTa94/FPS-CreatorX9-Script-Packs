@@ -1,0 +1,55 @@
+;Описание: LInside1Floor0, LiftInside1 - внутренняя кнопка на этаже 1; Floor0 - отправляeт лифт на этаж 0
+;     Activated=X; X=1 - этаж № 1, Х=2 - этаж № 2, Х=0 - Этаж № 0 (подвал с генератором)
+
+;--Начало скрипта--
+:state=0:state=1,activate=400
+
+;\\\Взаимодействие с игроком\\\
+;--Игрок в лифте--
+:state=1,plrhigher=10,plrdistwithin=35:state=2
+:state=2,plrdistwithin=35:associateplayer,coloff
+:state=2,plrdistfurther=40,playerassociated:state=1,unassociateplayer,colon
+
+;__________________________________Передвижение лифта____________________________________
+
+;\\\Лифт едет на этаж № 1\\\\
+:state=1,activated=101:state=3
+:state=2,activated=101:state=3
+;--Проверка, на каком этаже находится лифт--
+;--Лифт находится выше, чем этаж № 1--
+:state=10,etimergreater=200:state=11
+:state=11:moveup=-1
+:state=11,raycastup=20 -200:state=13
+;--Лифт находится ниже, чем этаж № 1--
+:state=10,raycastup=20 0,etimergreater=150:state=12
+:state=12:moveup=1
+:state=12,raycastup=20 300:state=13
+;--Лифт находится на этаже № 1--
+:state=13:settargetname=ZoneLift,activatetarget=101,state=0,stopsound,sound=audiobank\Script_Pack_10_Nazi_Zombies\lift_stop.ogg
+
+;\\\Лифт едет на этаж № 2\\\\
+:state=1,activated=102:state=3
+:state=2,activated=102:state=3
+;--Проверка, на каком этаже находится лифт--
+;--Лифт находится нниже этажа № 2--
+:state=20:moveup=1
+:state=20,raycastup=20 100:state=21
+;--Лифт находится на этаже № 1--
+:state=21:settargetname=ZoneLift,activatetarget=102,state=0,stopsound,sound=audiobank\Script_Pack_10_Nazi_Zombies\lift_stop.ogg
+
+;\\\Лифт едет на этаж № 0\\\\
+:state=1,activated=100:state=3
+:state=2,activated=100:state=3
+;--Проверка, на каком этаже находится лифт--
+;--Лифт едет на этаж № 0--
+:state=30:moveup=-1
+:state=30,raycastup=20 0:state=31
+;--Лифт находится на этаже № 0--
+:state=31:settargetname=ZoneLift,activatetarget=100,state=0,stopsound,sound=audiobank\Script_Pack_10_Nazi_Zombies\lift_stop.ogg
+
+;__________________________________________________________________________________
+
+;\\\Управление лифтом\\\
+:state=3,activated=101:coloff,etimerstart,state=10,loopsound=audiobank\Script_Pack_10_Nazi_Zombies\lift_move.ogg
+:state=3,activated=102:coloff,state=20,loopsound=audiobank\Script_Pack_10_Nazi_Zombies\lift_move.ogg
+:state=3,activated=100:coloff,state=30,loopsound=audiobank\Script_Pack_10_Nazi_Zombies\lift_move.ogg
